@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projet Pokémon TCG - Mohamed Sendouk</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Effet carte holographique (Ton style préféré) */
+    .holo-card {
+      position: relative;
+      z-index: 10;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transform-style: preserve-3d;
+      background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    }
+    
+    .holo-card:hover {
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      box-shadow: 
+        0 20px 30px rgba(0,0,0,0.1),
+        0 0 0 1px rgba(255,255,255,0.5) inset;
+    }
+
+    .holo-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        115deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.4) 25%,
+        transparent 30%,
+        transparent 70%,
+        rgba(255, 255, 255, 0.4) 75%,
+        transparent 80%
+      );
+      opacity: 0;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    .holo-card:hover::before {
+      opacity: 1;
+      animation: holo-shine 2s infinite linear;
+    }
+
+    @keyframes holo-shine {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Badge Types Pokémon */
+    .type-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    /* Connecteur pour la timeline des phases */
+    .phase-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, #ef4444, #3b82f6); /* Rouge vers Bleu */
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<!-- NAVBAR -->
+<header class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+    <a href="index.html" class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-800 flex items-baseline space-x-2"
+        style="font-family: 'Montserrat', sans-serif;">
+      <span>← Retour au Portfolio</span>
+    </a>
+  </nav>
+</header>
+
+<!-- HERO HEADER -->
+<section class="relative pt-32 pb-20 overflow-hidden">
+  <!-- Fond décoratif -->
+  <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 z-0"></div>
+  <div class="absolute -top-24 -right-24 w-96 h-96 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+  <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-red-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      
+      <!-- Texte Hero -->
+      <div class="flex-1 text-center md:text-left" data-aos="fade-right">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-bold uppercase tracking-wider mb-4 border border-yellow-200">
+          Projet Annuel • S2.01
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
+          Pokémon TCG <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-blue-500">Fullstack Java</span>
+        </h1>
+        <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
+          Une aventure de développement complète : de la conception du <strong>Moteur de Jeu</strong> (Logique Java) à la réalisation de l'<strong>Interface Graphique</strong> (JavaFX).
+        </p>
+        
+        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+          <span class="type-badge bg-red-600">Java</span>
+          <span class="type-badge bg-blue-600">JavaFX</span>
+          <span class="type-badge bg-purple-600">MVC Pattern</span>
+          <span class="type-badge bg-gray-800">GitLab</span>
+        </div>
+
+        <div class="mt-8 flex gap-4 justify-center md:justify-start">
+          <a href="#" class="px-8 py-3 bg-blue-700 text-white rounded-xl font-semibold shadow-lg hover:bg-blue-800 transition transform hover:-translate-y-1">
+            Voir le code
+          </a>
+        </div>
+      </div>
+
+      <!-- Image Hero (Holo Card Style) -->
+      <div class="flex-1 w-full max-w-md relative" data-aos="zoom-in">
+        <div class="absolute top-4 -right-4 w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl rotate-6 opacity-20 blur-sm"></div>
+        <div class="holo-card rounded-2xl p-2 bg-white shadow-2xl border border-gray-100 transform rotate-[-3deg]">
+          <!-- Image Placeholder (mets ton screenshot GUI ici si tu veux) -->
+          <img src="img/Pokémon_Trading_Card.png" alt="Pokémon TCG Interface" class="w-full h-auto rounded-xl">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION CHRONOLOGIE (LES 2 PHASES) -->
+<section class="py-20 bg-white relative overflow-hidden">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+    
+    <!-- Ligne Verticale (Cachée sur mobile) -->
+    <div class="hidden md:block phase-line"></div>
+
+    <!-- PHASE 1 : LOGIQUE (Rouge) -->
+    <div class="relative grid md:grid-cols-2 gap-12 items-center mb-24">
+      
+      <!-- Texte Gauche -->
+      <div class="md:text-right" data-aos="fade-right">
+        <span class="text-red-500 font-bold tracking-wide uppercase text-sm">Phase 1 • Mars - Avril</span>
+        <h2 class="text-3xl font-bold text-gray-900 mt-2">Le Moteur de Jeu</h2>
+        <p class="mt-4 text-gray-600 leading-relaxed">
+          Implémentation des règles officielles en Java pur. Architecture Orientée Objet stricte pour gérer la complexité des cartes.
+        </p>
+        
+        <!-- Cartes features -->
+        <div class="mt-6 space-y-3">
+            <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500 text-sm text-left">
+                <strong>Gestion du Banc :</strong> Limite de 5 Pokémon et échanges dynamiques.
+            </div>
+            <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500 text-sm text-left">
+                <strong>Évolutions :</strong> Transfert des états et énergies lors de l'évolution.
+            </div>
+            <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500 text-sm text-left">
+                <strong>Tests Unitaires :</strong> Validation de la logique via JUnit 5.
+            </div>
+        </div>
+      </div>
+
+      <!-- Icone Centrale -->
+      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 justify-center items-center w-12 h-12 bg-red-500 text-white rounded-full border-4 border-white shadow-lg z-10 font-bold">
+        1
+      </div>
+
+      <!-- Image/Visuel Droite -->
+      <div class="holo-card bg-white p-6 rounded-xl border border-gray-100" data-aos="fade-left">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+        </div>
+        <div class="space-y-2 font-mono text-xs text-gray-500">
+            <p><span class="text-purple-600">class</span> <span class="text-yellow-600">Pokemon</span> <span class="text-purple-600">extends</span> Carte {</p>
+            <p class="pl-4"><span class="text-purple-600">private</span> List&lt;Energie&gt; energies;</p>
+            <p class="pl-4"><span class="text-purple-600">public void</span> attaquer(Pokemon adversaire) {</p>
+            <p class="pl-8 text-green-600">// Logique de dégâts...</p>
+            <p class="pl-4">}</p>
+            <p>}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 : IHM (Bleu) -->
+    <div class="relative grid md:grid-cols-2 gap-12 items-center">
+      
+      <!-- Image/Visuel Gauche -->
+      <div class="holo-card bg-white p-6 rounded-xl border border-gray-100 order-2 md:order-1" data-aos="fade-right">
+        <!-- Petit mockup visuel abstrait de l'interface -->
+        <div class="grid grid-cols-3 gap-2 h-32">
+            <div class="col-span-2 bg-blue-50 rounded-lg border border-blue-100 p-2 flex items-center justify-center text-blue-300 text-xs">Plateau de Jeu</div>
+            <div class="bg-gray-50 rounded-lg border border-gray-100 flex flex-col gap-1 p-1">
+                <div class="h-1/3 bg-blue-100 rounded"></div>
+                <div class="h-1/3 bg-blue-100 rounded"></div>
+            </div>
+            <div class="col-span-3 h-12 bg-gray-800 rounded-lg mt-auto flex items-center justify-center text-white text-xs">Main du Joueur</div>
+        </div>
+      </div>
+
+      <!-- Icone Centrale -->
+      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 justify-center items-center w-12 h-12 bg-blue-600 text-white rounded-full border-4 border-white shadow-lg z-10 font-bold">
+        2
+      </div>
+
+      <!-- Texte Droite -->
+      <div class="md:text-left order-1 md:order-2" data-aos="fade-left">
+        <span class="text-blue-600 font-bold tracking-wide uppercase text-sm">Phase 2 • Mai - Juin</span>
+        <h2 class="text-3xl font-bold text-gray-900 mt-2">L'Interface Graphique</h2>
+        <p class="mt-4 text-gray-600 leading-relaxed">
+          Transformation du moteur logique en application visuelle complète avec JavaFX. J'ai réalisé la majeure partie de cette interface interactive.
+        </p>
+
+        <!-- Cartes features -->
+        <div class="mt-6 space-y-3">
+            <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-600 text-sm">
+                <strong>Architecture MVC :</strong> Séparation claire Vue (FXML) / Contrôleur.
+            </div>
+            <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-600 text-sm">
+                <strong>Data Binding :</strong> L'interface réagit en temps réel aux PV et cartes.
+            </div>
+            <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-600 text-sm">
+                <strong>Interactions :</strong> Gestion des clics, tours de jeu et attaques.
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- APPRENTISSAGES -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-3xl font-bold text-gray-900">Compétences Acquises</h2>
+      <div class="w-20 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-6">
+      <!-- Skill 1 -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up">
+        <div class="text-4xl mb-4">☕</div>
+        <h3 class="font-bold text-gray-900">Java Avancé</h3>
+        <p class="text-xs text-gray-500 mt-2">Héritage, Polymorphisme, Collections</p>
+      </div>
+
+      <!-- Skill 2 -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">
+        <div class="text-4xl mb-4">🖥️</div>
+        <h3 class="font-bold text-gray-900">JavaFX & FXML</h3>
+        <p class="text-xs text-gray-500 mt-2">Création d'interfaces riches et réactives</p>
+      </div>
+
+      <!-- Skill 3 -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">
+        <div class="text-4xl mb-4">🧩</div>
+        <h3 class="font-bold text-gray-900">Design Patterns</h3>
+        <p class="text-xs text-gray-500 mt-2">MVC, Observer, Factory</p>
+      </div>
+
+      <!-- Skill 4 -->
+      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up" data-aos-delay="300">
+        <div class="text-4xl mb-4">✅</div>
+        <h3 class="font-bold text-gray-900">Qualité Code</h3>
+        <p class="text-xs text-gray-500 mt-2">Tests Unitaires (JUnit) & Git</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white py-12">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col items-center text-center">
+    <h3 class="text-2xl font-bold mb-6">Prêt à voir autre chose ?</h3>
+    <div class="flex gap-4">
+      <a href="index.html" class="px-6 py-3 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-100 transition">
+        ← Retour au Portfolio
+      </a>
+      <a href="mailto:sendoukmohamed45@gmail.com" class="px-6 py-3 bg-transparent border border-gray-600 text-white rounded-full font-bold hover:bg-gray-800 transition">
+        Me contacter
+      </a>
+    </div>
+    <div class="mt-12 text-gray-500 text-sm">
+      © 2025 Mohamed Sendouk. Tous droits réservés.
+    </div>
+  </div>
+</footer>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: true });
+</script>
+
+</body>
+</html>

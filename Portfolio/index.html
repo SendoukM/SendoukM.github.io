@@ -1,0 +1,855 @@
+  <!DOCTYPE html>
+  <html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sendouk Mohamed Portfolio</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+      body {
+        font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+        scroll-behavior: smooth;
+      }
+
+      /* Scroll down fixé en bas de l'écran */
+      .scroll-down {
+        position: fixed;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        z-index: 40;
+      }
+      .scroll-down:hover { opacity: 1; }
+
+      .scroll-down .mouse {
+        width: 24px;
+        height: 36px;
+        border: 2px solid #1d4ed8;
+        border-radius: 12px;
+        position: relative;
+      }
+      .scroll-down .mouse::before {
+        content: '';
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 8px;
+        background: #1d4ed8;
+        border-radius: 2px;
+        animation: scroll-animation 2s infinite;
+      }
+      @keyframes scroll-animation {
+        0% { top: 8px; opacity: 1; }
+        100% { top: 20px; opacity: 0; }
+      }
+      .scroll-down .text {
+        font-size: 12px;
+        color: #1d4ed8;
+        font-weight: 500;
+      }
+
+      /* Bouton scroll-to-top */
+      #scrollToTop {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #1d4ed8;
+        color: white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        z-index: 50;
+      }
+      #scrollToTop:hover { background-color: #1e40af; transform: scale(1.1); }
+      #scrollToTop.show { display: flex; }
+
+      /* Titre de section */
+      .section-title {
+        position: relative;
+        display: inline-block;
+        padding-left: 0;
+        margin-left: 12px;
+      }
+      .section-title::before {
+        content: '';
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 6px;
+        height: 6px;
+        background-color: #404040;
+        border-radius: 50%;
+      }
+      .section-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Boutons de contact */
+      .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 15px;
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-btn::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s;
+      }
+      .contact-btn:hover::before { left: 100%; }
+      .contact-btn:hover {
+        transform: translateY(-8px) rotateY(15deg) scale(1.1);
+        box-shadow: 0 12px 24px rgba(29,78,216,0.3);
+        border-color: #3b82f6;
+        background: linear-gradient(135deg,#ffffff 0%,#f0f9ff 100%);
+      }
+      .contact-btn img { transition: all 0.3s ease; }
+      .contact-btn:hover img { transform: scale(1.15) rotate(5deg); filter: brightness(1.1); }
+      .contact-btn.github:hover { box-shadow: 0 12px 24px rgba(0,0,0,0.2); border-color: #333; }
+      .contact-btn.linkedin:hover { box-shadow: 0 12px 24px rgba(10,102,194,0.3); border-color: #0a66c2; }
+      .contact-btn.gmail:hover { box-shadow: 0 12px 24px rgba(234,67,53,0.3); border-color: #ea4335; }
+      @keyframes pulse-glow {
+        0%,100% { box-shadow: 0 0 0 0 rgba(29,78,216,0.4); }
+        50% { box-shadow: 0 0 0 10px rgba(29,78,216,0); }
+      }
+      .contact-btn:active { transform: translateY(-4px) scale(0.95); animation: pulse-glow 0.5s ease-out; }
+
+      /* Timeline */
+      .timeline-container { position: relative; padding: 40px 0; }
+      .timeline-line {
+        position: absolute; left: 50%; top: 0; bottom: 0; width: 3px;
+        background: linear-gradient(to bottom, #3b82f6, #1d4ed8, #3b82f6);
+        transform: translateX(-50%);
+        box-shadow: 0 0 10px rgba(59,130,246,0.3);
+      }
+      .timeline-dot {
+        position: absolute; left: 50%; transform: translateX(-50%);
+        width: 20px; height: 20px; background: white; border: 4px solid #3b82f6; border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(59,130,246,0.2); z-index: 2; transition: all 0.4s ease;
+      }
+      .timeline-dot:hover { transform: translateX(-50%) scale(1.3); box-shadow: 0 0 0 8px rgba(59,130,246,0.3); }
+
+      .timeline-card {
+        background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        border: 2px solid #e5e7eb; position: relative; transition: all 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+        cursor: pointer; overflow: hidden;
+      }
+      .timeline-card::before {
+        content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+        background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+        opacity: 0; transition: opacity 0.5s ease;
+      }
+      .timeline-card:hover::before { opacity: 1; }
+      .timeline-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 12px 40px rgba(59,130,246,0.2);
+        border-color: #3b82f6;
+      }
+      .timeline-connector {
+        position: absolute; top: 30px; width: 40px; height: 2px;
+        background: linear-gradient(to right, #3b82f6, transparent);
+      }
+      .timeline-item-left .timeline-connector {
+        right: -40px; background: linear-gradient(to right, transparent, #3b82f6);
+      }
+      .timeline-item-right .timeline-connector { left: -40px; }
+
+      .timeline-icon {
+        width: 60px; height: 60px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        background: linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%); color: white; font-size: 24px; font-weight: bold;
+        box-shadow: 0 4px 12px rgba(59,130,246,0.3); transition: all 0.3s ease;
+      }
+      .timeline-card:hover .timeline-icon {
+        transform: rotate(5deg) scale(1.1);
+        box-shadow: 0 8px 20px rgba(59,130,246,0.5);
+      }
+      .timeline-badge {
+        display: inline-block; padding: 6px 14px;
+        background: linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);
+        color: #1d4ed8; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid #bfdbfe;
+      }
+
+      /* Badge "À venir" */
+      .coming-soon-badge {
+        position: absolute; top: 16px; right: 16px;
+        background: linear-gradient(135deg,#fbbf24 0%,#f59e0b 100%);
+        color: white; padding: 6px 16px; border-radius: 20px;
+        font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(251,191,36,0.4);
+        animation: pulse-badge 2s ease-in-out infinite; z-index: 10;
+      }
+      @keyframes pulse-badge {
+        0%,100% { transform: scale(1); box-shadow: 0 4px 12px rgba(251,191,36,0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(251,191,36,0.6); }
+      }
+      .timeline-card.coming-soon {
+        opacity: 0.9; border: 2px dashed #fbbf24;
+        background: linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
+      }
+      .timeline-card.coming-soon:hover { opacity: 1; border-color: #f59e0b; }
+      .timeline-card.coming-soon .timeline-icon {
+        background: linear-gradient(135deg,#fbbf24 0%,#f59e0b 100%);
+      }
+
+      /* Timeline mobile : ligne + points à gauche */
+      @media (max-width: 768px) {
+        .timeline-line { left: 30px; }
+        .timeline-dot { left: 30px; }
+        .timeline-connector { display: none; }
+      }
+      .project-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 0.75rem; /* ~ rounded-xl */
+        border: 1px solid transparent;
+        background: linear-gradient(120deg, rgba(59,130,246,0.0), rgba(59,130,246,0.25), rgba(59,130,246,0.0));
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        pointer-events: none;
+      }
+
+      .project-card:hover::before {
+        opacity: 1;
+      }
+      /* BADGES PROJETS */
+  .project-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 9999px; /* rounded-full */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 20;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .project-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  .group:hover .project-badge {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Couleurs spécifiques par type (optionnel mais recommandé) */
+  .badge-sae { color: #fbbf24; /* Jaune/Ambre */ border-color: rgba(251, 191, 36, 0.4); }
+  .badge-perso { color: #34d399; /* Émeraude */ border-color: rgba(52, 211, 153, 0.4); }
+  .badge-hack { color: #c084fc; /* Violet */ border-color: rgba(192, 132, 252, 0.4); }
+
+      /* CONFETTIS POKÉMON */
+  .poke-confetti {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    font-size: 1.2rem;
+    animation: confetti-fall 2s ease-out forwards;
+  }
+
+  .group:hover .poke-confetti {
+    opacity: 1;
+    animation-play-state: running;
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(100%) rotate(0deg) scale(0);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(-20%) rotate(180deg) scale(1);
+    }
+    100% {
+      transform: translateY(-150%) rotate(720deg) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800">
+
+  <!-- NAVBAR responsive -->
+  <header class="fixed w-full bg-white shadow-sm z-50">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+      <!-- Nom à gauche -->
+      <h1 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-800 flex items-baseline space-x-2"
+          style="font-family: 'Montserrat', sans-serif;">
+        <span>Mohamed Sendouk</span>
+        <span class="text-blue-600 text-sm sm:text-base md:text-lg font-normal"
+              style="font-family: 'Noto Sans KR', sans-serif;">
+            (모하메드)
+          </span>
+      </h1>
+
+      <!-- Bouton burger mobile -->
+      <button id="navToggle"
+              class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-gray-100 focus:outline-none">
+        <span class="sr-only">Ouvrir le menu</span>
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Menu desktop -->
+      <ul class="hidden md:flex items-center space-x-4 lg:space-x-6 text-sm font-medium">
+        <li><a href="#home" class="hover:text-blue-600">Accueil</a></li>
+        <li><a href="#about" class="hover:text-blue-600">À propos</a></li>
+        <li><a href="#experience" class="hover:text-blue-600">Parcours</a></li>
+        <li><a href="#projects" class="hover:text-blue-600">Projets</a></li>
+        <li><a href="portfolioApp.htlm" class="hover:text-blue-600">Portfolio</a></li>
+        <li><a href="contact.html" class="hover:text-blue-600">Contact</a></li>
+        <li>
+          <a href="cv.pdf" download
+            class="px-3 py-2 lg:px-4 lg:py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-xs lg:text-sm whitespace-nowrap">
+            Télécharger CV
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Menu mobile -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
+      <ul class="px-4 py-3 space-y-2 text-sm font-medium">
+        <li><a href="#home" class="block py-1 hover:text-blue-600">Accueil</a></li>
+        <li><a href="#about" class="block py-1 hover:text-blue-600">À propos</a></li>
+        <li><a href="#experience" class="block py-1 hover:text-blue-600">Parcours</a></li>
+        <li><a href="#projects" class="block py-1 hover:text-blue-600">Projets</a></li>
+        <li><a href="portfolioApp.htlm" class="block py-1 hover:text-blue-600">Portfolio</a></li>
+        <li><a href="contact.html" class="block py-1 hover:text-blue-600">Contact</a></li>
+        <li>
+          <a href="cv.pdf" download
+            class="mt-2 inline-block px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-sm">
+            Télécharger CV
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home"
+          data-aos="fade-up"
+          class="min-h-screen pt-24 flex flex-col justify-center items-center text-center bg-gradient-to-b from-white to-blue-50 relative">
+    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-800 mb-4">
+      Bonjour (안녕하세요) !
+    </h2>
+    <p class="text-lg sm:text-xl text-gray-600 mb-6 px-4">
+      Étudiant en informatique, intéressé par les applications dans le domaine médical
+    </p>
+    <div class="space-x-0 sm:space-x-4 space-y-3 sm:space-y-0 flex flex-col sm:block">
+      <a href="#projects"
+        class="inline-flex items-center gap-2 px-6 py-2 rounded-full
+            bg-blue-700 text-white text-sm font-medium
+            shadow-sm hover:shadow-md
+            hover:bg-blue-800
+            transition-all duration-200">
+        Voir mes projets
+        <span class="transition-transform duration-200 group-hover:translate-x-0.5">
+      →
+    </span>
+      </a>
+
+
+
+    </div>
+
+    <!-- Scroll down -->
+    <a href="#about" class="scroll-down hidden sm:flex">
+      <div class="mouse"></div>
+      <span class="text">Défiler pour en savoir plus</span>
+    </a>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="about" data-aos="fade-up" class="max-w-5xl mx-auto py-16 sm:py-20 px-4 sm:px-6">
+    <div class="section-wrapper mb-6">
+      <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
+        À propos de Moi (저에 대해)
+      </h3>
+    </div>
+
+    <div class="flex justify-center gap-3 mb-8">
+      <a href="https://github.com/MohamedBLZ" target="_blank" class="contact-btn github">
+        <img src="img/github.png" alt="GitHub" class="w-5 h-5"/>
+      </a>
+      <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank" class="contact-btn linkedin">
+        <img src="img/linkedin.png" alt="LinkedIn" class="w-5 h-5"/>
+      </a>
+      <a href="mailto:sendoukmohamed45@gmail.com" class="contact-btn gmail">
+        <img src="img/gmail.png" alt="Gmail" class="w-5 h-5"/>
+      </a>
+    </div>
+
+    <div class="text-center mb-8">
+      <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">Mohamed Sendouk</h2>
+      <p class="text-base sm:text-lg text-blue-600 font-medium italic">
+        Développeur passionné de médecine
+      </p>
+      <div class="flex justify-center mt-3">
+        <div class="w-16 h-1 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 rounded-full"></div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-10">
+      <div class="text-gray-700 leading-relaxed text-justify mb-10 text-sm sm:text-base">
+        <p class="mb-4">
+          Je suis étudiant en BUT Informatique à l'IUT de Montpellier-Sète.
+          Curieux, persévérant et minutieux, je m'intéresse particulièrement au
+          <strong>domaine médical</strong>, un secteur qui combine technologie et bien-être humain.
+        </p>
+        <p class="mb-4">
+          Grâce à mes lectures sur l'anatomie et aux expériences de mon oncle, chirurgien,
+          j'ai développé une passion pour la médecine. Mon projet post-BUT est d'intégrer
+          un <strong>Master en Bio-Informatique</strong> afin de fusionner mes compétences
+          en informatique avec mes intérêts pour la santé et la recherche médicale.
+        </p>
+        <p>
+          Mon objectif est de contribuer à la création de solutions technologiques innovantes
+          pour améliorer la santé et faciliter la recherche scientifique.
+        </p>
+      </div>
+
+      <div class="bg-blue-50 rounded-xl p-4 sm:p-6 shadow-inner mb-10">
+        <h3 class="text-lg sm:text-xl font-semibold text-blue-800 mb-4 text-center">
+          Centres d'intérêt (관심사)
+        </h3>
+        <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">💉 Médecine</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">💻 Programmation</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">🧠 Intelligence Artificielle</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">🌍 Langue & Culture coréenne</span>
+        </div>
+      </div>
+
+      <div class="bg-blue-50 rounded-xl p-4 sm:p-6 shadow-inner mb-10">
+        <h3 class="text-lg sm:text-xl font-semibold text-blue-800 mb-4 text-center">
+          Compétences Techniques (기술 능력)
+        </h3>
+        <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">Python</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">Java</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">HTML / CSS / JavaScript</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">SQL</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">TailwindCSS</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">Git / GitHub</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">JavaFX</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">PL/SQL</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">C++</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">Figma</span>
+          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">Docker</span>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <a href="cv.pdf" download
+          class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition shadow text-sm sm:text-base">
+          <img src="img/tele.png" alt="Télécharger" class="w-5 h-5"/>
+          Télécharger mon CV
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARCOURS / TIMELINE -->
+  <section id="experience" class="bg-white py-16 sm:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="section-wrapper mb-10" data-aos="fade-up">
+        <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
+          Mon Parcours (경력)
+        </h3>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-line hidden sm:block"></div>
+
+        <!-- Item 1 -->
+        <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-right" data-aos="fade-left">
+          <div class="hidden sm:block"></div>
+          <div class="relative">
+            <div class="timeline-dot hidden sm:block" style="top: 30px; border-color: #fbbf24;"></div>
+            <div class="timeline-connector hidden sm:block"></div>
+            <div class="timeline-card coming-soon">
+              <span class="coming-soon-badge">⏳ À venir</span>
+              <div class="flex gap-4 mb-4">
+                <div class="timeline-icon">🚀</div>
+                <div class="flex-1">
+                    <span class="timeline-badge"
+                          style="background: linear-gradient(135deg,#fef3c7 0%,#fde68a 100%); color:#92400e; border-color:#fbbf24;">
+                      2027 — ????
+                    </span>
+                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">
+                    Master Bio-Informatique
+                  </h4>
+                  <p class="text-xs sm:text-sm text-gray-600 mt-1">Université • France</p>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm leading-relaxed italic">
+                Projet en préparation : intégrer un Master spécialisé en Bio-Informatique pour fusionner développement et santé.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4 text-xs">
+                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Bioinformatique</span>
+                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Data Science</span>
+                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Santé</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-left" data-aos="fade-right">
+          <div class="relative text-right sm:text-right">
+            <div class="timeline-dot hidden sm:block" style="top: 30px; border-color: #fbbf24;"></div>
+            <div class="timeline-connector hidden sm:block"></div>
+            <div class="timeline-card coming-soon">
+              <span class="coming-soon-badge">⏳ À venir</span>
+              <div class="flex gap-4 mb-4">
+                <div class="timeline-icon">💼</div>
+                <div class="flex-1 text-left sm:text-left">
+                    <span class="timeline-badge"
+                          style="background: linear-gradient(135deg,#fef3c7 0%,#fde68a 100%); color:#92400e; border-color:#fbbf24;">
+                      Avr 2026 — Juin 2026
+                    </span>
+                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">Stage en Développement</h4>
+                  <p class="text-xs sm:text-sm text-gray-600 mt-1">Recherche en cours • France</p>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm leading-relaxed italic">
+                Stage de fin de BUT2 : application de mes compétences en développement web/mobile, idéalement dans le secteur de la santé.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4 text-xs">
+                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Développement Web</span>
+                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Santé</span>
+                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Innovation</span>
+              </div>
+            </div>
+          </div>
+          <div class="hidden sm:block"></div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-right" data-aos="fade-left">
+          <div class="hidden sm:block"></div>
+          <div class="relative">
+            <div class="timeline-dot hidden sm:block" style="top: 30px;"></div>
+            <div class="timeline-connector hidden sm:block"></div>
+            <div class="timeline-card">
+              <div class="flex gap-4 mb-4">
+                <img src="img/iut.jpg" alt="Logo IUT"
+                    class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover border-2 border-blue-200 shadow-md" />
+                <div class="flex-1">
+                  <span class="timeline-badge">Sep 2024 — Présent</span>
+                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">BUT Informatique</h4>
+                  <p class="text-xs sm:text-sm text-gray-600 mt-1">IUT Montpellier-Sète</p>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm leading-relaxed">
+                Actuellement en BUT2, Parcours IAMSI : Java OO, C bas niveau, BDD MySQL, outils interactifs, systèmes/réseaux, virtualisation, conteneurisation, automatisation, gestion de projet Agile.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4 text-xs">
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">JavaFX</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">SQL</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">PL/SQL</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Gestion de projet</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Java</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">HTML / CSS / JS</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">IA</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Langage C</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="grid sm:grid-cols-2 gap-8 items-center timeline-item-left" data-aos="fade-right">
+          <div class="relative text-right sm:text-right">
+            <div class="timeline-dot hidden sm:block" style="top: 30px;"></div>
+            <div class="timeline-connector hidden sm:block"></div>
+            <div class="timeline-card">
+              <div class="flex gap-4 mb-4">
+                <img src="img/lycee.jpeg" alt="Logo Lycée"
+                    class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover border-2 border-blue-200 shadow-md" />
+                <div class="flex-1 text-left sm:text-left">
+                  <span class="timeline-badge">Sep 2021 — Juin 2024</span>
+                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">Baccalauréat Technologique</h4>
+                  <p class="text-xs sm:text-sm text-gray-600 mt-1">Lycée - STI2D - Martigues • France</p>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                Spécialités SIN (Systèmes d'Information et Numérique)
+              </p>
+              <div class="mb-4">
+                <p class="text-xs font-semibold text-gray-600">
+                  Niveau : 13.9, Mention Assez Bien
+                </p>
+              </div>
+              <div class="flex flex-wrap gap-2 text-xs">
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">SIN</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Mathématique</span>
+                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Physique</span>
+              </div>
+            </div>
+          </div>
+          <div class="hidden sm:block"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- LES PROJETS -->
+
+  <!-- PROJETS avec CONFETTIS POKÉMON -->
+  <section id="projects" class="bg-gradient-to-b from-gray-50 to-white py-20 sm:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-transparent to-indigo-500/3"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+      <!-- Titre -->
+      <div class="section-wrapper mb-10" data-aos="fade-up">
+        <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
+          Mes Projets (프로젝트)
+        </h3>
+      </div>
+
+      <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto mb-12 text-center">
+        Un aperçu de quelques réalisations marquantes. Chaque carte mène vers une page dédiée.
+      </p>
+
+      <!-- Grille 3 colonnes -->
+      <div class="grid md:grid-cols-3 gap-8 sm:gap-10">
+
+        <!-- PROJET 1 : POKÉMON avec confettis -->
+        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-yellow-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up">
+          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 p-4">
+            
+            <!-- CONFETTIS POKÉMON -->
+            <div class="poke-confetti absolute top-4 left-10 text-yellow-400" style="animation-delay: 0.1s;">⭐</div>
+            <div class="poke-confetti absolute top-8 left-20 text-red-500" style="animation-delay: 0.2s;">🔴</div>
+            <div class="poke-confetti absolute top-12 right-16 text-yellow-400" style="animation-delay: 0.3s;">✨</div>
+            <div class="poke-confetti absolute top-16 left-16 text-blue-400" style="animation-delay: 0.4s;">💎</div>
+            <div class="poke-confetti absolute top-20 right-20 text-purple-400" style="animation-delay: 0.5s;">💜</div>
+            <div class="poke-confetti absolute top-24 left-8 text-orange-400" style="animation-delay: 0.6s;">⚡</div>
+            <div class="poke-confetti absolute top-28 right-8 text-pink-400" style="animation-delay: 0.7s;">🌸</div>
+
+            <!-- Border glow Pokémon -->
+            <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-yellow-400 group-hover:shadow-2xl group-hover:shadow-yellow-400/50 transition-all duration-500"></div>
+
+            <!-- Image -->
+            <img src="img/Pokémon_Trading_Card.png"
+                alt="Application Pokémon TCG"
+                class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
+
+            <!-- Badge SAÉ -->
+            <div class="project-badge badge-sae">
+    SAÉ
+  </div>
+          </div>
+
+          <!-- Contenu -->
+          <div class="p-6 sm:p-8">
+            <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">SAÉ / Projet encadré</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-yellow-900 transition-all duration-300">Application Pokémon TCG</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">Jeu complet Pokémon TCG développé en Java (Moteur) et JavaFX (Interface Graphique). Gestion des règles officielles.</p>
+            <a href="projet-pokemon-tcg.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-all duration-200 hover:translate-x-1">
+              Voir le projet →
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJET 2 -->
+        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/20 hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-emerald-400/20 to-teal-500/20 p-4 flex items-center justify-center">
+            <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-emerald-400 group-hover:shadow-2xl group-hover:shadow-emerald-400/50 transition-all duration-500"></div>
+            <div class="relative text-6xl opacity-40 group-hover:opacity-70 transition-all duration-500 z-10">💻</div>
+            <div class="project-badge badge-perso">
+    Personnel
+  </div>
+          </div>
+          <div class="p-6 sm:p-8">
+            <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">Projet personnel</p>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-emerald-900 transition-all duration-300">Projet 2 – Titre à définir</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">Une phrase courte qui décrit le type de projet.</p>
+            <a href="#" class="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-all duration-200 hover:translate-x-1">
+              Voir le projet →
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJET 3 -->
+
+
+        <!-- PROJET 3 -->
+        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+          
+          <!-- Image avec cadre -->
+          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-purple-400/20 to-pink-500/20 p-3 flex items-center justify-center">
+            <div class="absolute inset-3 rounded-xl border-2 border-purple-200 group-hover:border-purple-400 group-hover:shadow-lg group-hover:shadow-purple-400/30 transition-all duration-300 pointer-events-none"></div>
+            <!-- Emoji placeholder -->
+            <div class="relative text-6xl opacity-30 group-hover:opacity-50 transition-opacity duration-500">⚡</div>
+            <!-- Badge Hackathon en haut à gauche -->
+            <div class="project-badge badge-hack">
+    Hackathon
+  </div>
+          </div>
+
+          <!-- Contenu -->
+          <div class="p-6 sm:p-7">
+            <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-2">
+              Nuit de l'Info / Game Jam
+            </p>
+            
+            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-900 transition-colors">
+              Projet 3 – Titre à définir
+            </h3>
+            
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Un aperçu du challenge (thème, contexte rapide) sans entrer dans les détails.
+            </p>
+
+            <a href="#"
+              class="group/link inline-flex items-center gap-2 text-sm font-bold text-purple-600 hover:text-purple-700 transition-all duration-200 hover:gap-3">
+              Voir le projet
+              <svg class="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Divider décoratif -->
+      <div class="flex justify-center mt-20" data-aos="fade-up" data-aos-delay="300">
+        <div class="w-32 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- Bouton scroll to top -->
+  <div id="scrollToTop">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-blue-50 text-gray-700 py-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6">
+      <div class="text-left mb-4 md:mb-0">
+        <div class="font-medium text-gray-800 text-base sm:text-lg">
+          Mohamed Sendouk <span class="text-blue-600">(모하메드)</span>
+        </div>
+        <div class="text-xs sm:text-sm text-gray-600 mt-1">
+          © 2025 · Tous droits réservés
+        </div>
+      </div>
+
+      <div class="flex space-x-3">
+        <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank"
+          class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+          <img src="img/linkedin.png" alt="LinkedIn" class="w-4 h-4"/>
+        </a>
+        <a href="mailto:sendoukmohamed45@gmail.com"
+          class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+          <img src="img/gmail.png" alt="Gmail" class="w-4 h-4"/>
+        </a>
+        <a href="https://github.com/MohamedBLZ" target="_blank"
+          class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+          <img src="img/github.png" alt="GitHub" class="w-4 h-4"/>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) scrollToTopBtn.classList.add('show');
+      else scrollToTopBtn.classList.remove('show');
+    });
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Menu mobile
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    navToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+  </body>
+  </html>
