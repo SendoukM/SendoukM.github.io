@@ -9,7 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@400;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -20,7 +20,7 @@
       scroll-behavior: smooth;
     }
 
-    /* Effet carte holographique (Ton style préféré) */
+    /* Effet carte holographique */
     .holo-card {
       position: relative;
       z-index: 10;
@@ -28,12 +28,12 @@
       transform-style: preserve-3d;
       background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
     }
-    
+
     .holo-card:hover {
       transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-      box-shadow: 
-        0 20px 30px rgba(0,0,0,0.1),
-        0 0 0 1px rgba(255,255,255,0.5) inset;
+      box-shadow:
+              0 20px 30px rgba(0,0,0,0.1),
+              0 0 0 1px rgba(255,255,255,0.5) inset;
     }
 
     .holo-card::before {
@@ -41,13 +41,13 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        115deg,
-        transparent 20%,
-        rgba(255, 255, 255, 0.4) 25%,
-        transparent 30%,
-        transparent 70%,
-        rgba(255, 255, 255, 0.4) 75%,
-        transparent 80%
+              115deg,
+              transparent 20%,
+              rgba(255, 255, 255, 0.4) 25%,
+              transparent 30%,
+              transparent 70%,
+              rgba(255, 255, 255, 0.4) 75%,
+              transparent 80%
       );
       opacity: 0;
       transition: opacity 0.5s;
@@ -65,7 +65,7 @@
       100% { background-position: -200% 0; }
     }
 
-    /* Badge Types Pokémon */
+    /* Badge Types */
     .type-badge {
       display: inline-block;
       padding: 4px 12px;
@@ -76,17 +76,50 @@
       text-transform: uppercase;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    
-    /* Connecteur pour la timeline des phases */
+
+    /* Connecteur Timeline */
     .phase-line {
       position: absolute;
       left: 50%;
       top: 0;
       bottom: 0;
       width: 4px;
-      background: linear-gradient(to bottom, #ef4444, #3b82f6); /* Rouge vers Bleu */
+      background: linear-gradient(to bottom, #ef4444, #3b82f6);
       transform: translateX(-50%);
       z-index: 0;
+    }
+
+    /* Style "Article" */
+    .article-section h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #111827;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+    .article-section p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      color: #4b5563;
+    }
+    .article-section ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: #4b5563;
+    }
+    .article-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Animation du tech-sidebar */
+    .tech-item {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tech-item:hover {
+      transform: translateX(5px);
+      background-color: #f9fafb;
     }
   </style>
 </head>
@@ -96,7 +129,7 @@
 <header class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50">
   <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
     <a href="index.html" class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-800 flex items-baseline space-x-2"
-        style="font-family: 'Montserrat', sans-serif;">
+       style="font-family: 'Montserrat', sans-serif;">
       <span>← Retour au Portfolio</span>
     </a>
   </nav>
@@ -104,192 +137,281 @@
 
 <!-- HERO HEADER -->
 <section class="relative pt-32 pb-20 overflow-hidden">
-  <!-- Fond décoratif -->
   <div class="absolute inset-0 bg-gradient-to-br from-yellow-50 via-orange-50 to-red-50 z-0"></div>
   <div class="absolute -top-24 -right-24 w-96 h-96 bg-yellow-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
   <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-red-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
 
   <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
     <div class="flex flex-col md:flex-row items-center gap-12">
-      
+
       <!-- Texte Hero -->
       <div class="flex-1 text-center md:text-left" data-aos="fade-right">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-100 text-yellow-800 text-xs font-bold uppercase tracking-wider mb-4 border border-yellow-200">
-          Projet Annuel • S2.01
+          Projet Semestriel • S2.01
         </div>
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
           Pokémon TCG <br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-blue-500">Fullstack Java</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-orange-500 to-blue-500">Projet SAE</span>
         </h1>
         <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
-          Une aventure de développement complète : de la conception du <strong>Moteur de Jeu</strong> (Logique Java) à la réalisation de l'<strong>Interface Graphique</strong> (JavaFX).
+          <strong>Conception</strong> et <strong>développement</strong> d’un jeu Pokémon Trading Card Game intégrant une <strong>Interface</strong> <strong>Graphique</strong> en JavaFX
         </p>
-        
+
         <div class="flex flex-wrap gap-3 justify-center md:justify-start">
           <span class="type-badge bg-red-600">Java</span>
           <span class="type-badge bg-blue-600">JavaFX</span>
-          <span class="type-badge bg-purple-600">MVC Pattern</span>
+          <span class="type-badge bg-purple-600">DOO</span>
           <span class="type-badge bg-gray-800">GitLab</span>
         </div>
 
-        <div class="mt-8 flex gap-4 justify-center md:justify-start">
-          <a href="#" class="px-8 py-3 bg-blue-700 text-white rounded-xl font-semibold shadow-lg hover:bg-blue-800 transition transform hover:-translate-y-1">
-            Voir le code
+        <div class="mt-8 flex flex-wrap gap-4 justify-center md:justify-start">
+          <a href="https://gitlabinfo.iutmontp.univ-montp2.fr/sendoukm/sae-pokemontcg-phase1" target="_blank"
+             class="px-6 py-3 bg-white border-2 border-red-100 text-red-600 rounded-xl font-bold shadow-sm hover:bg-red-50 hover:border-red-200 hover:shadow-md transition flex items-center gap-2 group">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+            <span>Phase 1 (Moteur)</span>
+          </a>
+          <a href="https://gitlabinfo.iutmontp.univ-montp2.fr/sendoukm/sae-pokemontcg-phase2" target="_blank"
+             class="px-6 py-3 bg-blue-700 text-white rounded-xl font-bold shadow-lg hover:bg-blue-800 transition transform hover:-translate-y-1 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+            <span>Phase 2 (IHM)</span>
           </a>
         </div>
       </div>
 
-      <!-- Image Hero (Holo Card Style) -->
+      <!-- Image Hero -->
       <div class="flex-1 w-full max-w-md relative" data-aos="zoom-in">
         <div class="absolute top-4 -right-4 w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl rotate-6 opacity-20 blur-sm"></div>
         <div class="holo-card rounded-2xl p-2 bg-white shadow-2xl border border-gray-100 transform rotate-[-3deg]">
-          <!-- Image Placeholder (mets ton screenshot GUI ici si tu veux) -->
           <img src="img/Pokémon_Trading_Card.png" alt="Pokémon TCG Interface" class="w-full h-auto rounded-xl">
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- SECTION CHRONOLOGIE (LES 2 PHASES) -->
+<!-- SECTION CHRONOLOGIE -->
 <section class="py-20 bg-white relative overflow-hidden">
   <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
-    
-    <!-- Ligne Verticale (Cachée sur mobile) -->
     <div class="hidden md:block phase-line"></div>
 
-    <!-- PHASE 1 : LOGIQUE (Rouge) -->
+    <!-- PHASE 1 : LOGIQUE (Résumé) -->
     <div class="relative grid md:grid-cols-2 gap-12 items-center mb-24">
-      
-      <!-- Texte Gauche -->
       <div class="md:text-right" data-aos="fade-right">
         <span class="text-red-500 font-bold tracking-wide uppercase text-sm">Phase 1 • Mars - Avril</span>
         <h2 class="text-3xl font-bold text-gray-900 mt-2">Le Moteur de Jeu</h2>
         <p class="mt-4 text-gray-600 leading-relaxed">
-          Implémentation des règles officielles en Java pur. Architecture Orientée Objet stricte pour gérer la complexité des cartes.
+          Développement du "cerveau" du jeu : gestion des règles, des cartes et des tours en Java pur.
         </p>
-        
-        <!-- Cartes features -->
-        <div class="mt-6 space-y-3">
-            <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500 text-sm text-left">
-                <strong>Gestion du Banc :</strong> Limite de 5 Pokémon et échanges dynamiques.
-            </div>
-            <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500 text-sm text-left">
-                <strong>Évolutions :</strong> Transfert des états et énergies lors de l'évolution.
-            </div>
-            <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-500 text-sm text-left">
-                <strong>Tests Unitaires :</strong> Validation de la logique via JUnit 5.
-            </div>
+        <div class="mt-4">
+          <a href="#details-projet" class="text-red-500 font-bold hover:underline">Voir le rapport détaillé ci-dessous ↓</a>
         </div>
       </div>
+      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 justify-center items-center w-12 h-12 bg-red-500 text-white rounded-full border-4 border-white shadow-lg z-10 font-bold">1</div>
 
-      <!-- Icone Centrale -->
-      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 justify-center items-center w-12 h-12 bg-red-500 text-white rounded-full border-4 border-white shadow-lg z-10 font-bold">
-        1
-      </div>
-
-      <!-- Image/Visuel Droite -->
-      <div class="holo-card bg-white p-6 rounded-xl border border-gray-100" data-aos="fade-left">
-        <div class="flex items-center gap-3 mb-4">
-            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+      <!-- CARTE CODE PHASE 1 -->
+      <div class="holo-card bg-white p-4 rounded-xl border border-gray-100" data-aos="fade-left">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
         </div>
-        <div class="space-y-2 font-mono text-xs text-gray-500">
-            <p><span class="text-purple-600">class</span> <span class="text-yellow-600">Pokemon</span> <span class="text-purple-600">extends</span> Carte {</p>
-            <p class="pl-4"><span class="text-purple-600">private</span> List&lt;Energie&gt; energies;</p>
-            <p class="pl-4"><span class="text-purple-600">public void</span> attaquer(Pokemon adversaire) {</p>
-            <p class="pl-8 text-green-600">// Logique de dégâts...</p>
-            <p class="pl-4">}</p>
-            <p>}</p>
+        <div class="font-mono text-[10px] leading-tight text-gray-600 overflow-hidden">
+          <p><span class="text-purple-600">public class</span> <span class="text-yellow-600">Pokemon</span> {</p>
+          <p class="pl-4"><span class="text-purple-600">private</span> <span class="text-purple-600">int</span> degats;</p>
+          <p class="pl-4"><span class="text-purple-600">private</span> <span class="text-purple-600">boolean</span> estBrule;</p>
+          <p class="pl-4"><span class="text-purple-600">private</span> <span class="text-purple-600">boolean</span> degatsEvite;</p>
+          <br>
+          <p class="pl-4"><span class="text-purple-600">public void</span> evoluer(CartePokemon c) {</p>
+          <p class="pl-8"><span class="text-purple-600">this</span>.cartePokemon = c;</p>
+          <p class="pl-8"><span class="text-purple-600">this</span>.cartes.add(c);</p>
+          <p class="pl-4">}</p>
+          <br>
+          <p class="pl-4"><span class="text-purple-600">public void</span> appliquerDegats(<span class="text-purple-600">int</span> nb, Joueur j) {</p>
+          <p class="pl-8"><span class="text-purple-600">if</span> (!degatsEvite) {</p>
+          <p class="pl-12"><span class="text-gray-400">// Gestion Faiblesse</span></p>
+          <p class="pl-12"><span class="text-purple-600">if</span> (type == carte.getFaiblesse()) nb *= 2;</p>
+          <p class="pl-12">degats += nb;</p>
+          <p class="pl-12"><span class="text-purple-600">if</span> (degatsSubitAugmente) degats += 20;</p>
+          <p class="pl-8">} <span class="text-purple-600">else</span> {</p>
+          <p class="pl-12">j.log(getNom() + <span class="text-green-600">" évite tout !"</span>);</p>
+          <p class="pl-8">}</p>
+          <p class="pl-4">}</p>
+          <p>}</p>
         </div>
       </div>
     </div>
 
-    <!-- PHASE 2 : IHM (Bleu) -->
+    <!-- PHASE 2 : IHM (Résumé) -->
     <div class="relative grid md:grid-cols-2 gap-12 items-center">
-      
-      <!-- Image/Visuel Gauche -->
       <div class="holo-card bg-white p-6 rounded-xl border border-gray-100 order-2 md:order-1" data-aos="fade-right">
-        <!-- Petit mockup visuel abstrait de l'interface -->
         <div class="grid grid-cols-3 gap-2 h-32">
-            <div class="col-span-2 bg-blue-50 rounded-lg border border-blue-100 p-2 flex items-center justify-center text-blue-300 text-xs">Plateau de Jeu</div>
-            <div class="bg-gray-50 rounded-lg border border-gray-100 flex flex-col gap-1 p-1">
-                <div class="h-1/3 bg-blue-100 rounded"></div>
-                <div class="h-1/3 bg-blue-100 rounded"></div>
-            </div>
-            <div class="col-span-3 h-12 bg-gray-800 rounded-lg mt-auto flex items-center justify-center text-white text-xs">Main du Joueur</div>
+          <div class="col-span-2 bg-blue-50 rounded-lg border border-blue-100 p-2 flex items-center justify-center text-blue-300 text-xs">Plateau de Jeu</div>
+          <div class="bg-gray-50 rounded-lg border border-gray-100 flex flex-col gap-1 p-1">
+            <div class="h-1/3 bg-blue-100 rounded"></div>
+            <div class="h-1/3 bg-blue-100 rounded"></div>
+          </div>
+          <div class="col-span-3 h-12 bg-gray-800 rounded-lg mt-auto flex items-center justify-center text-white text-xs">Main du Joueur</div>
         </div>
       </div>
-
-      <!-- Icone Centrale -->
-      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 justify-center items-center w-12 h-12 bg-blue-600 text-white rounded-full border-4 border-white shadow-lg z-10 font-bold">
-        2
-      </div>
-
-      <!-- Texte Droite -->
+      <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 justify-center items-center w-12 h-12 bg-blue-600 text-white rounded-full border-4 border-white shadow-lg z-10 font-bold">2</div>
       <div class="md:text-left order-1 md:order-2" data-aos="fade-left">
         <span class="text-blue-600 font-bold tracking-wide uppercase text-sm">Phase 2 • Mai - Juin</span>
         <h2 class="text-3xl font-bold text-gray-900 mt-2">L'Interface Graphique</h2>
         <p class="mt-4 text-gray-600 leading-relaxed">
-          Transformation du moteur logique en application visuelle complète avec JavaFX. J'ai réalisé la majeure partie de cette interface interactive.
+          Conception d'une IHM réactive en JavaFX respectant le pattern MVC.
         </p>
-
-        <!-- Cartes features -->
-        <div class="mt-6 space-y-3">
-            <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-600 text-sm">
-                <strong>Architecture MVC :</strong> Séparation claire Vue (FXML) / Contrôleur.
-            </div>
-            <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-600 text-sm">
-                <strong>Data Binding :</strong> L'interface réagit en temps réel aux PV et cartes.
-            </div>
-            <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-blue-600 text-sm">
-                <strong>Interactions :</strong> Gestion des clics, tours de jeu et attaques.
-            </div>
-        </div>
+        <ul class="mt-4 space-y-2 text-sm text-gray-600">
+          <li>• Architecture MVC & FXML</li>
+          <li>• Data Binding (Propriétés observables)</li>
+          <li>• Gestion événementielle (Clics, Tours)</li>
+        </ul>
       </div>
-
     </div>
-
   </div>
 </section>
 
-<!-- APPRENTISSAGES -->
-<section class="py-20 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="text-center mb-16" data-aos="fade-up">
-      <h2 class="text-3xl font-bold text-gray-900">Compétences Acquises</h2>
-      <div class="w-20 h-1 bg-yellow-400 mx-auto mt-4 rounded-full"></div>
-    </div>
+<!-- RAPPORT DÉTAILLÉ (Style "SAE TRAINS") AVEC SIDEBAR TECH -->
+<section id="details-projet" class="py-20 bg-gray-50 border-t border-gray-200 relative">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-4 gap-12">
 
-    <div class="grid md:grid-cols-4 gap-6">
-      <!-- Skill 1 -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up">
-        <div class="text-4xl mb-4">☕</div>
-        <h3 class="font-bold text-gray-900">Java Avancé</h3>
-        <p class="text-xs text-gray-500 mt-2">Héritage, Polymorphisme, Collections</p>
+    <!-- SIDEBAR TECH FLOTTANTE -->
+    <aside class="lg:col-span-1">
+      <div class="sticky top-24 space-y-3" data-aos="fade-right">
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 border-b pb-2">Détails Techniques</div>
+
+        <!-- LANGAGE -->
+        <div class="tech-item bg-white p-3 rounded-lg border border-gray-100 shadow-sm flex items-center gap-3">
+          <div class="text-orange-500 bg-orange-50 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></div>
+          <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Langage</span>
+            <span class="font-bold text-gray-700 text-sm">Java 17</span>
+          </div>
+        </div>
+
+        <!-- FRAMEWORK -->
+        <div class="tech-item bg-white p-3 rounded-lg border border-gray-100 shadow-sm flex items-center gap-3">
+          <div class="text-blue-500 bg-blue-50 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg></div>
+          <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Framework</span>
+            <span class="font-bold text-gray-700 text-sm">JavaFX</span>
+          </div>
+        </div>
+
+        <!-- TESTS -->
+        <div class="tech-item bg-white p-3 rounded-lg border border-gray-100 shadow-sm flex items-center gap-3">
+          <div class="text-green-500 bg-green-50 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+          <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Tests</span>
+            <span class="font-bold text-gray-700 text-sm">JUnit 5</span>
+          </div>
+        </div>
+
+        <!-- VERSION -->
+        <div class="tech-item bg-white p-3 rounded-lg border border-gray-100 shadow-sm flex items-center gap-3">
+          <div class="text-red-500 bg-red-50 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg></div>
+          <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Version</span>
+            <span class="font-bold text-gray-700 text-sm">Git / GitLab</span>
+          </div>
+        </div>
+
+        <!-- IDE -->
+        <div class="tech-item bg-white p-3 rounded-lg border border-gray-100 shadow-sm flex items-center gap-3">
+          <div class="text-purple-500 bg-purple-50 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg></div>
+          <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">IDE</span>
+            <span class="font-bold text-gray-700 text-sm">IntelliJ</span>
+          </div>
+        </div>
+
+        <!-- PROJET -->
+        <div class="tech-item bg-white p-3 rounded-lg border border-gray-100 shadow-sm flex items-center gap-3">
+          <div class="text-yellow-500 bg-yellow-50 p-2 rounded-md"><svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg></div>
+          <div class="flex flex-col">
+            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Gestion Projet</span>
+            <span class="font-bold text-gray-700 text-sm">Maven</span>
+          </div>
+        </div>
+
       </div>
+    </aside>
 
-      <!-- Skill 2 -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up" data-aos-delay="100">
-        <div class="text-4xl mb-4">🖥️</div>
-        <h3 class="font-bold text-gray-900">JavaFX & FXML</h3>
-        <p class="text-xs text-gray-500 mt-2">Création d'interfaces riches et réactives</p>
-      </div>
+    <!-- CONTENU PRINCIPAL DU RAPPORT -->
+    <div class="lg:col-span-3">
+      <div class="bg-white rounded-2xl shadow-sm p-8 md:p-12 article-section" data-aos="fade-up">
 
-      <!-- Skill 3 -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up" data-aos-delay="200">
-        <div class="text-4xl mb-4">🧩</div>
-        <h3 class="font-bold text-gray-900">Design Patterns</h3>
-        <p class="text-xs text-gray-500 mt-2">MVC, Observer, Factory</p>
-      </div>
+        <div class="border-b pb-6 mb-8">
+          <h2 class="text-3xl font-bold text-gray-900">Détails du Projet</h2>
+          <div class="w-16 h-1 bg-red-500 mt-4 rounded-full"></div>
+        </div>
 
-      <!-- Skill 4 -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm text-center hover:shadow-md transition" data-aos="fade-up" data-aos-delay="300">
-        <div class="text-4xl mb-4">✅</div>
-        <h3 class="font-bold text-gray-900">Qualité Code</h3>
-        <p class="text-xs text-gray-500 mt-2">Tests Unitaires (JUnit) & Git</p>
+        <!-- Description du projet -->
+        <h3>Description du projet</h3>
+        <p>
+          Le projet "Pokémon TCG" est une simulation complète du célèbre jeu de cartes à collectionner. L'objectif était de développer un moteur de jeu capable de gérer une partie entre deux joueurs en respectant scrupuleusement les règles officielles (pioche, attaques, banc, énergies, cartes Dresseur).
+        </p>
+        <p>
+          <strong>Type de projet :</strong> Ce projet a été réalisé en binôme. Nous avons collaboré via Git pour implémenter la logique métier (Backend) avant de passer à l'interface graphique.
+        </p>
+
+        <!-- Lien Règles Officielles (Nouveau) -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+          <p class="text-sm text-blue-700">
+            📚 <strong>Pour aller plus loin :</strong> Vous pouvez consulter les règles officielles complètes du jeu sur ce site :
+            <a href="https://www.pokemoncarte.com/les-regles-du-jeu-13" target="_blank" class="font-bold underline hover:text-blue-800">Pokémon Carte - Les règles du jeu</a>.
+          </p>
+        </div>
+
+        <!-- Règles du jeu (Contexte) -->
+        <h3>Règles implémentées</h3>
+        <p>
+          Le moteur gère les règles standards : chaque joueur dispose d'un deck de 60 cartes et de 6 cartes récompense. La victoire s'obtient en mettant K.O. les Pokémon adverses (récupération des récompenses) ou si l'adversaire ne peut plus piocher.
+        </p>
+        <ul>
+          <li><strong>Misère :</strong> Remélange automatique si la main de départ ne contient pas de Pokémon de base.</li>
+          <li><strong>Attaques :</strong> Gestion des dégâts, faiblesses, résistances et effets secondaires (statuts).</li>
+          <li><strong>Structure :</strong> Architecture Orientée Objet stricte pour différencier les types de cartes (Pokémon, Énergie, Dresseur).</li>
+        </ul>
+
+        <!-- Mes Contributions (Le cœur du sujet) -->
+        <h3>Mes Contributions Techniques</h3>
+        <p>J'ai pris en charge plusieurs modules critiques du moteur de jeu :</p>
+
+        <ul>
+          <li>
+            <strong>Réalisation et gestion du banc :</strong> Implémentation de la logique permettant de placer les Pokémon de base sur le banc (limite de 5 slots). Gestion des règles de déplacement : un Pokémon ne peut attaquer que s'il est "Actif", mais peut être échangé avec le banc (Retraite).
+          </li>
+          <li>
+            <strong>Mécanique d'Évolution :</strong> Développement de la logique d'évolution.
+            <br><em>Défi technique :</em> Quand un Pokémon évolue, l'objet Java change, mais il doit conserver les états de l'ancien (marqueurs de dégâts, énergies attachées). J'ai implémenté ce transfert d'état et les vérifications de tour (un Pokémon ne peut pas évoluer le tour où il est posé).
+          </li>
+          <li>
+            <strong>Architecture des Cartes Dresseur :</strong> Conception de la hiérarchie de classes pour les cartes "Objet" et "Supporter".
+            <br><em>Logique :</em> Les cartes "Supporter" sont limitées à une utilisation par tour, contrairement aux "Objets". J'ai codé les effets spécifiques (Soins, Pioche, Échange).
+          </li>
+          <li>
+            <strong>Logs et Interactivité :</strong> Ajout d'un système de logs détaillés pour tracer chaque action (ex: <em>"Le Joueur Bleu a utilisé ChronoBall"</em>). Cela a rendu le débogage et le suivi de la partie beaucoup plus clairs.
+          </li>
+        </ul>
+
+        <!-- Tests et Validation -->
+        <h3>Tests et Validation (JUnit 5)</h3>
+        <p>
+          La qualité du code était une priorité. J'ai rédigé l'intégralité des <strong>tests unitaires</strong> pour les cartes Objet et Dresseur, ainsi que pour les mécaniques complexes des Pokémon.
+        </p>
+        <p>
+          Cette approche (TDD) a permis de garantir qu'une modification sur le moteur ne cassait pas les règles existantes (Non-régression).
+        </p>
+
+        <!-- Bilan -->
+        <h3>Ce que le projet m'a apporté</h3>
+        <p>
+          Ce projet, couvrant la Phase 1 (Moteur) et la Phase 2 (Interface), m'a permis d'explorer les deux facettes du développement : le <strong>BACK</strong> et le <strong>FRONT</strong>. J'ai découvert que j'appréciais énormément le développement Frontend en général.
+        </p>
+        <p>
+          J'ai appris à coder un jeu de A à Z : de la conception logique au développement, en passant par l'intégration graphique. Plus important encore, j'ai compris qu'il ne fallait délaisser aucune partie : le backend et le frontend sont tout aussi importants pour l'expérience utilisateur. Enfin, j'ai adoré coder <strong>Pokémon TCG</strong>, un jeu qui a marqué mon enfance.
+        </p>
+
       </div>
     </div>
   </div>
