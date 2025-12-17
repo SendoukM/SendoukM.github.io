@@ -354,7 +354,7 @@
           <strong>Type de projet :</strong> Ce projet a été réalisé en binôme. Nous avons collaboré via Git pour implémenter la logique métier (Backend) avant de passer à l'interface graphique.
         </p>
 
-        <!-- Lien Règles Officielles (Nouveau) -->
+        <!-- Lien Règles Officielles -->
         <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
           <p class="text-sm text-blue-700">
             📚 <strong>Pour aller plus loin :</strong> Vous pouvez consulter les règles officielles complètes du jeu sur ce site :
@@ -373,8 +373,8 @@
           <li><strong>Structure :</strong> Architecture Orientée Objet stricte pour différencier les types de cartes (Pokémon, Énergie, Dresseur).</li>
         </ul>
 
-        <!-- Mes Contributions (Le cœur du sujet) -->
-        <h3>Mes Contributions Techniques</h3>
+        <!-- Mes Contributions (Phase 1) -->
+        <h3>Mes Contributions Techniques - Phase 1 (Moteur)</h3>
         <p>J'ai pris en charge plusieurs modules critiques du moteur de jeu :</p>
 
         <ul>
@@ -391,6 +391,28 @@
           </li>
           <li>
             <strong>Logs et Interactivité :</strong> Ajout d'un système de logs détaillés pour tracer chaque action (ex: <em>"Le Joueur Bleu a utilisé ChronoBall"</em>). Cela a rendu le débogage et le suivi de la partie beaucoup plus clairs.
+          </li>
+        </ul>
+
+        <!-- NOUVELLE SECTION PHASE 2 -->
+        <h3>Phase 2 : Interface Graphique (JavaFX)</h3>
+        <p>
+          La seconde partie du projet consistait à développer une interface graphique complète pour remplacer l'interaction console. Cette étape imposait une architecture rigoureuse pour séparer la logique (Moteur) de l'affichage (Vue).
+        </p>
+        <ul>
+          <li>
+            <strong>Architecture MVC & Pattern Façade :</strong> Utilisation de l'interface <code>IJeu</code> agissant comme une façade pour communiquer avec le moteur. Cela garantit que la vue ne manipule jamais directement les objets internes du noyau.
+          </li>
+          <li>
+            <strong>Programmation Événementielle :</strong> Transition vers un modèle réactif où l'interface répond aux clics utilisateurs et aux changements d'état du jeu via des <strong>Propriétés Observables</strong> (Data Binding JavaFX).
+          </li>
+          <li>
+            <strong>Conception des Vues :</strong> Développement de composants modulaires héritant de <code>Pane</code> :
+            <ul class="list-disc pl-4 mt-2 text-sm">
+              <li><code>VueDuJeu</code> : L'orchestrateur principal de la scène.</li>
+              <li><code>VueJoueurActif</code> vs <code>VueAdversaire</code> : Gestion de l'affichage différencié (cartes visibles vs dos de cartes).</li>
+              <li><code>VuePokemon</code> : Représentation visuelle des états (PV, énergies, statuts).</li>
+            </ul>
           </li>
         </ul>
 
@@ -420,7 +442,7 @@
 <!-- FOOTER -->
 <footer class="bg-gray-900 text-white py-12">
   <div class="max-w-6xl mx-auto px-4 flex flex-col items-center text-center">
-    <h3 class="text-2xl font-bold mb-6">Prêt à voir autre chose ?</h3>
+    <h3 class="text-2xl font-bold mb-6">Vous voulez voir d'autres de mes réalisations ?</h3>
     <div class="flex gap-4">
       <a href="index.html" class="px-6 py-3 bg-white text-gray-900 rounded-full font-bold hover:bg-gray-100 transition">
         ← Retour au Portfolio
