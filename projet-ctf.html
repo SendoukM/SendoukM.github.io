@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projet YGGAMES CTF - Mohamed Sendouk</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <style>
+    /* --- CONFIGURATION GLOBALE --- */
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #020617;
+      color: #e5e7eb;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .brand-font {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* --- FOND ANIMÉ (BLOBS + MATRIX) --- */
+    .ambient-light {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(15,23,42,0.9), transparent);
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.6;
+      animation: float 12s infinite ease-in-out;
+    }
+
+    .blob-1 {
+      top: -15%; left: -10%; width: 520px; height: 520px;
+      background: rgba(34,197,94,0.22);
+      animation-delay: 0s;
+    }
+    .blob-2 {
+      bottom: 10%; right: -10%; width: 420px; height: 420px;
+      background: rgba(59,130,246,0.2);
+      animation-delay: -5s;
+    }
+    .blob-3 {
+      top: 35%; left: 35%; width: 320px; height: 320px;
+      background: rgba(147,51,234,0.18);
+      animation-delay: -2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(40px, -50px) scale(1.05); }
+      66% { transform: translate(-25px, 20px) scale(0.95); }
+    }
+
+    /* Canvas matrix */
+    #matrix-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* --- CARTES GLASSMORPHISM --- */
+    .ctf-card {
+      background: rgba(15,23,42,0.8);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(148,163,184,0.35);
+      border-radius: 24px;
+      box-shadow:
+              0 8px 30px rgba(15,23,42,0.8),
+              inset 0 0 0 1px rgba(15,23,42,0.9);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ctf-card:hover {
+      transform: translateY(-6px);
+      background: rgba(15,23,42,0.95);
+      border-color: rgba(34,197,94,0.5);
+      box-shadow:
+              0 20px 45px -5px rgba(34,197,94,0.25),
+              0 10px 25px -8px rgba(15,23,42,0.9);
+    }
+
+    /* --- TILT --- */
+    .tilt-container {
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+    .tilt-element {
+      transition: transform 0.1s ease-out;
+    }
+
+    /* --- BOUTONS --- */
+    .btn-main {
+      position: relative;
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 18px rgba(34,197,94,0.45);
+      overflow: hidden;
+    }
+    .btn-main::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: 0.6s;
+    }
+    .btn-main:hover::before { left: 100%; }
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(34,197,94,0.7);
+    }
+
+    .btn-secondary {
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid rgba(148,163,184,0.7);
+      box-shadow: 0 4px 16px rgba(15,23,42,0.7);
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background: #020617;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(15,23,42,0.9);
+      border-color: #22c55e;
+    }
+
+    /* --- TECH BLOCKS --- */
+    .tech-block {
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(30,64,175,0.7);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+    .tech-block:hover {
+      background: rgba(15,23,42,1);
+      transform: translateY(-4px) scale(1.02);
+      border-color: #22c55e;
+      box-shadow: 0 12px 26px -6px rgba(59,130,246,0.35);
+    }
+
+    /* --- HERO IMAGE GLOW --- */
+    .hero-image-container::before {
+      content: ''; position: absolute; inset: -22px;
+      background: linear-gradient(135deg, rgba(34,197,94,0.4), rgba(59,130,246,0.4));
+      border-radius: 40px; filter: blur(34px); z-index: -1; opacity: 0.7;
+      animation: pulse-glow 4s infinite alternate;
+    }
+    @keyframes pulse-glow { 0% { opacity: 0.45; } 100% { opacity: 0.9; } }
+
+    /* Scrollbar */
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+
+    /* Video card */
+    .video-card {
+      background: rgba(15,23,42,0.9);
+      border-radius: 20px;
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: 0 20px 50px rgba(15,23,42,0.9);
+      overflow: hidden;
+    }
+    .video-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    /* Agile Sprint Dot */
+    .sprint-dot {
+      position: relative;
+      z-index: 10;
+    }
+    .sprint-dot::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      background-color: #34d399; /* emerald-400 */
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.6);
+    }
+  </style>
+</head>
+<body class="selection:bg-emerald-300/30 selection:text-emerald-50 custom-scrollbar">
+
+<div class="ambient-light">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+<canvas id="matrix-canvas"></canvas>
+
+<nav class="fixed w-full top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/80 shadow-lg">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="index.html" class="text-lg font-bold text-slate-100 flex items-center gap-2 hover:text-emerald-400 transition group">
+      <span class="group-hover:-translate-x-1 transition-transform">←</span>
+      <span>Retour Portfolio</span>
+    </a>
+    <div class="flex items-center gap-2 text-sm font-semibold text-emerald-300 bg-emerald-900/40 px-4 py-1.5 rounded-full border border-emerald-500/40 shadow-sm backdrop-blur-sm">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+      </span>
+      Projet CTF • S3/S4
+    </div>
+  </div>
+</nav>
+
+<header class="pt-40 pb-20 px-6 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <div data-aos="fade-right" data-aos-duration="1000">
+        <div class="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-widest text-emerald-300 uppercase bg-emerald-900/40 backdrop-blur-sm rounded-lg border border-emerald-500/50">
+          Plateforme de Capture The Flag
+        </div>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-slate-50 leading-tight mb-6 tracking-tight drop-shadow-sm">
+          YGGAMES <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">CTF</span>.
+        </h1>
+
+        <p class="text-2xl text-slate-200 font-medium mb-4">
+          Création d’un CTF complet pour l’association Yggames, avec un univers narratif autour de la société secrète Alkara.
+        </p>
+        <p class="text-slate-400 text-lg leading-relaxed mb-10 max-w-lg">
+          Le projet a été réalisé en équipe de 4 sur environ 4 mois. De mon côté, j’ai pris en charge tout le design visuel de la plateforme (UI/UX), une partie des défis, les traductions et l’accessibilité avancée.
+        </p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
+          <div class="tech-block p-3 flex items-center gap-3 group cursor-default">
+            <div class="w-10 h-10 rounded-xl bg-emerald-900 text-emerald-300 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+            </div>
+            <div>
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Plateforme</div>
+              <div class="font-bold text-slate-100">CTFd</div>
+            </div>
+          </div>
+
+          <div class="tech-block p-3 flex items-center gap-3 group cursor-default">
+            <div class="w-10 h-10 rounded-xl bg-slate-900 text-sky-300 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+            </div>
+            <div>
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Stack</div>
+              <div class="font-bold text-slate-100">HTML / CSS / JS</div>
+            </div>
+          </div>
+
+          <div class="tech-block p-3 flex items-center gap-3 group cursor-default">
+            <div class="w-10 h-10 rounded-xl bg-indigo-900 text-indigo-300 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7" /></svg>
+            </div>
+            <div>
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Infra</div>
+              <div class="font-bold text-slate-100">Docker / VPS</div>
+            </div>
+          </div>
+
+          <div class="tech-block p-3 flex items-center gap-3 group cursor-default">
+            <div class="w-10 h-10 rounded-xl bg-fuchsia-900 text-fuchsia-300 flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+            </div>
+            <div>
+              <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Thème</div>
+              <div class="font-bold text-slate-100">Design custom</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="https://gitlabinfo.iutmontp.univ-montp2.fr/eq_5" target="_blank" class="btn-main px-8 py-4 rounded-xl font-bold flex items-center gap-3 text-sm md:text-base">
+            <span>Voir le projet sur GitLab</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+          </a>
+        </div>
+
+        <div class="mt-6">
+          <a href="#details" class="text-sm font-semibold text-slate-400 hover:text-emerald-300 transition flex items-center gap-1 group">
+            Voir les détails du projet
+            <span class="group-hover:translate-y-1 transition-transform">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <div id="tiltHero" class="tilt-container hero-image-container relative" data-aos="zoom-out" data-aos-duration="1200" data-aos-delay="200">
+        <img src="img/yggames-ctf-interface.png" alt="Interface YGGAMES CTF" class="tilt-element relative rounded-2xl shadow-2xl border-4 border-slate-900/80 cursor-pointer w-full object-cover" onclick="openModal(this.src)">
+
+        <div class="tilt-element absolute -bottom-6 -left-6 bg-slate-900/95 backdrop-blur-md p-4 rounded-xl shadow-lg border border-emerald-500/50 animate-bounce" style="animation-duration: 3s; transform: translateZ(20px);">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-emerald-900 flex items-center justify-center text-emerald-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-slate-400 uppercase">Statut</div>
+              <div class="text-sm font-bold text-slate-100">Projet livré</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<section class="py-20 relative overflow-hidden">
+  <div class="absolute inset-0 bg-slate-950/95 skew-y-3 transform origin-bottom-left scale-110"></div>
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10 text-slate-100" data-aos="fade-up">
+    <div class="w-16 h-16 mx-auto bg-slate-900 rounded-full flex items-center justify-center mb-6 shadow-xl border border-slate-700">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a6 6 0 016 6m-6-6a6 6 0 00-6 6m6 6v-2m0 2a6 6 0 01-6-6m6 6a6 6 0 006-6" /></svg>
+    </div>
+    <h2 class="text-4xl font-bold mb-6 tracking-tight">Contexte du projet</h2>
+    <p class="text-xl text-slate-300 leading-relaxed font-light">
+      YGGAMES CTF est une plateforme de formation à la cybersécurité, pensée comme une mission d’infiltration.
+      Le joueur incarne un agent spécial chargé de démanteler Alkara, une société secrète impliquée dans des activités criminelles,
+      en résolvant une série de défis techniques scénarisés.
+    </p>
+    <p class="mt-6 text-slate-400">
+      Le CTF compte plus de <span class="font-semibold text-emerald-300">47 défis</span>, répartis dans plus de <span class="font-semibold text-emerald-300">9 catégories</span> (web, crypto, réseau, OSINT, etc.),
+      et a été pensé pour être accessible (multi-langues, filtres daltoniens, animations adaptées).
+    </p>
+  </div>
+</section>
+
+<section class="py-24 px-6 border-b border-slate-800/50">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-end gap-4 mb-16" data-aos="fade-right">
+      <div>
+        <h2 class="text-4xl font-bold text-slate-50">Gestion de Projet</h2>
+        <div class="h-1.5 w-24 bg-gradient-to-r from-emerald-400 to-cyan-400 mt-4 rounded-full"></div>
+      </div>
+      <span class="text-slate-400 pb-2 hidden md:inline-block">/ Méthodologie Agile & Sprints</span>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 mb-16" data-aos="fade-up">
+      <div class="lg:col-span-1">
+        <p class="text-slate-300 leading-relaxed">
+          Pour mener à bien ce projet d'envergure en 4 mois, nous avons adopté la méthode Agile. L'équipe de 4 étudiants s'est organisée autour de rôles définis pour assurer une livraison fluide.
+        </p>
+      </div>
+      <div class="lg:col-span-2 grid sm:grid-cols-3 gap-4">
+        <div class="bg-slate-900/50 border border-slate-700/50 p-4 rounded-xl text-center">
+          <div class="text-emerald-400 font-bold mb-1">Scrum Master</div>
+          <div class="text-xs text-slate-400">Garant de la méthode</div>
+        </div>
+        <div class="bg-slate-900/50 border border-slate-700/50 p-4 rounded-xl text-center">
+          <div class="text-emerald-400 font-bold mb-1">Product Owner</div>
+          <div class="text-xs text-slate-400">Vision produit & Backlog</div>
+        </div>
+        <div class="bg-slate-900/50 border border-emerald-500/30 p-4 rounded-xl text-center shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+          <div class="text-white font-bold mb-1">Dev Team</div>
+          <div class="text-xs text-emerald-400">Mon rôle (Design & Tech)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative py-8" data-aos="fade-up" data-aos-delay="100">
+      <div class="absolute top-10 left-0 w-full h-0.5 bg-slate-800 hidden md:block"></div>
+
+      <div class="grid md:grid-cols-5 gap-8 md:gap-4 relative">
+
+        <div class="relative flex flex-col items-center text-center group">
+          <div class="sprint-dot w-4 h-4 rounded-full bg-slate-900 border-2 border-emerald-500 mb-4 transition-transform group-hover:scale-125"></div>
+          <h4 class="text-lg font-bold text-slate-100 mb-2">Sprint 1</h4>
+          <p class="text-sm text-slate-400 px-2">Initialisation, définition des besoins et scénario Alkara.</p>
+        </div>
+
+        <div class="relative flex flex-col items-center text-center group">
+          <div class="sprint-dot w-4 h-4 rounded-full bg-slate-900 border-2 border-emerald-500 mb-4 transition-transform group-hover:scale-125"></div>
+          <h4 class="text-lg font-bold text-slate-100 mb-2">Sprint 2</h4>
+          <p class="text-sm text-slate-400 px-2">Mise en place infrastructure CTFd et premiers défis.</p>
+        </div>
+
+        <div class="relative flex flex-col items-center text-center group">
+          <div class="sprint-dot w-4 h-4 rounded-full bg-slate-900 border-2 border-emerald-500 mb-4 transition-transform group-hover:scale-125"></div>
+          <h4 class="text-lg font-bold text-slate-100 mb-2">Sprint 3</h4>
+          <p class="text-sm text-slate-400 px-2">Création graphique avancée, thème Matrix et identité.</p>
+        </div>
+
+        <div class="relative flex flex-col items-center text-center group">
+          <div class="sprint-dot w-4 h-4 rounded-full bg-slate-900 border-2 border-emerald-500 mb-4 transition-transform group-hover:scale-125"></div>
+          <h4 class="text-lg font-bold text-slate-100 mb-2">Sprint 4</h4>
+          <p class="text-sm text-slate-400 px-2">Accessibilité (filtres daltoniens), traduction et vidéos.</p>
+        </div>
+
+        <div class="relative flex flex-col items-center text-center group">
+          <div class="sprint-dot w-4 h-4 rounded-full bg-slate-900 border-2 border-emerald-500 mb-4 transition-transform group-hover:scale-125"></div>
+          <h4 class="text-lg font-bold text-slate-100 mb-2">Sprint 5</h4>
+          <p class="text-sm text-slate-400 px-2">Recettage, corrections finales et livraison du projet.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="details" class="py-28 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-end gap-4 mb-16" data-aos="fade-right">
+      <div>
+        <h2 class="text-4xl font-bold text-slate-50">Mes contributions</h2>
+        <div class="h-1.5 w-24 bg-gradient-to-r from-emerald-400 to-cyan-400 mt-4 rounded-full"></div>
+      </div>
+      <span class="text-slate-400 pb-2 hidden md:inline-block">/ Design, accessibilité et contenu</span>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+
+      <div class="ctf-card p-8 group" data-aos="fade-up" data-aos-delay="80">
+        <div class="w-14 h-14 bg-emerald-900 text-emerald-300 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l2.25-.75L15 9l-3-3-6.75 6.75L9.75 17z" /></svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-slate-50">Design global de la plateforme</h3>
+        <ul class="space-y-4 text-slate-300">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Conception de l’identité visuelle complète : thème “hacking” (fond matrix, palette néon, typographie) adaptée à l’univers Alkara.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Refonte des pages principales CTFd (liste des défis, scoreboard, page de jeu) pour avoir une interface claire et moderne.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Travail sur les micro-interactions (hover, transitions, feedbacks visuels) pour rendre l’expérience fluide et motivante.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ctf-card p-8 group" data-aos="fade-up" data-aos-delay="160">
+        <div class="w-14 h-14 bg-sky-900 text-sky-300 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-slate-50">Accessibilité & confort de jeu</h3>
+        <ul class="space-y-4 text-slate-300">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Mise en place de filtres pour différents types de daltonisme (protanopie, deutéranopie, tritanopie) directement sur l’interface.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Palette de couleurs modifiable par l’utilisateur pour ajuster le contraste sans perdre l’identité visuelle.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Animations adaptées pour limiter les effets potentiellement gênants (anti‑épilepsie : pas de flashs rapides, transitions douces).</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ctf-card p-8 group" data-aos="fade-up" data-aos-delay="240">
+        <div class="w-14 h-14 bg-purple-900 text-purple-300 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h3m-4 4h8a2 2 0 002-2V7a2 2 0 00-.894-1.789l-6-4a2 2 0 00-2.212 0l-6 4A2 2 0 003 7v11a2 2 0 002 2z" /></svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-slate-50">Défis & scénario</h3>
+        <ul class="space-y-4 text-slate-300">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Participation à la création de plusieurs catégories de défis, avec un lien direct au récit autour d’Alkara.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Écriture de textes immersifs pour introduire les missions et guider les joueurs dans l’histoire.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Traduction partielle des contenus pour rendre le CTF compréhensible à un public international.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="ctf-card p-8 group" data-aos="fade-up" data-aos-delay="320">
+        <div class="w-14 h-14 bg-slate-900 text-slate-200 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-slate-100 group-hover:text-slate-900 transition-colors duration-300 shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-6 0H5a2 2 0 01-2-2V7a2 2 0 012-2h2m4 9v5m0 0H9m3 0h3" /></svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 text-slate-50">Vidéos & promotion</h3>
+        <ul class="space-y-4 text-slate-300">
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Réalisation d’un trailer vidéo pour présenter l’univers du CTF et la mission autour d’Alkara.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="mt-1 w-5 h-5 rounded-full bg-emerald-900 text-emerald-300 flex items-center justify-center text-xs font-bold">✓</span>
+            <span>Création d’un format court pour les réseaux (YouTube Short) afin de promouvoir rapidement le projet.</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-6">
+  <div class="max-w-6xl mx-auto" data-aos="fade-up">
+    <div class="flex items-end gap-4 mb-10">
+      <div>
+        <h2 class="text-3xl font-bold text-slate-50">Vidéos du projet</h2>
+        <div class="h-1 w-20 bg-gradient-to-r from-emerald-400 to-cyan-400 mt-3 rounded-full"></div>
+      </div>
+      <span class="text-slate-400 pb-1 hidden md:inline-block">Trailer & Format court</span>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+
+      <div class="lg:col-span-2 video-card aspect-video relative group">
+        <iframe
+                class="video-frame absolute inset-0 w-full h-full"
+                src="https://www.youtube-nocookie.com/embed/pYTeqCUMnVg?rel=0&origin=http://127.0.0.1:5500"
+                title="YGGAMES CTF - Trailer"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="ctf-card p-8 flex flex-col justify-center items-center text-center relative overflow-hidden group">
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-colors"></div>
+
+        <div class="w-20 h-20 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 border border-slate-700 shadow-xl group-hover:border-emerald-500/50 transition-all duration-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+
+        <h3 class="text-xl font-bold text-white mb-3">Format Short</h3>
+        <p class="text-slate-400 text-sm mb-8 leading-relaxed">
+          Découvrez les coulisses du projet et l'univers d'Alkara dans un format dynamique de 30 secondes.
+        </p>
+
+        <a href="https://youtube.com/shorts/GH8mEhAnIDQ" target="_blank" class="w-full btn-main py-4 rounded-xl font-bold flex items-center justify-center gap-3 text-sm group">
+          <span>REGARDER LE SHORT</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+
+        <div class="mt-6 flex items-center gap-2 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+          <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+          Lien Externe YouTube
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="py-20 px-6">
+  <div class="max-w-5xl mx-auto" data-aos="fade-up">
+    <div class="ctf-card p-10 md:p-14 border-l-8 border-emerald-500 flex flex-col md:flex-row gap-8 items-center md:items-start relative overflow-hidden">
+      <div class="absolute top-0 right-0 -mt-8 -mr-8 w-32 h-32 bg-emerald-500/30 rounded-full blur-3xl opacity-50"></div>
+
+      <div class="flex-shrink-0">
+        <div class="w-16 h-16 bg-slate-900 text-emerald-300 rounded-full flex items-center justify-center text-3xl shadow-inner">
+          🎮
+        </div>
+      </div>
+      <div>
+        <h3 class="text-2xl font-bold text-slate-50 mb-4">Ce que je retiens du projet</h3>
+        <p class="text-slate-300 text-lg leading-relaxed italic relative z-10">
+          "Ce projet m’a permis de combiner plusieurs choses que j’aime : le CTF, le design d’interface et l’accessibilité.
+          J’ai pu concevoir une expérience de jeu complète, à la fois immersive visuellement et inclusive pour différents profils de joueurs.
+          Travailler sur un vrai thème narratif avec des contraintes techniques réelles m’a aussi rapproché de ce que j’aimerais faire plus tard en cybersécurité et UX."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="bg-black text-slate-300 py-16 border-t border-slate-800 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-tr from-emerald-900/30 to-indigo-900/30 pointer-events-none"></div>
+  <div class="max-w-6xl mx-auto px-4 text-center relative z-10">
+    <h3 class="text-2xl font-bold text-white mb-8">Vous voulez voir d'autres de mes réalisations ?</h3>
+    <div class="flex justify-center gap-6 mb-12">
+      <a href="index.html" class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition backdrop-blur-sm">Retour Portfolio</a>
+      <a href="mailto:sendoukmohamed45@gmail.com" class="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition shadow-lg shadow-emerald-900/50">Me contacter</a>
+    </div>
+    <div class="w-full h-px bg-slate-800 mb-8 max-w-xs mx-auto"></div>
+    <div class="text-sm text-slate-500">
+      © 2025 Mohamed Sendouk. Projet réalisé dans le cadre du BUT Informatique.
+    </div>
+  </div>
+</footer>
+
+<div id="imageModal" class="fixed inset-0 z-[100] hidden bg-slate-900/95 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer transition-opacity duration-300 opacity-0" onclick="closeModal()">
+  <img id="modalImage" src="" alt="Agrandissement" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl transform scale-95 transition-transform duration-300 border border-white/10">
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 1000, once: true, offset: 50 });
+
+  /* --- MATRIX BACKGROUND --- */
+  const canvas = document.getElementById('matrix-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 10;
+
+  const count = 4200;
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+
+  for (let i = 0; i < count * 3; i += 3) {
+    positions[i]   = (Math.random() - 0.5) * 40;
+    positions[i+1] = (Math.random() - 0.5) * 40;
+    positions[i+2] = (Math.random() - 0.5) * 40;
+
+    colors[i]   = 0;
+    colors[i+1] = 0.9 + Math.random() * 0.1;
+    colors[i+2] = 0;
+  }
+
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size: 0.06,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.85
+  });
+
+  const mesh = new THREE.Points(geo, mat);
+  scene.add(mesh);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation.y += 0.0018;
+    const array = geo.attributes.position.array;
+    for (let i = 1; i < array.length; i += 3) {
+      array[i] -= 0.05;
+      if (array[i] < -20) array[i] = 20;
+    }
+    geo.attributes.position.needsUpdate = true;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+  });
+
+  /* --- SCRIPT 3D TILT EFFECT --- */
+  const heroContainer = document.getElementById('tiltHero');
+  const heroImg = heroContainer ? heroContainer.querySelector('img') : null;
+  const badge = heroContainer ? heroContainer.querySelector('.absolute') : null;
+
+  if (heroContainer && heroImg) {
+    heroContainer.addEventListener('mousemove', (e) => {
+      const rect = heroContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / 20) * -1;
+      const rotateY = (x - centerX) / 20;
+
+      heroImg.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+
+      if (badge) {
+        badge.style.transform = `perspective(1000px) translateZ(40px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      }
+    });
+
+    heroContainer.addEventListener('mouseleave', () => {
+      heroImg.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+      if (badge) {
+        badge.style.transform = `perspective(1000px) translateZ(20px) rotateX(0) rotateY(0)`;
+      }
+    });
+  }
+
+  /* --- SCRIPT MODAL --- */
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+
+  function openModal(src) {
+    modal.classList.remove('hidden');
+    void modal.offsetWidth;
+    modal.classList.remove('opacity-0');
+
+    setTimeout(() => {
+      modalImg.classList.remove('scale-95');
+      modalImg.classList.add('scale-100');
+    }, 50);
+    modalImg.src = src;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modalImg.classList.remove('scale-100');
+    modalImg.classList.add('scale-95');
+    modal.classList.add('opacity-0');
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 300);
+  }
+</script>
+
+</body>
+</html>

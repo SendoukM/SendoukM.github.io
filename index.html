@@ -420,6 +420,9 @@
         animation: shimmer 2s infinite;
       }
       @keyframes shimmer { 100% { transform: translateX(100%); } }
+      /* Style spécifique pour le projet CTF */
+      .badge-ctf { color: #00f2ff; border-color: rgba(0, 242, 255, 0.4); text-shadow: 0 0 5px #00f2ff; }
+      .group:hover .border-ctf { border-color: #00f2ff; box-shadow: 0 0 20px rgba(0, 242, 255, 0.5); }
 
 
 
@@ -927,7 +930,7 @@
   <!-- PROJETS avec CONFETTIS POKÉMON -->
   <section id="projects" class="bg-gradient-to-b from-gray-50 to-white py-20 sm:py-28 relative overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-transparent to-indigo-500/3"></div>
-    
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
       <!-- Titre -->
       <div class="section-wrapper mb-10" data-aos="fade-up">
@@ -945,7 +948,7 @@
         <!-- PROJET 1 : POKÉMON avec confettis -->
         <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-yellow-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up">
           <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 p-4">
-            
+
             <!-- CONFETTIS POKÉMON -->
             <div class="poke-confetti absolute top-4 left-10 text-yellow-400" style="animation-delay: 0.1s;">⭐</div>
             <div class="poke-confetti absolute top-8 left-20 text-red-500" style="animation-delay: 0.2s;">🔴</div>
@@ -1006,7 +1009,7 @@
 
         <!-- PROJET 3 -->
         <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-          
+
           <!-- Image avec cadre -->
           <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-purple-400/20 to-pink-500/20 p-3 flex items-center justify-center">
             <div class="absolute inset-3 rounded-xl border-2 border-purple-200 group-hover:border-purple-400 group-hover:shadow-lg group-hover:shadow-purple-400/30 transition-all duration-300 pointer-events-none"></div>
@@ -1027,11 +1030,11 @@
             <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-2">
               Nuit de l'info
             </p>
-            
+
             <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-900 transition-colors">
               Projet Résistance
             </h3>
-            
+
             <p class="text-gray-600 text-sm leading-relaxed mb-5">
               Projet réalisé lors de la Nuit de l'info 2025...
             </p>
@@ -1042,6 +1045,47 @@
               <svg class="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up">
+          <div class="relative h-56 sm:h-64 overflow-hidden bg-slate-900 p-4">
+
+            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#00f2ff 1px, transparent 1px); background-size: 15px 15px;"></div>
+
+            <div class="absolute inset-0 rounded-xl border-4 border-transparent border-ctf transition-all duration-500 z-20"></div>
+            <img src="img/CTF.jpg"
+                 alt="Capture d'écran du jeu Résistance"
+                 class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
+
+            <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-900 to-cyan-900">
+              <div class="text-6xl group-hover:scale-125 transition-transform duration-500">🛡️</div>
+            </div>
+
+            <div class="project-badge badge-ctf">
+              Cybersecurity / UX
+            </div>
+          </div>
+
+          <div class="p-6 sm:p-8">
+            <div class="flex justify-between items-start mb-3">
+              <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Projet Personnel & Infra</p>
+              <span class="text-[10px] bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded font-bold">CTFd + Docker</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-cyan-600 transition-all duration-300">YGGAMES CTF</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+              Création d'une plateforme CTF : Design UI/UX complet, système multilingue (20+ langues) et modes d'accessibilité daltoniens innovants.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Reverse Proxy</span>
+              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Accessibility</span>
+              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Agile</span>
+            </div>
+
+            <a href="projet-ctf.html" class="inline-flex items-center gap-2 text-sm font-bold text-cyan-600 hover:text-cyan-700 transition-all duration-200 hover:translate-x-1">
+              Voir le projet →
             </a>
           </div>
         </article>
