@@ -1,72 +1,1142 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contenu à venir - Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio d'Apprentissage - Sendouk Mohamed</title>
 
-    <!-- Tailwind CDN -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Fonts : Police plus neutre et pro (Inter) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@400;600&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top, #e0f2fe 0, #f8fafc 40%, #f9fafb 100%);
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* NAV LATERALE */
+        .side-nav {
+            position: fixed;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .nav-dot {
+            width: 11px;
+            height: 11px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.4);
+        }
+        .nav-dot:hover,
+        .nav-dot.active {
+            background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+            transform: scale(1.5);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+        }
+        .nav-dot::after {
+            content: attr(data-title);
+            position: absolute;
+            left: 26px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0f172a;
+            color: #f9fafb;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 10px;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.25s;
+            white-space: nowrap;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
+        }
+        .nav-dot:hover::after {
+            opacity: 1;
+            left: 22px;
+        }
+
+        /* CARTES COMPETENCES */
+        .competence-card {
+            border-radius: 1.8rem;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: radial-gradient(circle at top left, rgba(191, 219, 254, 0.35), #ffffff 55%);
+            box-shadow:
+                    0 18px 45px rgba(15, 23, 42, 0.08),
+                    0 0 0 1px rgba(148, 163, 184, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .competence-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 50%);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .competence-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-mineure {
+            border: 1px solid rgba(59, 130, 246, 0.7);
+            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), #ffffff 60%);
+            box-shadow:
+                    0 18px 40px rgba(37, 99, 235, 0.16),
+                    0 0 0 1px rgba(191, 219, 254, 0.7);
+        }
+
+        .mineure-tag {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+            color: #ffffff;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.55);
+        }
+
+        /* NIVEAUX / AC */
+        .level-title {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #64748b;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .level-title::before {
+            content: "";
+            width: 26px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(to right, #1d4ed8, #38bdf8);
+            opacity: 0.7;
+        }
+
+        .ac-group {
+            border-left: 2px dashed rgba(148, 163, 184, 0.6);
+            padding-left: 18px;
+            margin-top: 14px;
+        }
+        .ac-item {
+            margin-bottom: 18px;
+            padding: 10px 12px;
+            border-radius: 0.9rem;
+            background: rgba(248, 250, 252, 0.9);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            transition: 0.25s;
+        }
+        .ac-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            border-color: rgba(129, 140, 248, 0.5);
+            background: #ffffff;
+        }
+
+        .ac-header-line {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .status-badge {
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            margin-right: 6px;
+            letter-spacing: 0.08em;
+            border: 1px solid transparent;
+        }
+        .status-acquis {
+            background: #dcfce7;
+            color: #166534;
+            border-color: rgba(22, 101, 52, 0.15);
+        }
+        .status-en-cours {
+            background: #fef9c3;
+            color: #92400e;
+            border-color: rgba(217, 119, 6, 0.25);
+        }
+
+        /* PASTILLES & METADATA */
+        .project-pill {
+            font-size: 10px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            background: rgba(248, 250, 252, 0.9);
+            color: #1d4ed8;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .project-pill::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #1d4ed8, #38bdf8);
+            box-shadow: 0 0 6px rgba(59, 130, 246, 0.8);
+        }
+
+        /* CARTES DE PROJETS (Traces) */
+        .project-evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .project-evidence-card {
+            position: relative;
+            border-radius: 0.9rem;
+            padding: 9px 11px;
+            background: radial-gradient(circle at top left, rgba(191, 219, 254, 0.5), #ffffff 55%);
+            border: 1px solid rgba(191, 219, 254, 0.9);
+            box-shadow: 0 10px 18px rgba(148, 163, 184, 0.35);
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .project-evidence-card::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.12), transparent 55%);
+            opacity: 0.6;
+            transform: translate3d(-20px, -10px, 0);
+        }
+        .project-evidence-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 16px 26px rgba(37, 99, 235, 0.4);
+            border-color: #1d4ed8;
+        }
+        .project-evidence-card h5 {
+            position: relative;
+            z-index: 1;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 2px;
+        }
+        .project-evidence-card p {
+            position: relative;
+            z-index: 1;
+            font-size: 11px;
+            color: #475569;
+            line-height: 1.4;
+        }
+        .project-evidence-card span.badge {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 4px;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #1d4ed8;
+        }
+        .project-evidence-card span.badge::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 6px rgba(34, 197, 94, 0.9);
+        }
+        .project-link-full {
+            text-decoration: none;
+            display: block;
+        }
+
+        /* LIENS INLINE (si besoin) */
+        .project-link {
+            font-size: 11px;
+            font-weight: 700;
+            color: #1d4ed8;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .project-link svg {
+            width: 11px;
+            height: 11px;
+            stroke-width: 2.2;
+            transition: transform 0.2s ease;
+        }
+        .project-link:hover svg {
+            transform: translateX(2px);
+        }
+
+        /* FILTRE NIVEAUX */
+        .filter-select {
+            appearance: none;
+            background: #ffffff;
+            border: 2px solid rgba(203, 213, 225, 0.9);
+            padding: 10px 38px 10px 14px;
+            border-radius: 999px;
+            font-weight: 600;
+            color: #1e40af;
+            cursor: pointer;
+            outline: none;
+            transition: 0.22s;
+            font-size: 0.86rem;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
+        }
+        .filter-select:hover {
+            border-color: #1d4ed8;
+            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.35);
+            transform: translateY(-1px);
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-slate-800 flex items-center justify-center min-h-screen p-6">
+<body class="bg-gray-50 text-gray-800">
 
-<div class="max-w-xl w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-
-    <!-- Header Visuel -->
-    <div class="h-2 bg-gradient-to-r from-blue-600 to-indigo-600 w-full"></div>
-
-    <div class="p-8 md:p-12 text-center">
-
-        <!-- Icône Horloge/Calendrier -->
-        <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-        </div>
-
-        <!-- Titre Principal -->
-        <h1 class="text-3xl font-extrabold text-gray-900 mb-3">
-            Contenu en attente
+<!-- NAVBAR responsive -->
+<header class="fixed w-full bg-white shadow-sm z-50">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+        <!-- Nom à gauche -->
+        <h1 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-800 flex items-baseline space-x-2"
+            style="font-family: 'Montserrat', sans-serif;">
+            <span>Mohamed Sendouk</span>
+            <span class="text-blue-600 text-sm sm:text-base md:text-lg font-normal"
+                  style="font-family: 'Noto Sans KR', sans-serif;">
+                (모하메드)
+            </span>
         </h1>
 
-        <!-- Sous-titre explicatif -->
-        <p class="text-lg text-gray-500 mb-8">
-            Portfolio de Compétences
+        <!-- Bouton burger mobile -->
+        <button id="navToggle"
+                class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-gray-100 focus:outline-none">
+            <span class="sr-only">Ouvrir le menu</span>
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+
+        <!-- Menu desktop -->
+        <ul class="hidden md:flex items-center space-x-4 lg:space-x-6 text-sm font-medium">
+            <li><a href="index.html#home" class="hover:text-blue-600">Accueil</a></li>
+            <li><a href="index.html#about" class="hover:text-blue-600">À propos</a></li>
+            <li><a href="index.html#experience" class="hover:text-blue-600">Parcours</a></li>
+            <li><a href="index.html#projects" class="hover:text-blue-600">Projets</a></li>
+            <li><a href="#portfolio" class="text-blue-700 hover:text-blue-800">Portfolio d'apprentissage</a></li>
+            <li><a href="contact.html" class="hover:text-blue-600">Contact</a></li>
+            <li>
+                <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
+                   class="px-3 py-2 lg:px-4 lg:py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-xs lg:text-sm whitespace-nowrap">
+                    Télécharger CV
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Menu mobile -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
+        <ul class="px-4 py-3 space-y-2 text-sm font-medium">
+            <li><a href="index.html#home" class="block py-1 hover:text-blue-600">Accueil</a></li>
+            <li><a href="index.html#about" class="block py-1 hover:text-blue-600">À propos</a></li>
+            <li><a href="index.html#experience" class="block py-1 hover:text-blue-600">Parcours</a></li>
+            <li><a href="index.html#projects" class="block py-1 hover:text-blue-600">Projets</a></li>
+            <li><a href="#portfolio" class="block py-1 text-blue-700 hover:text-blue-800">Portfolio</a></li>
+            <li><a href="contact.html" class="block py-1 hover:text-blue-600">Contact</a></li>
+            <li>
+                <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
+                   class="mt-2 inline-block px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-sm">
+                    Télécharger CV
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
+
+<!-- NAV LATERALE -->
+<div class="side-nav hidden lg:flex">
+    <a href="#c1" class="nav-dot active" data-title="C1 - Développer"></a>
+    <a href="#c2" class="nav-dot" data-title="C2 - Optimiser (N2)"></a>
+    <a href="#c3" class="nav-dot" data-title="C3 - Administrer (N2)"></a>
+    <a href="#c4" class="nav-dot" data-title="C4 - Gérer données (N2)"></a>
+    <a href="#c5" class="nav-dot" data-title="C5 - Conduire"></a>
+    <a href="#c6" class="nav-dot" data-title="C6 - Collaborer"></a>
+</div>
+
+<main id="portfolio" class="max-w-6xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-20">
+
+    <!-- INTRO -->
+    <section class="text-center mb-16 sm:mb-20" data-aos="fade-up">
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+            Portfolio d'apprentissage
+        </h1>
+        <p class="text-blue-600 font-bold tracking-widest uppercase text-xs sm:text-sm mb-8">
+            Parcours Intégration d'Applications et Management du Système d'Information
         </p>
 
-        <!-- Zone d'explication -->
-        <div class="bg-blue-50 rounded-lg p-6 mb-8 text-left">
-            <h3 class="font-bold text-blue-900 mb-2 flex items-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Note d'information :
-            </h3>
-            <p class="text-sm text-blue-800 leading-relaxed">
-                Les sections détaillant les <strong>Unités d'Enseignement (UE)</strong>, les <strong>Compétences</strong> et les <strong>Apprentissages Critiques (AC)</strong> seront intégrées ultérieurement.
-            </p>
-            <p class="text-sm text-blue-800 leading-relaxed mt-2 font-semibold">
-                Cette partie fait l'objet d'un livrable spécifique attendu pour le Semestre 2 (2026).
+        <div class="max-w-3xl mx-auto text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
+            Cette page présente de manière structurée les compétences que j'ai construites durant mon BUT Informatique,
+            en mettant en évidence les compétences qui s'arrêtent au <strong>niveau 2</strong> dans mon parcours IAMSI
+            (C2, C3, C4) et la manière dont je les ai travaillées à travers des projets concrets.
+        </div>
+
+        <!-- FILTRE NIVEAUX -->
+        <div class="flex justify-center gap-4 items-center">
+            <label for="levelFilter" class="text-xs sm:text-sm font-semibold text-gray-500">
+                Filtrer par niveau
+            </label>
+            <select id="levelFilter" class="filter-select">
+                <option value="all">Tous les niveaux</option>
+                <option value="n1">Niveau 1</option>
+                <option value="n2">Niveau 2</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- C1 -->
+    <section id="c1" class="competence-card p-6 sm:p-8 mb-12" data-aos="fade-up">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                    C1 : Réaliser un développement d'application
+                </h2>
+                <p class="text-blue-600 font-semibold text-sm">
+                    Compétence majeure – poursuivie en BUT3
+                </p>
+            </div>
+            <span class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase self-start">
+                Majeure
+            </span>
+        </div>
+
+        <!-- N1 -->
+        <div class="n1-content mt-4">
+            <h3 class="level-title mb-2">Niveau 1 – Développer des applications informatiques simples</h3>
+            <div class="ac-group">
+
+                <!-- AC 1.1 -->
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <div class="flex items-center flex-wrap gap-1">
+                            <span class="status-badge status-acquis">Acquis</span>
+                            <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                                AC 1.1 – Implémenter des conceptions simples
+                            </h4>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’ai appliqué les structures de données de base et l’algorithmique vue en cours pour produire des applications
+                        fonctionnelles respectant les spécifications fournies.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Java / JavaFX</span>
+                        <span class="project-pill">Architecture MVC simple</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-pokemon-tcg.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>Pokémon TCG – Java</h5>
+                                <p>Moteur de jeu complet, gestion des cartes, règles officielles et interface JavaFX.</p>
+                                <span class="badge">SAE • Java</span>
+                            </article>
+                        </a>
+                        <a href="projet-ecocoin.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>EcoCoin – E‑commerce</h5>
+                                <p>Site MVC PHP avec gestion des produits, panier et commandes.</p>
+                                <span class="badge">SAE • Web</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AC 1.2 -->
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <div class="flex items-center flex-wrap gap-1">
+                            <span class="status-badge status-acquis">Acquis</span>
+                            <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                                AC 1.2 – Élaborer des conceptions simples
+                            </h4>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’ai produit des diagrammes UML (cas d’utilisation, classes, séquences) pour structurer les
+                        fonctionnalités avant de coder, ce qui m’a aidé à garder un code lisible et extensible.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">UML</span>
+                        <span class="project-pill">Analyse des besoins</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ecocoin.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>EcoCoin – Conception</h5>
+                                <p>Modélisation UML de la base de données et des cas d’utilisation.</p>
+                                <span class="badge">SAE • UML</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AC 1.4 -->
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <div class="flex items-center flex-wrap gap-1">
+                            <span class="status-badge status-acquis">Acquis</span>
+                            <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                                AC 1.4 – Développer des interfaces utilisateurs
+                            </h4>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’ai conçu des interfaces responsives en respectant des maquettes et une cohérence d’UI/UX, autant
+                        en desktop (JavaFX) qu’en web (HTML / CSS / Tailwind / JS).
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Tailwind CSS</span>
+                        <span class="project-pill">UI / UX</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-pokemon-tcg.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>Pokémon TCG – UI</h5>
+                                <p>Interface de jeu JavaFX avec gestion des états et feedback visuel.</p>
+                                <span class="badge">Desktop</span>
+                            </article>
+                        </a>
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF – Interface</h5>
+                                <p>Interface web moderne avec badges, confettis et modes d’accessibilité.</p>
+                                <span class="badge">Web • CTF</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- N2 -->
+        <div class="n2-content mt-8">
+            <h3 class="level-title mb-2">Niveau 2 – Partir des exigences jusqu’à l’application complète</h3>
+            <div class="ac-group">
+
+                <!-- AC 2.1 -->
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <div class="flex items-center flex-wrap gap-1">
+                            <span class="status-badge status-en-cours">En cours</span>
+                            <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                                AC 2.1 – Élaborer et implémenter les spécifications à partir des exigences
+                            </h4>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Je pars d’un besoin métier (user stories, contraintes) pour définir une architecture puis développer une
+                        application complète qui respecte ces spécifications.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Cahier des charges</span>
+                        <span class="project-pill">Patrons de conception</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ecocoin.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>EcoCoin – Spécifications</h5>
+                                <p>Cahier des charges fonctionnel, architecture MVC et implémentation complète.</p>
+                                <span class="badge">SAE • Web</span>
+                            </article>
+                        </a>
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF</h5>
+                                <p>Plateforme complète à partir d’un besoin réel (événements CTF, joueurs, scores).</p>
+                                <span class="badge">Perso • CTF</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AC 2.2 -->
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <div class="flex items-center flex-wrap gap-1">
+                            <span class="status-badge status-acquis">Acquis</span>
+                            <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                                AC 2.2 – Appliquer des principes d’accessibilité et d’ergonomie
+                            </h4>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’applique des principes d’accessibilité (contraste, modes daltoniens, lisibilité) et d’ergonomie
+                        sur mes interfaces, notamment sur ma plateforme CTF et mon portfolio.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Accessibilité</span>
+                        <span class="project-pill">Modes daltoniens</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF – Accessibilité</h5>
+                                <p>Modes daltoniens, contrastes renforcés et multi‑langues sur l’interface.</p>
+                                <span class="badge">CTF • Accessibilité</span>
+                            </article>
+                        </a>
+                        <a href="index.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>Portfolio – UI</h5>
+                                <p>Design responsive, animations AOS et cohérence visuelle globale.</p>
+                                <span class="badge">Perso • Portfolio</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C2 -->
+    <section id="c2" class="competence-card card-mineure p-6 sm:p-8 mb-12" data-aos="fade-up">
+        <span class="mineure-tag">MINEURE – arrêt niveau 2</span>
+        <div class="mb-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                C2 : Optimiser des applications
+            </h2>
+            <p class="text-sm text-gray-600">
+                Dans mon parcours IAMSI, cette compétence est travaillée jusqu’au niveau 2 : l’objectif est de maîtriser l’analyse
+                d’algorithmes et les choix de structures de données, sans aller vers une spécialisation algorithmique poussée.
             </p>
         </div>
 
-        <!-- Bouton Retour -->
-        <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Retour à l'accueil
-        </a>
+        <!-- N1 -->
+        <div class="n1-content">
+            <h3 class="level-title mb-2">Niveau 1 – Appréhender et construire des algorithmes</h3>
+            <div class="ac-group">
 
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 1.1 – Analyser un problème avec méthode
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’ai appris à découper un problème, identifier les entrées/sorties et comparer plusieurs
+                        approches en termes de complexité pour choisir une solution adaptée.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Notation O(n)</span>
+                        <span class="project-pill">Algorithmes de base</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-pokemon-tcg.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>Pokémon TCG</h5>
+                                <p>Choix d’algorithmes pour gérer les cartes, les effets et les tours de jeu.</p>
+                                <span class="badge">Java • Algo</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- N2 -->
+        <div class="n2-content mt-8">
+            <h3 class="level-title mb-2">Niveau 2 – Sélectionner les algorithmes adéquats</h3>
+            <div class="ac-group">
+
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-en-cours">En cours</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 2.1 – Choisir des structures de données complexes adaptées
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Dans mes projets, je sélectionne des structures adaptées (listes, maps, parfois logique de graphes)
+                        pour améliorer le temps de réponse ou l’usage mémoire.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Structures de données</span>
+                        <span class="project-pill">Performances</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF</h5>
+                                <p>Organisation des défis, scores et joueurs pour des performances correctes.</p>
+                                <span class="badge">CTF • Données</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 2.3 – Comprendre les enjeux de sécurisation du code
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Grâce à mon intérêt pour la cybersécurité et les CTF, j’intègre la sécurisation du code
+                        (validation d’entrée, authentification, protection des données sensibles) dès la conception.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Sécurité applicative</span>
+                        <span class="project-pill">CTF / vulnérabilités</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF – Sécurité</h5>
+                                <p>Mise en place de règles de sécurité, gestion des comptes et des scores.</p>
+                                <span class="badge">CTF • Sécurité</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- C3 -->
+    <section id="c3" class="competence-card card-mineure p-6 sm:p-8 mb-12" data-aos="fade-up">
+        <span class="mineure-tag">MINEURE – arrêt niveau 2</span>
+        <div class="mb-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                C3 : Administrer des systèmes informatiques communicants complexes
+            </h2>
+            <p class="text-sm text-gray-600">
+                Cette compétence est travaillée jusqu’au niveau 2, avec un focus sur Linux, la virtualisation
+                et la mise en place de services réseaux pour les applications.
+            </p>
+        </div>
+
+        <!-- N2 -->
+        <div class="n2-content">
+            <h3 class="level-title mb-2">Niveau 2 – Déployer des services dans une architecture réseau</h3>
+            <div class="ac-group">
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 2.1 – Concevoir et configurer des services réseaux
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’ai installé et configuré des serveurs web et divers services liés à mes applications sur des
+                        machines Linux et via des conteneurs Docker.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Linux</span>
+                        <span class="project-pill">Nginx / Apache</span>
+                        <span class="project-pill">Docker</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF – Infra</h5>
+                                <p>Plateforme CTFd conteneurisée avec reverse proxy et configuration réseau.</p>
+                                <span class="badge">CTF • Infra</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C4 -->
+    <section id="c4" class="competence-card card-mineure p-6 sm:p-8 mb-12" data-aos="fade-up">
+        <span class="mineure-tag">MINEURE – arrêt niveau 2</span>
+        <div class="mb-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                C4 : Gérer des données de l'information
+            </h2>
+            <p class="text-sm text-gray-600">
+                Cette compétence s’arrête au niveau 2 mais reste centrale dans mes projets web : conception de schémas,
+                optimisation de requêtes et sécurisation des données.
+            </p>
+        </div>
+
+        <!-- N1 -->
+        <div class="n1-content">
+            <h3 class="level-title mb-2">Niveau 1 – Concevoir et mettre en place une base de données</h3>
+            <div class="ac-group">
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 1.1 – Mettre à jour et interroger une base relationnelle
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Je conçois des schémas relationnels, écris des requêtes SQL complexes et manipule les données depuis
+                        une application web ou Java.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">MySQL / PostgreSQL</span>
+                        <span class="project-pill">SQL avancé</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ecocoin.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>EcoCoin – BDD</h5>
+                                <p>Conception et exploitation d’une base de données pour un site e‑commerce.</p>
+                                <span class="badge">SAE • SQL</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- N2 -->
+        <div class="n2-content mt-8">
+            <h3 class="level-title mb-2">Niveau 2 – Optimiser une base de données et mettre en œuvre la sécurité</h3>
+            <div class="ac-group">
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-en-cours">En cours</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 2.1 – Optimiser les modèles de données de l’entreprise
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’optimise des requêtes (index, jointures) et je retravaille des schémas pour améliorer les temps
+                        de réponse sur des applications comme mon site e‑commerce.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Optimisation requêtes</span>
+                        <span class="project-pill">Index / vues</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ecocoin.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>EcoCoin – Optimisation</h5>
+                                <p>Amélioration des requêtes et du modèle de données pour de meilleures performances.</p>
+                                <span class="badge">Web • SQL</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 2.2 – Assurer la sécurité des données
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Je mets en place des mécanismes de sécurité (droits, validation des entrées, protection des données
+                        sensibles) pour les utilisateurs.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Droits &amp; rôles</span>
+                        <span class="project-pill">Protection des données</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ecocoin.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>EcoCoin – Sécurité BDD</h5>
+                                <p>Gestion des comptes, vérification des entrées et protection des informations clients.</p>
+                                <span class="badge">Web • Sécurité</span>
+                            </article>
+                        </a>
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF – Données</h5>
+                                <p>Protection des comptes joueurs et des scores dans la plateforme.</p>
+                                <span class="badge">CTF • Données</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C5 -->
+    <section id="c5" class="competence-card p-6 sm:p-8 mb-12" data-aos="fade-up">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                    C5 : Conduire un projet
+                </h2>
+                <p class="text-blue-600 font-semibold text-sm">
+                    Compétence majeure – projets tuteurés, CTF et jeux
+                </p>
+            </div>
+            <span class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase self-start">
+                Majeure
+            </span>
+        </div>
+
+        <div class="n1-content">
+            <h3 class="level-title mb-2">Niveau 1 – Identifier les besoins métiers</h3>
+            <div class="ac-group">
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 1.1 – Appréhender les besoins du client
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’analyse les besoins (fonctionnels et techniques), je les reformule en user stories
+                        et je priorise les fonctionnalités à développer.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">User stories</span>
+                        <span class="project-pill">Méthodes agiles</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF – Besoin</h5>
+                                <p>Analyse du besoin pour créer une plateforme CTF utilisée par une vraie communauté.</p>
+                                <span class="badge">Perso • CTF</span>
+                            </article>
+                        </a>
+                        <a href="projet-ecocoin.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>EcoCoin – Cahier des charges</h5>
+                                <p>Formalisation des exigences métier pour un site e‑commerce.</p>
+                                <span class="badge">SAE • Web</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C6 -->
+    <section id="c6" class="competence-card p-6 sm:p-8 mb-12" data-aos="fade-up">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                    C6 : Collaborer au sein d'une équipe informatique
+                </h2>
+                <p class="text-blue-600 font-semibold text-sm">
+                    Compétence majeure – projets en équipe, hackathons, CTF
+                </p>
+            </div>
+            <span class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase self-start">
+                Majeure
+            </span>
+        </div>
+
+        <div class="n2-content">
+            <h3 class="level-title mb-2">Niveau 2 – Situer son rôle dans une équipe</h3>
+            <div class="ac-group">
+                <div class="ac-item">
+                    <div class="ac-header-line">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 2.2 – Organiser et partager une veille technologique
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        J’utilise des outils collaboratifs (Discord, GitHub, flux RSS) pour partager des ressources sur
+                        le développement, la cybersécurité et les technologies web avec mon équipe.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Git / GitHub</span>
+                        <span class="project-pill">Discord / veille</span>
+                    </div>
+                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <a href="projet-ctf.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>YGGAME CTF – Travail d’équipe</h5>
+                                <p>Organisation des tâches, discussions techniques et partage de ressources sécurité.</p>
+                                <span class="badge">CTF • Team</span>
+                            </article>
+                        </a>
+                        <a href="resistance.html" class="project-link-full">
+                            <article class="project-evidence-card">
+                                <h5>Projet Résistance – Nuit de l’Info</h5>
+                                <p>Travail en équipe sur un jeu, avec partage d’idées et coordination rapide.</p>
+                                <span class="badge">Jeu • Hackathon</span>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-blue-50 text-gray-700 border-t border-gray-100 pt-12 pb-6">
+    <div class="max-w-6xl mx-auto flex flex-col items-center px-4 sm:px-6">
+        <div class="w-11 h-11 bg-blue-700 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-200 mb-4">
+            M
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+            Sendouk Mohamed
+        </h3>
+        <p class="text-xs sm:text-sm text-gray-500 mb-6 text-center max-w-md">
+            Étudiant en BUT Informatique – Parcours IAMSI, passionné par le développement, le médical et la cybersécurité.
+        </p>
+        <div class="flex gap-3 mb-6">
+            <a href="https://www.linkedin.com" class="bg-white rounded-full p-2 shadow hover:scale-110 transition-transform">
+                <img src="img/linkedin.png" class="w-4 h-4" alt="LinkedIn">
+            </a>
+            <a href="mailto:sendoukmohamed45@gmail.com" class="bg-white rounded-full p-2 shadow hover:scale-110 transition-transform">
+                <img src="img/gmail.png" class="w-4 h-4" alt="Gmail">
+            </a>
+            <a href="https://github.com/SendoukM" class="bg-white rounded-full p-2 shadow hover:scale-110 transition-transform">
+                <img src="img/github.png" class="w-4 h-4" alt="GitHub">
+            </a>
+        </div>
+        <p class="text-[11px] text-gray-400">
+            © 2026 Sendouk Mohamed. Tous droits réservés.
+        </p>
     </div>
-</div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    // Filtre niveaux
+    const levelFilter = document.getElementById('levelFilter');
+    if (levelFilter) {
+        levelFilter.addEventListener('change', function() {
+            const val = this.value;
+            const n1s = document.querySelectorAll('.n1-content');
+            const n2s = document.querySelectorAll('.n2-content');
+
+            if (val === 'all') {
+                n1s.forEach(el => el.style.display = 'block');
+                n2s.forEach(el => el.style.display = 'block');
+            } else if (val === 'n1') {
+                n1s.forEach(el => el.style.display = 'block');
+                n2s.forEach(el => el.style.display = 'none');
+            } else if (val === 'n2') {
+                n1s.forEach(el => el.style.display = 'none');
+                n2s.forEach(el => el.style.display = 'block');
+            }
+        });
+    }
+
+    // Scroll spy
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section[id]');
+        const dots = document.querySelectorAll('.nav-dot');
+        let current = "";
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        dots.forEach(dot => {
+            dot.classList.remove('active');
+            if (dot.getAttribute('href') === `#${current}`) {
+                dot.classList.add('active');
+            }
+        });
+    });
+
+    // Burger
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (navToggle && mobileMenu) {
+        navToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+</script>
 
 </body>
 </html>
