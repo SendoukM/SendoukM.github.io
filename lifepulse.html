@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifePulse — Assistant Santé Intelligent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-soft 3s infinite ease-in-out;
+        }
+        .bg-mesh {
+            background-color: #0f172a;
+            background-image:
+                    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.15) 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, rgba(13, 148, 136, 0.15) 0px, transparent 50%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-teal {
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-mesh min-h-screen text-white overflow-hidden font-sans">
+<!-- Bouton Retour en haut à gauche -->
+<a href="index.html" class="group fixed top-6 left-6 z-50 glass p-3 rounded-xl backdrop-blur-sm border-teal-500/30 hover:border-teal-500/50 transition-all duration-300 hover:scale-105 glow-teal hover:glow-teal">
+    <svg class="w-5 h-5 text-teal-400 group-hover:text-teal-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+    </svg>
+    <span class="sr-only">Retour au portfolio</span>
+</a>
+
+<!-- Orbes décoratifs -->
+<div class="absolute top-1/4 left-1/4 w-64 h-64 bg-teal-500/10 rounded-full blur-[120px] animate-pulse-slow"></div>
+<div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] animate-pulse-slow" style="animation-delay: 1.5s;"></div>
+
+<div class="relative z-10 container mx-auto px-6 py-16 max-w-6xl">
+
+    <!-- Badge statut -->
+    <div class="mb-12 flex justify-center">
+            <span class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 text-teal-400 text-xs font-bold px-6 py-2 rounded-full uppercase tracking-[0.2em]">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+                </span>
+                Développement en cours
+            </span>
+    </div>
+
+    <!-- Logo + Titre -->
+    <div class="text-center mb-16">
+        <!-- Zone pour ton logo généré -->
+        <div class="mb-8 flex justify-center">
+            <div class="w-40 h-40 bg-gradient-to-br from-teal-500/20 to-blue-500/20 rounded-3xl flex items-center justify-center glass glow-teal animate-pulse-slow">
+                <!-- Remplace par <img src="lifepulse_logo_texte.png" class="h-32 w-auto"> quand tu l'auras -->
+                <img src="img/LifePulseApp2.jpg" class="h-32 w-auto">
+            </div>
+        </div>
+        <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-blue-400 to-teal-500">
+            LifePulse
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-400 mb-12 font-light leading-relaxed max-w-3xl mx-auto">
+            L'avenir de votre <span class="text-teal-400 font-bold">santé connectée</span>.
+            Analyse prédictive, journal intelligent et score vital en temps réel.
+        </p>
+    </div>
+
+    <!-- Mockup App Dashboard -->
+    <div class="relative my-20">
+        <div class="absolute -inset-8 bg-gradient-to-r from-teal-500/20 to-blue-500/20 rounded-3xl blur-3xl animate-pulse-slow"></div>
+        <div class="glass p-8 rounded-3xl relative z-10 max-w-3xl mx-auto glow-teal">
+            <div class="bg-black/30 rounded-3xl p-8 border border-white/20 backdrop-blur-sm">
+                <!-- Mockup écran smartphone -->
+                <div class="bg-gradient-to-b from-slate-900/80 to-black/50 rounded-3xl p-8 border-4 border-teal-500/20 relative overflow-hidden">
+                    <!-- Notch -->
+                    <div class="absolute top-4 left-1/2 transform -translate-x-1/2 w-24 h-3 bg-black/50 rounded-full"></div>
+
+                    <!-- Dashboard simulé -->
+                    <div class="relative z-10">
+                        <!-- Health Score -->
+                        <div class="text-teal-400 text-sm font-bold mb-6 flex items-center gap-2 uppercase tracking-wider">
+                            <div class="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></div>
+                            Health Score en temps réel
+                        </div>
+                        <div class="text-5xl md:text-6xl font-black text-white mb-8">
+                            84<span class="text-2xl font-normal text-teal-400 ml-2">/100</span>
+                        </div>
+
+                        <!-- Métriques rapides -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-sm">
+                            <div class="glass p-4 rounded-xl text-center">
+                                <div class="text-2xl mb-1">😴</div>
+                                <div class="text-gray-400">Sommeil</div>
+                                <div class="text-teal-400 font-bold text-lg">7h20</div>
+                            </div>
+                            <div class="glass p-4 rounded-xl text-center">
+                                <div class="text-2xl mb-1">🏃</div>
+                                <div class="text-gray-400">Activité</div>
+                                <div class="text-teal-400 font-bold text-lg">8.2k pas</div>
+                            </div>
+                            <div class="glass p-4 rounded-xl text-center">
+                                <div class="text-2xl mb-1">❤️</div>
+                                <div class="text-gray-400">Rythme</div>
+                                <div class="text-blue-400 font-bold text-lg">72 bpm</div>
+                            </div>
+                            <div class="glass p-4 rounded-xl text-center">
+                                <div class="text-2xl mb-1">🧠</div>
+                                <div class="text-gray-400">Stress</div>
+                                <div class="text-orange-400 font-bold text-lg">Modéré</div>
+                            </div>
+                        </div>
+
+                        <!-- Alert simulée -->
+                        <div class="glass p-4 rounded-2xl bg-orange-500/10 border-orange-500/30">
+                            <div class="flex items-center gap-2 text-sm">
+                                <div class="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                                <span class="text-orange-400 font-medium">Conseil IA :</span>
+                                <span class="text-gray-400">Ton sommeil est en baisse cette semaine</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 text-left">
+        <div class="glass p-8 rounded-3xl hover:glow-teal transition-all duration-300 hover:scale-[1.02]">
+            <div class="text-3xl mb-4">🧬</div>
+            <div class="text-teal-400 text-lg font-bold mb-3 uppercase tracking-wide">VitalScore</div>
+            <p class="text-gray-400 leading-relaxed">Algorithme propriétaire qui calcule votre score de santé global en temps réel à partir de vos données vitales.</p>
+        </div>
+        <div class="glass p-8 rounded-3xl hover:glow-teal transition-all duration-300 hover:scale-[1.02]">
+            <div class="text-3xl mb-4">🤖</div>
+            <div class="text-teal-400 text-lg font-bold mb-3 uppercase tracking-wide">SymptomAI</div>
+            <p class="text-gray-400 leading-relaxed">Analyse intelligente de vos symptômes avec suggestions personnalisées. IA locale 100% confidentielle.</p>
+        </div>
+        <div class="glass p-8 rounded-3xl hover:glow-teal transition-all duration-300 hover:scale-[1.02]">
+            <div class="text-3xl mb-4">📊</div>
+            <div class="text-teal-400 text-lg font-bold mb-3 uppercase tracking-wide">BioLog</div>
+            <p class="text-gray-400 leading-relaxed">Journal d'habitudes ultra-rapide qui détecte automatiquement vos patterns de santé.</p>
+        </div>
+    </div>
+
+    <!-- Progress & Tech Stack -->
+    <div class="grid md:grid-cols-2 gap-12 mb-20">
+        <!-- Progress bar -->
+        <div class="glass p-8 rounded-3xl">
+            <div class="flex justify-between text-sm mb-4 text-gray-500 uppercase tracking-widest font-bold">
+                <span>Phase de développement</span>
+                <span>75%</span>
+            </div>
+            <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-teal-500 to-teal-400 w-[75%] shadow-[0_0_20px_rgba(20,184,166,0.5)] rounded-full transition-all duration-1000 animate-pulse-slow"></div>
+            </div>
+            <div class="mt-4 grid grid-cols-4 gap-2 text-xs text-gray-500">
+                <span>🎨 UI/UX</span>
+                <span>✅ Backend</span>
+                <span>🔄 IA</span>
+                <span>🚀 Déploiement</span>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="glass p-8 rounded-3xl">
+            <h3 class="text-teal-400 font-bold mb-6 uppercase tracking-wider text-lg">Tech Stack</h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm text-gray-400">
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></span> Vue.js + Tailwind</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></span> FastAPI (Python)</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></span> PostgreSQL</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></span> OpenAI API</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></span> PWA Ready</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"></span> Privacy First</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA + Infos recruteurs -->
+    <div class="text-center mb-20">
+        <a href="index.html" class="group relative inline-flex items-center gap-3 px-10 py-5 font-bold text-white bg-gradient-to-r from-teal-600 via-teal-500 to-teal-400 rounded-3xl shadow-2xl glow-teal hover:shadow-teal-500/50 transition-all duration-500 hover:scale-105 hover:-translate-y-2 mb-8 block mx-auto w-max">
+                <span class="relative flex h-4 w-4">
+                    <span class="animate-ping absolute inset-0 rounded-full bg-white opacity-75"></span>
+                    <span class="relative rounded-full h-4 w-4 bg-white shadow-lg"></span>
+                </span>
+            <span>Démontrer LifePulse (bientôt disponible)</span>
+        </a>
+
+        <div class="glass max-w-2xl mx-auto p-8 rounded-3xl">
+            <h3 class="text-teal-400 font-bold mb-4 uppercase tracking-wider text-lg">👨‍💻 Pour les recruteurs</h3>
+            <p class="text-sm text-gray-400 leading-relaxed mb-4">
+                Projet personnel démontrant une architecture full-stack moderne, intégration IA avancée,
+                design biomédical soigné et expérience utilisateur premium santé.
+            </p>
+            <div class="flex gap-4 justify-center pt-4 border-t border-white/10">
+                <span class="text-xs bg-teal-500/20 text-teal-300 px-3 py-1 rounded-full">HealthTech</span>
+                <span class="text-xs bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full">Full Stack</span>
+                <span class="text-xs bg-purple-500/20 text-purple-300 px-3 py-1 rounded-full">IA/ML</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-full text-center text-[11px] text-gray-500 uppercase tracking-[0.4em] border-t border-white/5 pt-8">
+        HealthTech • Privacy Driven • AI Powered • Déploiement T2 2026
+    </div>
+
+</div>
+
+<script>
+    // Effet parallax subtil
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const mesh = document.querySelector('.bg-mesh');
+        mesh.style.transform = `translateY(${scrolled * 0.3}px)`;
+    });
+
+    // Animation hover sur features
+    document.querySelectorAll('.glass').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            el.style.transform = 'translateY(-8px)';
+        });
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = 'translateY(0)';
+        });
+    });
+</script>
+
+</body>
+</html>
