@@ -123,17 +123,23 @@
             <div class="h-1 w-20 bg-yellow-500 rounded-full"></div>
         </div>
 
-        <div class="max-w-4xl mx-auto video-container bg-white p-2" data-aos="fade-up">
-            <div class="rounded-xl overflow-hidden aspect-video shadow-inner bg-black">
-                <iframe
-                        class="w-full h-full"
-                        src="https://www.youtube.com/watch?v=qnEdw8xGDeQ"
-                        title="CliqueClaque Trailer"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                </iframe>
-            </div>
+        <div class="max-w-4xl mx-auto" data-aos="fade-up">
+            <a href="https://www.youtube.com/watch?v=qnEdw8xGDeQ" target="_blank" class="block card-story p-2 group relative overflow-hidden">
+                <div class="relative rounded-xl overflow-hidden aspect-video">
+                    <img src="img/Menu.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="CliqueClaque Trailer">
+
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
+                        <div class="w-20 h-20 bg-yellow-500 border-4 border-[--main-brown] rounded-full flex items-center justify-center shadow-[0_8px_0px_#D9B64E] group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white translate-x-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-3 text-center font-bold text-xs uppercase tracking-widest opacity-60">
+                    Cliquer pour visionner le trailer sur YouTube
+                </div>
+            </a>
         </div>
     </section>
 
@@ -177,7 +183,7 @@
             <span class="absolute -top-8 -left-8 text-2xl animate-bounce">✨</span>
             <span class="absolute -bottom-8 -right-8 text-2xl animate-bounce" style="animation-delay: 0.2s">⭐</span>
 
-            <a href="docs/CliqueClaque_GameJam2026.zip" download class="btn-play inline-flex items-center gap-4 px-12 py-5 text-xl font-black uppercase tracking-tighter">
+            <a href="docs/CliqueClaque.zip" download class="btn-play inline-flex items-center gap-4 px-12 py-5 text-xl font-black uppercase tracking-tighter">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1l8 8 8-8v-1M12 12V3" />
                 </svg>
