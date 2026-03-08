@@ -118,6 +118,45 @@
             text-transform: uppercase;
             box-shadow: 0 10px 25px rgba(37, 99, 235, 0.55);
         }
+        .majeure-tag {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            /* Dégradé Indigo vers Violet pour bien différencier du bleu standard */
+            background: linear-gradient(135deg, #4338ca 0%, #6366f1 50%, #a855f7 100%);
+            color: #ffffff;
+            padding: 5px 16px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            /* Ombre portée violette plus profonde */
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+        }
+
+        /* Le petit point brillant en version "pulsante" pour le côté majeur */
+        .majeure-tag::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #fff;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { opacity: 0.6; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.6; transform: scale(0.9); }
+        }
 
         /* NIVEAUX / AC */
         .level-title {
@@ -327,6 +366,22 @@
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
         }
+
+        /* Style des boutons de filtre */
+        .type-btn {
+            color: #64748b; /* Gris-bleu ardoise */
+        }
+
+        .type-btn.active {
+            background-color: #ffffff;
+            color: #2563eb; /* Ton bleu C5/C6 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .type-btn:hover:not(.active) {
+            color: #2563eb;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -419,20 +474,30 @@
         </div>
 
         <!-- FILTRE NIVEAUX -->
-        <div class="flex justify-center gap-4 items-center">
-            <label for="levelFilter" class="text-xs sm:text-sm font-semibold text-gray-500">
-                Filtrer par niveau
-            </label>
-            <select id="levelFilter" class="filter-select">
-                <option value="all">Tous les niveaux</option>
-                <option value="n1">Niveau 1</option>
-                <option value="n2">Niveau 2</option>
-            </select>
+        <div class="flex flex-col items-center gap-4 mt-12 mb-16" data-aos="fade-up">
+    <span class="text-[10px] font-bold text-blue-500 uppercase tracking-[0.2em] mb-2">
+        Personnaliser l'affichage
+    </span>
+
+            <div class="inline-flex p-1.5 bg-gray-100/50 backdrop-blur-md rounded-2xl border border-gray-200 shadow-inner">
+                <button onclick="filterById('all')" class="type-btn active px-6 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all duration-300">
+                    Toutes
+                </button>
+                <button onclick="filterById('majeure')" class="type-btn px-6 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all duration-300">
+                    Majeures
+                </button>
+                <button onclick="filterById('mineure')" class="type-btn px-6 py-2.5 rounded-xl text-xs font-extrabold uppercase tracking-wider transition-all duration-300">
+                    Mineures
+                </button>
+            </div>
         </div>
+
     </section>
 
+
     <!-- C1 -->
-    <section id="c1" class="competence-card p-6 sm:p-8 mb-12" data-aos="fade-up">
+    <section id="c1"  class="competence-card p-6 sm:p-8 mb-12 bg-white rounded-3xl shadow-xl border-l-8 border-blue-600"data-aos="fade-up">
+        <span class="majeure-tag">MAJEURE</span>
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
@@ -442,9 +507,7 @@
                     Compétence majeure – poursuivie en BUT3
                 </p>
             </div>
-            <span class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase self-start">
-                Majeure
-            </span>
+
         </div>
 
         <!-- N1 -->
@@ -651,7 +714,7 @@
     </section>
 
     <!-- C2 -->
-    <section id="c2" class="competence-card card-mineure p-6 sm:p-8 mb-12" data-aos="fade-up">
+    <section id="c2" class="competence-card p-6 sm:p-8 mb-12 bg-white rounded-3xl shadow-xl border-l-8 border-blue-600" data-aos="fade-up">
         <span class="mineure-tag">MINEURE – arrêt niveau 2</span>
         <div class="mb-6">
             <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
@@ -767,46 +830,81 @@
     </section>
 
     <!-- C3 -->
-    <section id="c3" class="competence-card card-mineure p-6 sm:p-8 mb-12" data-aos="fade-up">
+    <section id="c3" class="competence-card p-6 sm:p-8 mb-12 bg-white rounded-3xl shadow-xl border-l-8 border-blue-600" data-aos="fade-up">
         <span class="mineure-tag">MINEURE – arrêt niveau 2</span>
-        <div class="mb-6">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
-                C3 : Administrer des systèmes informatiques communicants complexes
-            </h2>
-            <p class="text-sm text-gray-600">
-                Cette compétence est travaillée jusqu’au niveau 2, avec un focus sur Linux, la virtualisation
-                et la mise en place de services réseaux pour les applications.
-            </p>
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
+                    C3 : Administrer des systèmes informatiques communicants complexes
+                </h2>
+                <p class="text-sm text-gray-600">
+                    Cette compétence s’arrête au niveau 2 mais reste essentielle pour le déploiement de mes solutions :
+                    configuration de serveurs Linux, conteneurisation avec Docker et gestion d'infrastructures réseaux.
+                </p>
+            </div>
         </div>
 
-        <!-- N2 -->
-        <div class="n2-content">
-            <h3 class="level-title mb-2">Niveau 2 – Déployer des services dans une architecture réseau</h3>
+        <div class="n1-content">
+            <h3 class="level-title mb-2 text-gray-700 font-bold border-b pb-1">Niveau 1 – Installer et configurer un poste de travail</h3>
+            <div class="ac-group">
+                <div class="ac-item mb-6">
+                    <div class="ac-header-line flex items-center gap-2 mb-2">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 1.1 – Identifier les composants matériels et logiciels
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Apprentissage de l'administration système de base : installation d'OS, gestion des droits utilisateurs et configuration réseau élémentaire sous Linux.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Linux Bash</span>
+                        <span class="project-pill">Système</span>
+                    </div>
+                    <div class="mt-4 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <article class="project-evidence-card opacity-80">
+                            <h5>SAÉ 1.05 & 1.06</h5>
+                            <p>Installation et configuration de l'environnement pour la gestion des données.</p>
+                            <span class="badge">SAÉ • S1</span>
+                        </article>
+                        <article class="project-evidence-card opacity-80">
+                            <h5>SAÉ 2.05</h5>
+                            <p>Configuration des services système pour le déploiement d'une application.</p>
+                            <span class="badge">SAÉ • S2</span>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="n2-content mt-8">
+            <h3 class="level-title mb-2 text-gray-700 font-bold border-b pb-1">Niveau 2 – Déployer des services dans une architecture réseau</h3>
             <div class="ac-group">
                 <div class="ac-item">
-                    <div class="ac-header-line">
+                    <div class="ac-header-line flex items-center gap-2 mb-2">
                         <span class="status-badge status-acquis">Acquis</span>
                         <h4 class="font-bold text-gray-900 text-sm sm:text-base">
                             AC 2.1 – Concevoir et configurer des services réseaux
                         </h4>
                     </div>
                     <p class="text-xs sm:text-sm text-gray-600">
-                        J’ai installé et configuré des serveurs web et divers services liés à mes applications sur des
-                        machines Linux et via des conteneurs Docker.
+                        Déploiement et configuration de serveurs web (Nginx/Apache) et conteneurisation de services applicatifs via Docker.
                     </p>
                     <div class="mt-2 flex flex-wrap gap-2">
-                        <span class="project-pill">Linux</span>
-                        <span class="project-pill">Nginx / Apache</span>
                         <span class="project-pill">Docker</span>
+                        <span class="project-pill">Nginx</span>
                     </div>
-                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
-                        Traces principales
+                    <div class="mt-4 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Trace principale
                     </div>
                     <div class="project-evidence-grid">
                         <a href="projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Infra</h5>
-                                <p>Plateforme CTFd conteneurisée avec reverse proxy et configuration réseau.</p>
+                                <p>Plateforme CTFd conteneurisée avec reverse proxy et isolation réseau.</p>
                                 <span class="badge">CTF • Infra</span>
                             </article>
                         </a>
@@ -817,7 +915,7 @@
     </section>
 
     <!-- C4 -->
-    <section id="c4" class="competence-card card-mineure p-6 sm:p-8 mb-12" data-aos="fade-up">
+    <section id="c4" class="competence-card p-6 sm:p-8 mb-12 bg-white rounded-3xl shadow-xl border-l-8 border-blue-600" data-aos="fade-up">
         <span class="mineure-tag">MINEURE – arrêt niveau 2</span>
         <div class="mb-6">
             <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
@@ -937,55 +1035,81 @@
     </section>
 
     <!-- C5 -->
-    <section id="c5" class="competence-card p-6 sm:p-8 mb-12" data-aos="fade-up">
+    <section id="c5" class="competence-card majeure p-6 sm:p-8 mb-12 bg-white rounded-3xl shadow-xl border-l-8 border-blue-600" data-aos="fade-up">
+        <span class="majeure-tag">MAJEURE</span>
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
                     C5 : Conduire un projet
                 </h2>
-                <p class="text-blue-600 font-semibold text-sm">
-                    Compétence majeure – projets tuteurés, CTF et jeux
+                <p class="text-blue-600 font-semibold text-sm italic">
+                    Compétence majeure — poursuivie jusqu'en BUT3
                 </p>
             </div>
-            <span class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase self-start">
-                Majeure
-            </span>
         </div>
 
         <div class="n1-content">
-            <h3 class="level-title mb-2">Niveau 1 – Identifier les besoins métiers</h3>
+            <h3 class="level-title mb-2 text-gray-700 font-bold border-b pb-1">Niveau 1 – Appréhender les besoins du client et de l'utilisateur</h3>
             <div class="ac-group">
-                <div class="ac-item">
-                    <div class="ac-header-line">
+                <div class="ac-item mb-6">
+                    <div class="ac-header-line flex items-center gap-2 mb-2">
                         <span class="status-badge status-acquis">Acquis</span>
                         <h4 class="font-bold text-gray-900 text-sm sm:text-base">
-                            AC 1.1 – Appréhender les besoins du client
+                            AC 1.1 – Recueillir et analyser les besoins des clients et des utilisateurs
                         </h4>
                     </div>
                     <p class="text-xs sm:text-sm text-gray-600">
-                        J’analyse les besoins (fonctionnels et techniques), je les reformule en user stories
-                        et je priorise les fonctionnalités à développer.
+                        Lors de ma première année, j'ai appris à identifier les attentes des utilisateurs et à formaliser les besoins métiers sous forme de cahier des charges et de spécifications techniques.
                     </p>
                     <div class="mt-2 flex flex-wrap gap-2">
-                        <span class="project-pill">User stories</span>
-                        <span class="project-pill">Méthodes agiles</span>
+                        <span class="project-pill">Analyse des besoins</span>
+                        <span class="project-pill">Spécifications</span>
                     </div>
-                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                    <div class="mt-4 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
                         Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <article class="project-evidence-card opacity-80">
+                            <h5>SAÉ 1.05 & 1.06</h5>
+                            <p>Recueil des besoins et modélisation pour un système de gestion de données.</p>
+                            <span class="badge">SAÉ • S1</span>
+                        </article>
+                        <article class="project-evidence-card opacity-80">
+                            <h5>SAÉ 2.05</h5>
+                            <p>Gestion de projet et définition des besoins pour une application tuteurée.</p>
+                            <span class="badge">SAÉ • S2</span>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="n2-content mt-8">
+            <h3 class="level-title mb-2 text-gray-700 font-bold border-b pb-1">Niveau 2 – Organiser et piloter un projet informatique</h3>
+            <div class="ac-group">
+                <div class="ac-item">
+                    <div class="ac-header-line flex items-center gap-2 mb-2">
+                        <span class="status-badge status-en-cours">En cours</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 2.2 – Planifier et suivre les étapes d'un projet
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Je pilote désormais des projets de plus grande envergure en gérant le cycle de vie complet : de la planification des releases au suivi des retours utilisateurs via des outils collaboratifs.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Pilotage de projet</span>
+                        <span class="project-pill">GitHub Projects</span>
+                    </div>
+                    <div class="mt-4 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Trace principale
                     </div>
                     <div class="project-evidence-grid">
                         <a href="projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
-                                <h5>YGGAME CTF – Besoin</h5>
-                                <p>Analyse du besoin pour créer une plateforme CTF utilisée par une vraie communauté.</p>
+                                <h5>YGGAME CTF – Pilotage</h5>
+                                <p>Gestion complète du projet : planification des releases, suivi des correctifs et déploiement.</p>
                                 <span class="badge">Perso • CTF</span>
-                            </article>
-                        </a>
-                        <a href="projet-ecocoin.html" class="project-link-full">
-                            <article class="project-evidence-card">
-                                <h5>EcoCoin – Cahier des charges</h5>
-                                <p>Formalisation des exigences métier pour un site e‑commerce.</p>
-                                <span class="badge">SAE • Web</span>
                             </article>
                         </a>
                     </div>
@@ -994,27 +1118,60 @@
         </div>
     </section>
 
-    <!-- C6 -->
-    <section id="c6" class="competence-card p-6 sm:p-8 mb-12" data-aos="fade-up">
+    <section id="c6" class="competence-card majeure p-6 sm:p-8 mb-12 bg-white rounded-3xl shadow-xl border-l-8 border-blue-600" data-aos="fade-up">
+        <span class="majeure-tag">MAJEURE</span>
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
                     C6 : Collaborer au sein d'une équipe informatique
                 </h2>
-                <p class="text-blue-600 font-semibold text-sm">
-                    Compétence majeure – projets en équipe, hackathons, CTF
+                <p class="text-blue-600 font-semibold text-sm italic">
+                    Compétence majeure — poursuivie jusqu'en BUT3
                 </p>
             </div>
-            <span class="bg-blue-50 text-blue-700 px-4 py-1 rounded-full text-xs font-bold uppercase self-start">
-                Majeure
-            </span>
         </div>
 
-        <div class="n2-content">
-            <h3 class="level-title mb-2">Niveau 2 – Situer son rôle dans une équipe</h3>
+        <div class="n1-content">
+            <h3 class="level-title mb-2 text-gray-700 font-bold border-b pb-1">Niveau 1 – Appréhender les besoins du client et de l'utilisateur</h3>
+            <div class="ac-group">
+                <div class="ac-item mb-6">
+                    <div class="ac-header-line flex items-center gap-2 mb-2">
+                        <span class="status-badge status-acquis">Acquis</span>
+                        <h4 class="font-bold text-gray-900 text-sm sm:text-base">
+                            AC 1.2 – Communiquer efficacement au sein d'une équipe
+                        </h4>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600">
+                        Savoir rendre compte de ses tâches, utiliser un vocabulaire technique précis et maintenir une documentation partagée pour assurer la cohérence du travail collectif.
+                    </p>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span class="project-pill">Communication technique</span>
+                        <span class="project-pill">Documentation</span>
+                    </div>
+                    <div class="mt-4 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                        Traces principales
+                    </div>
+                    <div class="project-evidence-grid">
+                        <article class="project-evidence-card opacity-80">
+                            <h5>SAÉ 1.05 & 1.06</h5>
+                            <p>Communication et répartition des rôles pour la modélisation d'une base de données.</p>
+                            <span class="badge">SAÉ • S1</span>
+                        </article>
+                        <article class="project-evidence-card opacity-80">
+                            <h5>SAÉ 2.05</h5>
+                            <p>Travail d'équipe en mode agile pour la conception d'une application tuteurée.</p>
+                            <span class="badge">SAÉ • S2</span>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="n2-content mt-8">
+            <h3 class="level-title mb-2 text-gray-700 font-bold border-b pb-1">Niveau 2 – Situer son rôle dans une équipe</h3>
             <div class="ac-group">
                 <div class="ac-item">
-                    <div class="ac-header-line">
+                    <div class="ac-header-line flex items-center gap-2 mb-2">
                         <span class="status-badge status-acquis">Acquis</span>
                         <h4 class="font-bold text-gray-900 text-sm sm:text-base">
                             AC 2.2 – Organiser et partager une veille technologique
@@ -1028,7 +1185,7 @@
                         <span class="project-pill">Git / GitHub</span>
                         <span class="project-pill">Discord / veille</span>
                     </div>
-                    <div class="mt-2 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
+                    <div class="mt-4 text-[11px] text-gray-500 font-semibold uppercase tracking-[0.18em]">
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
@@ -1051,7 +1208,6 @@
             </div>
         </div>
     </section>
-
 </main>
 
 <footer class="bg-blue-50 text-gray-700 border-t border-gray-100 pt-12 pb-6">
@@ -1136,7 +1292,46 @@
             mobileMenu.classList.toggle('hidden');
         });
     }
+
+    function filterById(type) {
+        const cards = document.querySelectorAll('.competence-card');
+        const buttons = document.querySelectorAll('.type-btn');
+
+        // Groupes basés sur tes IDs
+        const majeures = ['c1', 'c5', 'c6'];
+        const mineures = ['c2', 'c3', 'c4'];
+
+        // Gestion de l'état actif des boutons
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+
+        // Animation et affichage des cartes
+        cards.forEach(card => {
+            const cardId = card.id.toLowerCase();
+
+            let shouldShow = false;
+            if (type === 'all') shouldShow = true;
+            else if (type === 'majeure') shouldShow = majeures.includes(cardId);
+            else if (type === 'mineure') shouldShow = mineures.includes(cardId);
+
+            if (shouldShow) {
+                card.style.display = 'block';
+                // Petit délai pour l'animation de fondu
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.display = 'none';
+                }, 400); // Correspond à la durée de la transition CSS
+            }
+        });
+    }
 </script>
+
 
 </body>
 </html>
