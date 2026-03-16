@@ -372,6 +372,7 @@
         box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
         position: relative;
         overflow: hidden;
+        animation: monitorPulse 4s ease-in-out infinite;
       }
 
       /* Grille de fond style "Papier millimétré médical" */
@@ -386,12 +387,22 @@
       /* Animation de la ligne ECG */
       .ecg-line {
         fill: none;
-        stroke: #22c55e; /* Vert médical */
+        stroke: #22c55e;
         stroke-width: 2;
         stroke-linecap: round;
         stroke-linejoin: round;
-        animation: draw-ecg 2s linear infinite;
-        filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.6));
+        filter: drop-shadow(0 0 6px rgba(34,197,94,0.7));
+        stroke-dasharray: 300;
+        animation: ecgMove 1.6s linear infinite;
+      }
+
+      @keyframes ecgMove {
+        from {
+          stroke-dashoffset: 300;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
       }
 
       @keyframes draw-ecg {
@@ -400,6 +411,38 @@
         90% { opacity: 1; }
         100% { stroke-dasharray: 1500, 0; stroke-dashoffset: -1500; opacity: 0; }
       }
+
+      .monitor-scan {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(59,130,246,0.15) 45%,
+                rgba(59,130,246,0.35) 50%,
+                rgba(59,130,246,0.15) 55%,
+                transparent 100%
+        );
+        animation: scanMove 3s linear infinite;
+      }
+
+      @keyframes scanMove {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+      }
+      @keyframes monitorPulse {
+        0%,100%{
+          box-shadow:
+                  0 0 30px rgba(59,130,246,0.15),
+                  inset 0 0 20px rgba(59,130,246,0.05);
+        }
+        50%{
+          box-shadow:
+                  0 0 60px rgba(59,130,246,0.35),
+                  inset 0 0 30px rgba(59,130,246,0.15);
+        }
+      }
+
 
 
 
@@ -432,6 +475,7 @@
           <div class="relative h-24 rounded-xl bg-gradient-to-br from-blue-50 to-white overflow-hidden">
             <!-- grille -->
             <div class="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,rgba(59,130,246,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.12)_1px,transparent_1px)] bg-[size:16px_16px]"></div>
+            <div class="monitor-scan"></div>
             <!-- ligne ECG -->
             <svg class="relative w-full h-full text-[#3b82f6]" viewBox="0 0 200 80">
               <path
@@ -453,6 +497,7 @@
               Chargement du portfolio <span class="font-semibold text-[#3b82f6]">BUT Informatique</span> spécialisé santé.
             </p>
           </div>
+          <p id="scanText" class="text-[11px] text-slate-500"></p>
 
           <!-- Progress -->
           <div class="space-y-2">
@@ -1338,6 +1383,23 @@
       // Quand la page est prête
       finish();
     });
+
+    const steps = [
+      "Connexion au serveur…",
+      "Analyse des modules…",
+      "Chargement des données…",
+      "Optimisation de l’interface…",
+      "Finalisation…"
+    ];
+
+    let step = 0;
+
+    setInterval(() => {
+      if(step < steps.length){
+        document.getElementById("scanText").textContent = steps[step];
+        step++;
+      }
+    }, 700);
   </script>
 
 
