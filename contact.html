@@ -157,9 +157,94 @@
             animation: float 6s ease-in-out infinite;
         }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        /* ============================= */
+        /* BACKGROUND TECH ANIME */
+        /* ============================= */
+
+        .tech-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .tech-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(59,130,246,0.2);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+
+        @keyframes floatParticle {
+            from {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+
+        /* ============================= */
+        /* GLOW HOVER EFFECT */
+        /* ============================= */
+
+        .glow-card{
+            position:relative;
+        }
+
+        .glow-card::after{
+
+            content:"";
+            position:absolute;
+            inset:0;
+
+            background: radial-gradient(
+                    circle at var(--x) var(--y),
+                    rgba(59,130,246,0.25),
+                    transparent 60%
+            );
+
+            opacity:0;
+            transition: opacity .3s ease;
+        }
+
+        .glow-card:hover::after{
+            opacity:1;
+        }
+        /* ============================= */
+        /* DARK MODE */
+        /* ============================= */
+
+        .dark body{
+            background:#0f172a;
+            color:white;
+        }
+
+        .dark .contact-card{
+            background:#1e293b;
+            color:white;
+        }
+
+        .dark .info-card{
+            background:#1e293b;
+            border-color:#334155;
+        }
+
+        .dark footer{
+            background:#020617;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+<!-- BACKGROUND PARTICLES -->
+<div class="tech-bg" id="tech-bg"></div>
 
 <!-- Navbar (Fixée en haut) -->
 <header class="fixed w-full top-0 left-0 bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
@@ -204,6 +289,7 @@
         <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mt-6 mb-4 leading-tight" data-aos="fade-up">
             Entrons en contact ! <br class="md:hidden"> <span style="font-family: 'Noto Sans KR', sans-serif;">(연락하세요)</span>
         </h1>
+        <p id="typing-text" class="text-blue-700 font-semibold mt-4"></p>
         <p class="text-lg text-gray-700 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
             Je suis toujours ouvert à discuter de nouveaux projets, d'opportunités de stage ou simplement échanger sur la technologie et la médecine.
         </p>
@@ -314,6 +400,47 @@
         </div>
     </div>
 </section>
+<!-- CARTE LOCALISATION -->
+<section class="max-w-6xl mx-auto px-6 mt-12 mb-12" data-aos="fade-up">
+    <div class="contact-card">
+
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+            📍 Me trouver
+        </h3>
+
+        <p class="text-gray-600 mb-6">
+            75 Avenue Augustin Fliche, 34090 Montpellier
+        </p>
+
+        <div class="w-full h-[400px] rounded-xl overflow-hidden border border-gray-200 shadow-md relative group">
+            <!-- Carte Google Maps responsive avec marqueur -->
+            <iframe
+                    src="https://www.google.com/maps/embed/v1/place?key=VOTRE_API_KEY&q=75+Avenue+Augustin+Fliche,Montpellier&zoom=16"
+                    width="100%"
+                    height="100%"
+                    style="border:0; transition: transform 0.3s ease;"
+                    allowfullscreen=""
+                    loading="lazy">
+            </iframe>
+
+            <!-- Effet hover : zoom léger sur la carte -->
+            <div class="absolute inset-0 group-hover:scale-105 transition-transform duration-300"></div>
+        </div>
+
+        <!-- Bouton itinéraire -->
+
+
+    </div>
+    <div class="mt-4 text-center">
+        <a
+                href="https://www.google.com/maps/dir/?api=1&destination=75+Avenue+Augustin+Fliche,34090+Montpellier"
+                target="_blank"
+                class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition transform hover:-translate-y-1 hover:scale-105"
+        >
+            🧭 Obtenir l’itinéraire
+        </a>
+    </div>
+</section>
 
 <!-- Footer -->
 <footer class="bg-blue-50 text-gray-700 py-6 mt-16 border-t border-gray-200">
@@ -342,6 +469,70 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({ duration: 1000, once: true });
+</script>
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<script>
+
+    document.querySelectorAll(".contact-card,.info-card")
+        .forEach(card=>{
+
+            card.classList.add("glow-card")
+
+            card.addEventListener("mousemove",(e)=>{
+
+                const rect = card.getBoundingClientRect()
+
+                card.style.setProperty("--x",(e.clientX-rect.left)+"px")
+                card.style.setProperty("--y",(e.clientY-rect.top)+"px")
+
+            })
+
+        })
+
+</script>
+<script>
+
+    document.querySelectorAll(".contact-card,.info-card")
+        .forEach(card=>{
+
+            card.classList.add("glow-card")
+
+            card.addEventListener("mousemove",(e)=>{
+
+                const rect = card.getBoundingClientRect()
+
+                card.style.setProperty("--x",(e.clientX-rect.left)+"px")
+                card.style.setProperty("--y",(e.clientY-rect.top)+"px")
+
+            })
+
+        })
+
+</script>
+<script>
+
+    const text = "Développeur BUT Informatique spécialisé Santé & Technologie";
+    const typing = document.getElementById("typing-text");
+
+    let i=0;
+
+    function type(){
+
+        if(i<text.length){
+
+            typing.innerHTML += text.charAt(i);
+            i++;
+
+            setTimeout(type,40);
+
+        }
+
+    }
+
+    type();
+
 </script>
 </body>
 </html>
