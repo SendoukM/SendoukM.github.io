@@ -245,7 +245,7 @@
         content: '';
         position: absolute;
         inset: 0;
-        border-radius: 0.75rem; /* ~ rounded-xl */
+        border-radius: 0.75rem;
         border: 1px solid transparent;
         background: linear-gradient(120deg, rgba(59,130,246,0.0), rgba(59,130,246,0.25), rgba(59,130,246,0.0));
         opacity: 0;
@@ -256,78 +256,79 @@
       .project-card:hover::before {
         opacity: 1;
       }
+
       /* BADGES PROJETS */
-  .project-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem; /* text-xs */
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 9999px; /* rounded-full */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 20;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+      .project-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 9999px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 20;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
 
-  .project-badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background-color: currentColor;
-    border-radius: 50%;
-    box-shadow: 0 0 8px currentColor;
-  }
+      .project-badge::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: currentColor;
+        border-radius: 50%;
+        box-shadow: 0 0 8px currentColor;
+      }
 
-  .group:hover .project-badge {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-    background: rgba(255, 255, 255, 0.2);
-  }
+      .group:hover .project-badge {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        background: rgba(255, 255, 255, 0.2);
+      }
 
-  /* Couleurs spécifiques par type (optionnel mais recommandé) */
-  .badge-sae { color: #fbbf24; /* Jaune/Ambre */ border-color: rgba(251, 191, 36, 0.4); }
-  .badge-perso { color: #34d399; /* Émeraude */ border-color: rgba(52, 211, 153, 0.4); }
-  .badge-hack { color: #c084fc; /* Violet */ border-color: rgba(192, 132, 252, 0.4); }
+      .badge-sae { color: #fbbf24; border-color: rgba(251, 191, 36, 0.4); }
+      .badge-perso { color: #34d399; border-color: rgba(52, 211, 153, 0.4); }
+      .badge-hack { color: #c084fc; border-color: rgba(192, 132, 252, 0.4); }
 
       /* CONFETTIS POKÉMON */
-  .poke-confetti {
-    position: absolute;
-    pointer-events: none;
-    opacity: 0;
-    font-size: 1.2rem;
-    animation: confetti-fall 2s ease-out forwards;
-  }
+      .poke-confetti {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0;
+        font-size: 1.2rem;
+        animation: confetti-fall 2s ease-out forwards;
+      }
 
-  .group:hover .poke-confetti {
-    opacity: 1;
-    animation-play-state: running;
-  }
+      .group:hover .poke-confetti {
+        opacity: 1;
+        animation-play-state: running;
+      }
 
-  @keyframes confetti-fall {
-    0% {
-      transform: translateY(100%) rotate(0deg) scale(0);
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-      transform: translateY(-20%) rotate(180deg) scale(1);
-    }
-    100% {
-      transform: translateY(-150%) rotate(720deg) scale(0.5);
-      opacity: 0;
-    }
-  }
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(100%) rotate(0deg) scale(0);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+          transform: translateY(-20%) rotate(180deg) scale(1);
+        }
+        100% {
+          transform: translateY(-150%) rotate(720deg) scale(0.5);
+          opacity: 0;
+        }
+      }
+
       /* Slider Infini */
       .tech-slider {
         overflow: hidden;
@@ -340,7 +341,7 @@
         top: 0; width: 100px; height: 100%;
         z-index: 2;
       }
-      .tech-slider:before { left: 0; background: linear-gradient(to right, #f8fafc, transparent); } /* Adapte la couleur au fond */
+      .tech-slider:before { left: 0; background: linear-gradient(to right, #f8fafc, transparent); }
       .tech-slider:after { right: 0; background: linear-gradient(to left, #f8fafc, transparent); }
 
       .tech-track {
@@ -365,9 +366,10 @@
         from { transform: translateX(0); }
         to { transform: translateX(-50%); }
       }
+
       /* --- MONITEUR BIO-IT --- */
       .monitor-card {
-        background: #0f172a; /* Bleu très sombre, quasi noir */
+        background: #0f172a;
         border: 1px solid #1e293b;
         box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
         position: relative;
@@ -375,7 +377,6 @@
         animation: monitorPulse 4s ease-in-out infinite;
       }
 
-      /* Grille de fond style "Papier millimétré médical" */
       .monitor-grid {
         background-image:
                 linear-gradient(rgba(30, 41, 59, 0.5) 1px, transparent 1px),
@@ -384,7 +385,6 @@
         opacity: 0.3;
       }
 
-      /* Animation de la ligne ECG */
       .ecg-line {
         fill: none;
         stroke: #22c55e;
@@ -397,1012 +397,787 @@
       }
 
       @keyframes ecgMove {
-        from {
-          stroke-dashoffset: 300;
-        }
-        to {
-          stroke-dashoffset: 0;
-        }
+        from { stroke-dashoffset: 300; }
+        to { stroke-dashoffset: 0; }
       }
 
-      @keyframes draw-ecg {
-        0% { stroke-dasharray: 0, 1500; stroke-dashoffset: 0; opacity: 0; }
-        10% { opacity: 1; }
-        90% { opacity: 1; }
-        100% { stroke-dasharray: 1500, 0; stroke-dashoffset: -1500; opacity: 0; }
-      }
-
-      .monitor-scan {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                rgba(59,130,246,0.15) 45%,
-                rgba(59,130,246,0.35) 50%,
-                rgba(59,130,246,0.15) 55%,
-                transparent 100%
-        );
-        animation: scanMove 3s linear infinite;
-      }
-
-      @keyframes scanMove {
-        0% { transform: translateY(-100%); }
-        100% { transform: translateY(100%); }
-      }
       @keyframes monitorPulse {
         0%,100%{
-          box-shadow:
-                  0 0 30px rgba(59,130,246,0.15),
-                  inset 0 0 20px rgba(59,130,246,0.05);
+          box-shadow: 0 0 30px rgba(59,130,246,0.15), inset 0 0 20px rgba(59,130,246,0.05);
         }
         50%{
-          box-shadow:
-                  0 0 60px rgba(59,130,246,0.35),
-                  inset 0 0 30px rgba(59,130,246,0.15);
+          box-shadow: 0 0 60px rgba(59,130,246,0.35), inset 0 0 30px rgba(59,130,246,0.15);
         }
       }
-
-
-
-
-
-
-
-
-
     </style>
   </head>
   <body class="bg-gray-50 text-gray-800">
-  <!-- LOADER MEDICAL -->
-  <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
-    <div class="relative w-full max-w-sm px-8">
-      <!-- Cadre / carte -->
-      <div class="relative border-2 border-[#3b82f6] rounded-2xl bg-white shadow-xl overflow-hidden">
-        <!-- Barre titre -->
-        <div class="flex items-center justify-between px-4 py-2 bg-[#3b82f6] text-white text-xs tracking-[0.15em] uppercase">
-          <span>Initialisation du dossier</span>
-          <span class="inline-flex items-center gap-1">
-          <span class="w-1 h-1 rounded-full bg-white/70 animate-pulse"></span>
-          <span class="w-1 h-1 rounded-full bg-white/70 animate-pulse [animation-delay:0.15s]"></span>
-          <span class="w-1 h-1 rounded-full bg-white/70 animate-pulse [animation-delay:0.3s]"></span>
-        </span>
-        </div>
 
-        <!-- Contenu -->
-        <div class="p-5 space-y-4">
-          <!-- “Monitor” -->
-          <div class="relative h-24 rounded-xl bg-gradient-to-br from-blue-50 to-white overflow-hidden">
-            <!-- grille -->
-            <div class="absolute inset-0 opacity-40 bg-[linear-gradient(to_right,rgba(59,130,246,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(59,130,246,0.12)_1px,transparent_1px)] bg-[size:16px_16px]"></div>
-            <div class="monitor-scan"></div>
-            <!-- ligne ECG -->
-            <svg class="relative w-full h-full text-[#3b82f6]" viewBox="0 0 200 80">
-              <path
-                      d="M0 40 H30 L40 10 L50 55 L60 25 L70 40 H100 L110 20 L120 60 L130 35 L140 40 H200"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      class="ecg-line"
-              />
-            </svg>
-          </div>
+    <!-- NAVBAR responsive -->
+    <header class="fixed w-full bg-white shadow-sm z-50">
+      <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+        <!-- Nom à gauche -->
+        <h1 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-800 flex items-center space-x-3">
+          <div class="live-dot" title="Système opérationnel"></div> <span>Mohamed Sendouk</span>
+          <span class="text-blue-600 text-sm font-normal">(모하메드)</span>
+        </h1>
 
-          <!-- Texte -->
-          <div class="space-y-1 text-xs text-slate-600">
-            <p class="font-semibold tracking-wide text-slate-900 uppercase">
-              Analyse du profil en cours…
-            </p>
-            <p>
-              Chargement du portfolio <span class="font-semibold text-[#3b82f6]">BUT Informatique</span> spécialisé santé.
-            </p>
-          </div>
-          <p id="scanText" class="text-[11px] text-slate-500"></p>
+        <!-- Bouton burger mobile -->
+        <button id="navToggle"
+                class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-gray-100 focus:outline-none">
+          <span class="sr-only">Ouvrir le menu</span>
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
 
-          <!-- Progress -->
-          <div class="space-y-2">
-            <div class="flex justify-between text-[11px] text-slate-500">
-              <span>Chargement de l’interface</span>
-              <span id="preloader-label" class="font-medium text-[#3b82f6]">0%</span>
-            </div>
-            <div class="h-1.5 rounded-full bg-slate-100 overflow-hidden">
-              <div id="preloader-bar" class="h-full w-0 bg-gradient-to-r from-[#3b82f6] to-sky-400 transition-[width] duration-150 ease-out"></div>
-            </div>
-          </div>
+        <!-- Menu desktop -->
+        <ul class="hidden md:flex items-center space-x-4 lg:space-x-6 text-sm font-medium">
+          <li><a href="#home" class="hover:text-blue-600">Accueil</a></li>
+          <li><a href="#about" class="hover:text-blue-600">À propos</a></li>
+          <li><a href="#experience" class="hover:text-blue-600">Parcours</a></li>
+          <li><a href="#projects" class="hover:text-blue-600">Projets</a></li>
+          <li><a href="portfolioApp.html" class="hover:text-blue-600">Portfolio d'apprentissage</a></li>
+          <li><a href="contact.html" class="hover:text-blue-600">Contact</a></li>
+          <li>
+            <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
+              class="px-3 py-2 lg:px-4 lg:py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-xs lg:text-sm whitespace-nowrap">
+              Télécharger CV
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-          <!-- Petit hint -->
-          <p class="text-[10px] uppercase tracking-[0.2em] text-slate-400 text-center">
-            Optimisation · Sécurité · Santé numérique
-          </p>
-        </div>
+      <!-- Menu mobile -->
+      <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
+        <ul class="px-4 py-3 space-y-2 text-sm font-medium">
+          <li><a href="#home" class="block py-1 hover:text-blue-600">Accueil</a></li>
+          <li><a href="#about" class="block py-1 hover:text-blue-600">À propos</a></li>
+          <li><a href="#experience" class="block py-1 hover:text-blue-600">Parcours</a></li>
+          <li><a href="#projects" class="block py-1 hover:text-blue-600">Projets</a></li>
+          <li><a href="portfolioApp.html" class="block py-1 hover:text-blue-600">Portfolio</a></li>
+          <li><a href="contact.html" class="block py-1 hover:text-blue-600">Contact</a></li>
+          <li>
+            <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
+              class="mt-2 inline-block px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-sm">
+              Télécharger CV
+            </a>
+          </li>
+        </ul>
       </div>
-    </div>
-  </div>
+    </header>
 
-
-
-  <!-- NAVBAR responsive -->
-  <header class="fixed w-full bg-white shadow-sm z-50">
-    <nav class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
-      <!-- Nom à gauche -->
-      <h1 class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-800 flex items-center space-x-3">
-        <div class="live-dot" title="Système opérationnel"></div> <span>Mohamed Sendouk</span>
-        <span class="text-blue-600 text-sm font-normal">(모하메드)</span>
-      </h1>
-
-      <!-- Bouton burger mobile -->
-      <button id="navToggle"
-              class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-blue-700 hover:bg-gray-100 focus:outline-none">
-        <span class="sr-only">Ouvrir le menu</span>
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-
-      <!-- Menu desktop -->
-      <ul class="hidden md:flex items-center space-x-4 lg:space-x-6 text-sm font-medium">
-        <li><a href="#home" class="hover:text-blue-600">Accueil</a></li>
-        <li><a href="#about" class="hover:text-blue-600">À propos</a></li>
-        <li><a href="#experience" class="hover:text-blue-600">Parcours</a></li>
-        <li><a href="#projects" class="hover:text-blue-600">Projets</a></li>
-        <li><a href="portfolioApp.html" class="hover:text-blue-600">Portfolio d'apprentissage</a></li>
-        <li><a href="contact.html" class="hover:text-blue-600">Contact</a></li>
-        <li>
-          <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
-            class="px-3 py-2 lg:px-4 lg:py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-xs lg:text-sm whitespace-nowrap">
-            Télécharger CV
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Menu mobile -->
-    <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
-      <ul class="px-4 py-3 space-y-2 text-sm font-medium">
-        <li><a href="#home" class="block py-1 hover:text-blue-600">Accueil</a></li>
-        <li><a href="#about" class="block py-1 hover:text-blue-600">À propos</a></li>
-        <li><a href="#experience" class="block py-1 hover:text-blue-600">Parcours</a></li>
-        <li><a href="#projects" class="block py-1 hover:text-blue-600">Projets</a></li>
-        <li><a href="portfolioApp.html" class="block py-1 hover:text-blue-600">Portfolio</a></li>
-        <li><a href="contact.html" class="block py-1 hover:text-blue-600">Contact</a></li>
-        <li>
-          <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
-            class="mt-2 inline-block px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-sm">
-            Télécharger CV
-          </a>
-        </li>
-      </ul>
-    </div>
-  </header>
-
-  <!-- HERO -->
-  <section id="home"
-          data-aos="fade-up"
-          class="min-h-screen pt-24 flex flex-col justify-center items-center text-center bg-gradient-to-b from-white to-blue-50 relative">
-    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-800 mb-4">
-      Bonjour (안녕하세요) !
-    </h2>
-    <p class="text-lg sm:text-xl text-gray-600 mb-6 px-4">
-      Étudiant en informatique, intéressé par les applications dans le domaine médical
-    </p>
-    <div class="space-x-0 sm:space-x-4 space-y-3 sm:space-y-0 flex flex-col sm:block">
-      <a href="#projects"
-        class="inline-flex items-center gap-2 px-6 py-2 rounded-full
-            bg-blue-700 text-white text-sm font-medium
-            shadow-sm hover:shadow-md
-            hover:bg-blue-800
-            transition-all duration-200">
-        Voir mes projets
-        <span class="transition-transform duration-200 group-hover:translate-x-0.5">
-      →
-    </span>
-      </a>
-
-
-
-    </div>
-
-    <!-- Scroll down -->
-    <a href="#about" class="scroll-down hidden sm:flex">
-      <div class="mouse"></div>
-      <span class="text">Défiler pour en savoir plus</span>
-    </a>
-  </section>
-
-  <!-- À PROPOS -->
-  <section id="about" data-aos="fade-up" class="max-w-5xl mx-auto py-16 sm:py-20 px-4 sm:px-6">
-    <div class="section-wrapper mb-6">
-      <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
-        À propos de Moi (저에 대해)
-      </h3>
-    </div>
-
-    <div class="flex justify-center gap-3 mb-8">
-      <a href="https://github.com/SendoukM" target="_blank" class="contact-btn github">
-        <img src="img/github.png" alt="GitHub" class="w-5 h-5"/>
-      </a>
-      <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank" class="contact-btn linkedin">
-        <img src="img/linkedin.png" alt="LinkedIn" class="w-5 h-5"/>
-      </a>
-      <a href="mailto:sendoukmohamed45@gmail.com" class="contact-btn gmail">
-        <img src="img/gmail.png" alt="Gmail" class="w-5 h-5"/>
-      </a>
-    </div>
-
-    <div class="text-center mb-8">
-      <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">Mohamed Sendouk</h2>
-      <p class="text-base sm:text-lg text-blue-600 font-medium italic">
-        Développeur passionné de médecine
+    <!-- HERO -->
+    <section id="home"
+            data-aos="fade-up"
+            class="min-h-screen pt-24 flex flex-col justify-center items-center text-center bg-gradient-to-b from-white to-blue-50 relative">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-800 mb-4">
+        Bonjour (안녕하세요) !
+      </h2>
+      <p class="text-lg sm:text-xl text-gray-600 mb-6 px-4">
+        Étudiant en informatique, intéressé par les applications dans le domaine médical
       </p>
-      <div class="flex justify-center mt-3">
-        <div class="w-16 h-1 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 rounded-full"></div>
-      </div>
-    </div>
-
-    <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-10">
-      <div class="text-gray-700 leading-relaxed text-justify mb-10 text-sm sm:text-base">
-        <p class="mb-4">
-          Je suis étudiant en BUT Informatique à l'IUT de Montpellier-Sète.
-          Curieux, persévérant et minutieux, je m'intéresse particulièrement au
-          <strong>domaine médical</strong>, un secteur qui combine technologie et bien-être humain.
-        </p>
-        <p class="mb-4">
-          Grâce à mes lectures sur l'anatomie et aux expériences de mon oncle, chirurgien,
-          j'ai développé une passion pour la médecine. Mon projet post-BUT est d'intégrer
-          un <strong>Master en Bio-Informatique</strong> afin de fusionner mes compétences
-          en informatique avec mes intérêts pour la santé et la recherche médicale.
-        </p>
-        <p>
-          Mon objectif est de contribuer à la création de solutions technologiques innovantes
-          pour améliorer la santé et faciliter la recherche scientifique.
-        </p>
-      </div>
-
-      <div class="bg-blue-50 rounded-xl p-4 sm:p-6 shadow-inner mb-10">
-        <h3 class="text-lg sm:text-xl font-semibold text-blue-800 mb-4 text-center">
-          Centres d'intérêt (관심사)
-        </h3>
-        <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
-          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">💉 Médecine</span>
-          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">💻 Programmation</span>
-          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">🧠 Intelligence Artificielle</span>
-          <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">🌍 Langue & Culture coréenne</span>
-        </div>
-      </div>
-
-      <div class="bg-blue-50 rounded-xl p-4 sm:p-6 shadow-inner mb-10">
-        <h3 class="text-lg sm:text-xl font-semibold text-blue-800 mb-4 text-center">
-          Compétences Techniques (기술 능력)
-        </h3>
-        <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
-          <div class="tech-slider py-4">
-            <div class="tech-track">
-              <!-- Liste doublée pour l'effet infini -->
-              <span class="tech-icon">☕ Java</span>
-              <span class="tech-icon">🐍 Python</span>
-              <span class="tech-icon">🌐 HTML/CSS</span>
-              <span class="tech-icon">⚛️ React/JS</span>
-              <span class="tech-icon">🗄️ SQL</span>
-              <span class="tech-icon">🐳 Docker</span>
-              <span class="tech-icon">🎨 Tailwind</span>
-              <!-- Répétition -->
-              <span class="tech-icon">☕ Java</span>
-              <span class="tech-icon">🐍 Python</span>
-              <span class="tech-icon">🌐 HTML/CSS</span>
-              <span class="tech-icon">⚛️ React/JS</span>
-              <span class="tech-icon">🗄️ SQL</span>
-              <span class="tech-icon">🐳 Docker</span>
-              <span class="tech-icon">🎨 Tailwind</span>
-              <span class="tech-icon">🏥 Bio-Info</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
-          class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition shadow text-sm sm:text-base">
-          <img src="img/tele.png" alt="Télécharger" class="w-5 h-5"/>
-          Télécharger mon CV
+      <div class="space-x-0 sm:space-x-4 space-y-3 sm:space-y-0 flex flex-col sm:block">
+        <a href="#projects"
+          class="inline-flex items-center gap-2 px-6 py-2 rounded-full
+              bg-blue-700 text-white text-sm font-medium
+              shadow-sm hover:shadow-md
+              hover:bg-blue-800
+              transition-all duration-200">
+          Voir mes projets
+          <span class="transition-transform duration-200 group-hover:translate-x-0.5">
+            →
+          </span>
         </a>
       </div>
-    </div>
-  </section>
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 mb-16" data-aos="zoom-in">
-    <div class="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between shadow-2xl relative overflow-hidden">
-      <!-- Déco background -->
-      <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl"></div>
 
-      <div class="flex items-center gap-4 z-10">
-        <div class="relative">
-          <span class="absolute top-0 right-0 w-3 h-3 bg-green-400 border-2 border-blue-900 rounded-full"></span>
-          <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-2xl">
-            🎓
-          </div>
-        </div>
-        <div>
-          <h4 class="font-bold text-lg">Statut Actuel</h4>
-          <p class="text-blue-100 text-sm">À la recherche d'un stage (Avril 2026)</p>
-        </div>
-      </div>
+      <!-- Scroll down -->
+      <a href="#about" class="scroll-down hidden sm:flex">
+        <div class="mouse"></div>
+        <span class="text">Défiler pour en savoir plus</span>
+      </a>
+    </section>
 
-      <div class="mt-4 sm:mt-0 z-10 text-center sm:text-right">
-        <p class="text-xs font-mono text-blue-200 mb-1">Projet en cours :</p>
-        <div class="inline-flex items-center gap-2 bg-black/30 px-3 py-1 rounded-lg border border-white/10">
-          <span class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
-          <span class="font-mono text-sm">Création d'un CTF</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- SECTION DIAGNOSTIC BIO-IT -->
-  <section class="bg-gray-50 py-10 px-4 sm:px-6">
-    <div class="max-w-5xl mx-auto" data-aos="fade-up">
-
-      <div class="section-wrapper mb-8">
+    <!-- À PROPOS -->
+    <section id="about" data-aos="fade-up" class="max-w-5xl mx-auto py-16 sm:py-20 px-4 sm:px-6">
+      <div class="section-wrapper mb-6">
         <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
-          Diagnostic Profil (프로필 진단)
+          À propos de Moi (저에 대해)
         </h3>
       </div>
 
-      <!-- CARTE MONITEUR -->
-      <div class="monitor-card rounded-2xl p-6 sm:p-8 text-slate-200 grid md:grid-cols-3 gap-8 items-center">
+      <div class="flex justify-center gap-3 mb-8">
+        <a href="https://github.com/SendoukM" target="_blank" class="contact-btn github">
+          <img src="img/github.png" alt="GitHub" class="w-5 h-5"/>
+        </a>
+        <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank" class="contact-btn linkedin">
+          <img src="img/linkedin.png" alt="LinkedIn" class="w-5 h-5"/>
+        </a>
+        <a href="mailto:sendoukmohamed45@gmail.com" class="contact-btn gmail">
+          <img src="img/gmail.png" alt="Gmail" class="w-5 h-5"/>
+        </a>
+      </div>
 
-        <!-- Fond Grille -->
-        <div class="absolute inset-0 monitor-grid pointer-events-none"></div>
+      <div class="text-center mb-8">
+        <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-2">Mohamed Sendouk</h2>
+        <p class="text-base sm:text-lg text-blue-600 font-medium italic">
+          Développeur passionné de médecine
+        </p>
+        <div class="flex justify-center mt-3">
+          <div class="w-16 h-1 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 rounded-full"></div>
+        </div>
+      </div>
 
-        <!-- COLONNE GAUCHE : VISUEL ECG -->
-        <div class="md:col-span-1 relative z-10 flex flex-col items-center justify-center border-r border-slate-700/50 pr-0 md:pr-8">
-          <div class="flex items-center gap-2 mb-4 self-start">
-            <div class="live-dot"></div>
-            <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Live Monitor</span>
-          </div>
+      <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-10">
+        <div class="text-gray-700 leading-relaxed text-justify mb-10 text-sm sm:text-base">
+          <p class="mb-4">
+            Je suis étudiant en BUT Informatique à l'IUT de Montpellier-Sète.
+            Curieux, persévérant et minutieux, je m'intéresse particulièrement au
+            <strong>domaine médical</strong>, un secteur qui combine technologie et bien-être humain.
+          </p>
+          <p class="mb-4">
+            Grâce à mes lectures sur l'anatomie et aux expériences de mon oncle, chirurgien,
+            j'ai développé une passion pour la médecine. Mon projet post-BUT est d'intégrer
+            un <strong>Master en Bio-Informatique</strong> afin de fusionner mes compétences
+            en informatique avec mes intérêts pour la santé et la recherche médicale.
+          </p>
+          <p>
+            Mon objectif est de contribuer à la création de solutions technologiques innovantes
+            pour améliorer la santé et faciliter la recherche scientifique.
+          </p>
+        </div>
 
-          <!-- SVG ECG Animé -->
-          <div class="w-full h-24 relative overflow-hidden bg-slate-900/50 rounded-lg border border-slate-700 mb-4">
-            <svg viewBox="0 0 500 100" class="w-full h-full" preserveAspectRatio="none">
-              <polyline class="ecg-line" points="0,50 100,50 120,20 140,80 160,50 200,50 220,50 240,20 260,80 280,50 350,50 370,20 390,80 410,50 500,50" />
-            </svg>
-          </div>
-
-          <div class="text-center">
-            <div class="text-3xl font-bold text-green-400 font-mono">100%</div>
-            <div class="text-xs text-slate-500 uppercase">Motivation Function</div>
+        <div class="bg-blue-50 rounded-xl p-4 sm:p-6 shadow-inner mb-10">
+          <h3 class="text-lg sm:text-xl font-semibold text-blue-800 mb-4 text-center">
+            Centres d'intérêt (관심사)
+          </h3>
+          <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
+            <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">💉 Médecine</span>
+            <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">💻 Programmation</span>
+            <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">🧠 Intelligence Artificielle</span>
+            <span class="bg-white border border-blue-200 text-blue-700 px-4 py-2 rounded-full font-medium">🌍 Langue & Culture coréenne</span>
           </div>
         </div>
 
-        <!-- COLONNE DROITE : STATS UTILES -->
-        <div class="md:col-span-2 relative z-10 pl-0 md:pl-4">
-          <div class="flex justify-between items-end mb-6">
-            <div>
-              <h4 class="text-xl font-bold text-white flex items-center gap-2">
-                <span class="text-blue-400">⚡</span> Analyse Bio-Numérique
-              </h4>
-              <p class="text-sm text-slate-400">Dernier scan : <span class="text-green-400">Aujourd'hui</span></p>
-            </div>
-            <div class="text-right hidden sm:block">
-              <div class="text-xs font-mono text-blue-400 border border-blue-400/30 px-2 py-1 rounded">
-                STATUS: READY TO CODE
+        <div class="bg-blue-50 rounded-xl p-4 sm:p-6 shadow-inner mb-10">
+          <h3 class="text-lg sm:text-xl font-semibold text-blue-800 mb-4 text-center">
+            Compétences Techniques (기술 능력)
+          </h3>
+          <div class="flex flex-wrap justify-center gap-3 text-xs sm:text-sm">
+            <div class="tech-slider py-4">
+              <div class="tech-track">
+                <!-- Liste doublée pour l'effet infini -->
+                <span class="tech-icon">☕ Java</span>
+                <span class="tech-icon">🐍 Python</span>
+                <span class="tech-icon">🌐 HTML/CSS</span>
+                <span class="tech-icon">⚛️ React/JS</span>
+                <span class="tech-icon">🗄️ SQL</span>
+                <span class="tech-icon">🐳 Docker</span>
+                <span class="tech-icon">🎨 Tailwind</span>
+                <!-- Répétition -->
+                <span class="tech-icon">☕ Java</span>
+                <span class="tech-icon">🐍 Python</span>
+                <span class="tech-icon">🌐 HTML/CSS</span>
+                <span class="tech-icon">⚛️ React/JS</span>
+                <span class="tech-icon">🗄️ SQL</span>
+                <span class="tech-icon">🐳 Docker</span>
+                <span class="tech-icon">🎨 Tailwind</span>
+                <span class="tech-icon">🏥 Bio-Info</span>
               </div>
             </div>
           </div>
-
-          <!-- Barres de compétences (Soft Skills "Utiles") -->
-          <div class="space-y-5">
-
-            <!-- Skill 1 -->
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="font-medium text-slate-300">Rigueur Scientifique & Code</span>
-                <span class="font-mono text-blue-400">98%</span>
-              </div>
-              <div class="stat-bar-bg">
-                <div class="stat-bar-fill bg-blue-500" style="width: 98%"></div>
-              </div>
-            </div>
-
-            <!-- Skill 2 -->
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="font-medium text-slate-300">Résolution de Problèmes (Debugging)</span>
-                <span class="font-mono text-purple-400">95%</span>
-              </div>
-              <div class="stat-bar-bg">
-                <div class="stat-bar-fill bg-purple-500" style="width: 95%"></div>
-              </div>
-            </div>
-
-            <!-- Skill 3 -->
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="font-medium text-slate-300">Endurance (Hackathon/Projets)</span>
-                <span class="font-mono text-green-400">Stable</span>
-              </div>
-              <div class="stat-bar-bg">
-                <div class="stat-bar-fill bg-green-500" style="width: 92%"></div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="mt-6 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
-            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Logic</span>
-            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Creativity</span>
-            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span> Bio-Data</span>
-          </div>
-
         </div>
 
+        <div class="text-center mt-8">
+          <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
+            class="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition shadow text-sm sm:text-base">
+            <img src="img/tele.png" alt="Télécharger" class="w-5 h-5"/>
+            Télécharger mon CV
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    <!-- STATUT ACTUEL (ALTERNANCE) -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 mb-16" data-aos="zoom-in">
+      <div class="bg-gradient-to-r from-blue-900 to-blue-800 rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between shadow-2xl relative overflow-hidden">
+        <!-- Déco background -->
+        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl"></div>
 
-
-  <!-- PARCOURS / TIMELINE -->
-  <section id="experience" class="bg-white py-16 sm:py-20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="section-wrapper mb-10" data-aos="fade-up">
-        <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
-          Mon Parcours (경력)
-        </h3>
-      </div>
-
-      <div class="timeline-container">
-        <div class="timeline-line hidden sm:block"></div>
-
-        <!-- Item 1 -->
-        <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-right" data-aos="fade-left">
-          <div class="hidden sm:block"></div>
+        <div class="flex items-center gap-4 z-10">
           <div class="relative">
-            <div class="timeline-dot hidden sm:block" style="top: 30px; border-color: #fbbf24;"></div>
-            <div class="timeline-connector hidden sm:block"></div>
-            <div class="timeline-card coming-soon">
-              <span class="coming-soon-badge">⏳ À venir</span>
-              <div class="flex gap-4 mb-4">
-                <div class="timeline-icon">🚀</div>
-                <div class="flex-1">
-                    <span class="timeline-badge"
-                          style="background: linear-gradient(135deg,#fef3c7 0%,#fde68a 100%); color:#92400e; border-color:#fbbf24;">
-                      2027 — ????
-                    </span>
-                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">
-                    Master Bio-Informatique
-                  </h4>
-                  <p class="text-xs sm:text-sm text-gray-600 mt-1">Université • France</p>
-                </div>
-              </div>
-              <p class="text-gray-700 text-sm leading-relaxed italic">
-                Projet en préparation : intégrer un Master spécialisé en Bio-Informatique pour fusionner développement et santé.
-              </p>
-              <div class="flex flex-wrap gap-2 mt-4 text-xs">
-                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Bioinformatique</span>
-                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Data Science</span>
-                <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Santé</span>
-              </div>
+            <span class="absolute top-0 right-0 w-3 h-3 bg-green-400 border-2 border-blue-900 rounded-full animate-ping"></span>
+            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-2xl">
+              🎓
             </div>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg">Statut Actuel</h4>
+            <p class="text-blue-100 text-sm">À la recherche d'une alternance (Septembre 2026)</p>
           </div>
         </div>
 
-        <!-- Item 2 -->
-        <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-left" data-aos="fade-right">
-          <div class="relative text-right sm:text-right">
-            <div class="timeline-dot hidden sm:block" style="top: 30px; border-color: #fbbf24;"></div>
-            <div class="timeline-connector hidden sm:block"></div>
-
-            <div class="timeline-card coming-soon border-2 border-dashed border-amber-400 bg-gradient-to-br from-amber-50 to-white overflow-visible">
-              <div class="absolute -top-3 -left-3 z-30">
-        <span class="flex h-6 w-6 relative">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-6 w-6 bg-green-500 items-center justify-center text-[10px] text-white font-bold shadow-lg">OK</span>
-        </span>
-              </div>
-
-              <span class="coming-soon-badge bg-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.5)]">✨ Opportunité</span>
-
-              <div class="flex gap-4 mb-4">
-                <div class="timeline-icon bg-gradient-to-br from-amber-400 to-orange-500 shadow-amber-200">💼</div>
-                <div class="flex-1 text-left">
-          <span class="timeline-badge bg-amber-100 text-amber-800 border-amber-200">
-            Avril 2026 — Juin 2026
-          </span>
-                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">Stage : Stagiaire en Informatique</h4>
-                  <p class="text-xs sm:text-sm font-semibold text-amber-600 uppercase tracking-wider mt-1">Status : Open for opportunities</p>
-                </div>
-              </div>
-
-              <p class="text-gray-700 text-sm leading-relaxed italic text-left border-l-2 border-amber-200 pl-3 mb-4">
-                À la recherche d'un stage de 10 à 12 semaines. Passionné par le <strong>développement web et l'informatique</strong> , je suis prêt à relever vos défis techniques.
-              </p>
-
-              <div class="text-left mt-6 relative z-20">
-                <a href="mailto:sendoukmohamed45@gmail.com?subject=Proposition de stage - BUT Informatique"
-                   class="group inline-flex items-center gap-3 px-6 py-3 bg-gray-900 text-white text-sm font-bold rounded-xl transition-all duration-300 hover:bg-amber-500 hover:shadow-[0_10px_20px_rgba(245,158,11,0.4)] hover:-translate-y-1">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-          </span>
-                  Me recruter
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
-              </div>
-
-              <div class="flex flex-wrap gap-2 mt-5 text-[10px] uppercase font-bold tracking-tighter">
-                <span class="bg-white/50 text-amber-700 px-2 py-1 rounded border border-amber-200">Fullstack</span>
-                <span class="bg-white/50 text-amber-700 px-2 py-1 rounded border border-amber-200">Health-Tech</span>
-                <span class="bg-white/50 text-amber-700 px-2 py-1 rounded border border-amber-200">Innovation</span>
-                <span class="bg-white/50 text-amber-700 px-2 py-1 rounded border border-amber-200">FRONT</span>
-              </div>
-            </div>
-          </div>
-          <div class="hidden sm:block"></div>
-        </div>
-
-        <!-- Item 3 -->
-        <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-right" data-aos="fade-left">
-          <div class="hidden sm:block"></div>
-          <div class="relative">
-            <div class="timeline-dot hidden sm:block" style="top: 30px;"></div>
-            <div class="timeline-connector hidden sm:block"></div>
-            <div class="timeline-card">
-              <div class="flex gap-4 mb-4">
-                <img src="img/iut.jpg" alt="Logo IUT"
-                    class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover border-2 border-blue-200 shadow-md" />
-                <div class="flex-1">
-                  <span class="timeline-badge">Sep 2024 — Présent</span>
-                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">BUT Informatique</h4>
-                  <p class="text-xs sm:text-sm text-gray-600 mt-1">IUT Montpellier-Sète</p>
-                </div>
-              </div>
-              <p class="text-gray-700 text-sm leading-relaxed">
-                Actuellement en BUT2, Parcours IAMSI : Java OO, C bas niveau, BDD MySQL, outils interactifs, systèmes/réseaux, virtualisation, conteneurisation, automatisation, gestion de projet Agile.
-              </p>
-              <div class="flex flex-wrap gap-2 mt-4 text-xs">
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">JavaFX</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">SQL</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">PL/SQL</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Gestion de projet</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Java</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">HTML / CSS / JS</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">IA</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Langage C</span>
-              </div>
-            </div>
+        <div class="mt-4 sm:mt-0 z-10 text-center sm:text-right">
+          <p class="text-xs font-mono text-blue-200 mb-1">Objectif Prochaine Étape :</p>
+          <div class="inline-flex items-center gap-2 bg-black/30 px-3 py-1 rounded-lg border border-white/10">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span class="font-mono text-sm">Alternance 3e année (BUT)</span>
           </div>
         </div>
-
-        <!-- Item 4 -->
-        <div class="grid sm:grid-cols-2 gap-8 items-center timeline-item-left" data-aos="fade-right">
-          <div class="relative text-right sm:text-right">
-            <div class="timeline-dot hidden sm:block" style="top: 30px;"></div>
-            <div class="timeline-connector hidden sm:block"></div>
-            <div class="timeline-card">
-              <div class="flex gap-4 mb-4">
-                <img src="img/lycee.jpeg" alt="Logo Lycée"
-                    class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover border-2 border-blue-200 shadow-md" />
-                <div class="flex-1 text-left sm:text-left">
-                  <span class="timeline-badge">Sep 2021 — Juin 2024</span>
-                  <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">Baccalauréat Technologique</h4>
-                  <p class="text-xs sm:text-sm text-gray-600 mt-1">Lycée - STI2D - Martigues • France</p>
-                </div>
-              </div>
-              <p class="text-gray-700 text-sm leading-relaxed mb-3">
-                Spécialités SIN (Systèmes d'Information et Numérique)
-              </p>
-              <div class="mb-4">
-                <p class="text-xs font-semibold text-gray-600">
-                  Niveau : 13.9, Mention Assez Bien
-                </p>
-              </div>
-              <div class="flex flex-wrap gap-2 text-xs">
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">SIN</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Mathématique</span>
-                <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Physique</span>
-              </div>
-            </div>
-          </div>
-          <div class="hidden sm:block"></div>
-        </div>
-
       </div>
     </div>
-  </section>
-  <!-- LES PROJETS -->
 
-  <!-- PROJETS avec CONFETTIS POKÉMON -->
-  <section id="projects" class="bg-gradient-to-b from-gray-50 to-white py-20 sm:py-28 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-transparent to-indigo-500/3"></div>
+    <!-- SECTION DIAGNOSTIC BIO-IT -->
+    <section class="bg-gray-50 py-10 px-4 sm:px-6">
+      <div class="max-w-5xl mx-auto" data-aos="fade-up">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-      <!-- Titre -->
-      <div class="section-wrapper mb-10" data-aos="fade-up">
-        <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
-          Mes Projets (프로젝트)
-        </h3>
-      </div>
+        <div class="section-wrapper mb-8">
+          <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
+            Diagnostic Profil (프로필 진단)
+          </h3>
+        </div>
 
-      <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto mb-12 text-center">
-        Voici un petit aperçu des projets que j'ai réalisés. Chaque carte mène à sa page.      </p>
+        <!-- CARTE MONITEUR -->
+        <div class="monitor-card rounded-2xl p-6 sm:p-8 text-slate-200 grid md:grid-cols-3 gap-8 items-center">
 
-      <!-- Grille 3 colonnes -->
-      <div class="grid md:grid-cols-3 gap-8 sm:gap-10">
+          <!-- Fond Grille -->
+          <div class="absolute inset-0 monitor-grid pointer-events-none"></div>
 
-        <!-- PROJET 1 : POKÉMON avec confettis -->
-        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-yellow-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up">
-          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 p-4">
+          <!-- COLONNE GAUCHE : VISUEL ECG -->
+          <div class="md:col-span-1 relative z-10 flex flex-col items-center justify-center border-r border-slate-700/50 pr-0 md:pr-8">
+            <div class="flex items-center gap-2 mb-4 self-start">
+              <div class="live-dot"></div>
+              <span class="text-xs font-mono text-slate-400 uppercase tracking-widest">Live Monitor</span>
+            </div>
 
-            <!-- CONFETTIS POKÉMON -->
-            <div class="poke-confetti absolute top-4 left-10 text-yellow-400" style="animation-delay: 0.1s;">⭐</div>
-            <div class="poke-confetti absolute top-8 left-20 text-red-500" style="animation-delay: 0.2s;">🔴</div>
-            <div class="poke-confetti absolute top-12 right-16 text-yellow-400" style="animation-delay: 0.3s;">✨</div>
-            <div class="poke-confetti absolute top-16 left-16 text-blue-400" style="animation-delay: 0.4s;">💎</div>
-            <div class="poke-confetti absolute top-20 right-20 text-purple-400" style="animation-delay: 0.5s;">💜</div>
-            <div class="poke-confetti absolute top-24 left-8 text-orange-400" style="animation-delay: 0.6s;">⚡</div>
-            <div class="poke-confetti absolute top-28 right-8 text-pink-400" style="animation-delay: 0.7s;">🌸</div>
-
-            <!-- Border glow Pokémon -->
-            <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-yellow-400 group-hover:shadow-2xl group-hover:shadow-yellow-400/50 transition-all duration-500"></div>
-
-            <!-- Image -->
-            <img src="img/Pokémon_Trading_Card.png"
-                alt="Application Pokémon TCG"
-                class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
-
-            <!-- Badge SAÉ -->
-            <div class="project-badge badge-sae">
-    SAÉ
-  </div>
-          </div>
-
-          <!-- Contenu -->
-          <div class="p-6 sm:p-8">
-            <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">SAÉ / Projet encadré</p>
-            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-yellow-900 transition-all duration-300">Application Pokémon TCG</h3>
-            <p class="text-gray-600 text-sm leading-relaxed mb-6">Jeu complet Pokémon TCG développé en Java (Moteur) et JavaFX (Interface Graphique). Gestion des règles officielles.</p>
-            <a href="projet-pokemon-tcg.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-all duration-200 hover:translate-x-1">
-              Voir le projet →
-            </a>
-          </div>
-        </article>
-
-        <!-- PROJET 2 -->
-        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/20 hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
-          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-emerald-400/20 to-teal-500/20 p-4 flex items-center justify-center">
-            <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-emerald-400 group-hover:shadow-2xl group-hover:shadow-emerald-400/50 transition-all duration-500"></div>
-            <div class="relative text-6xl opacity-40 group-hover:opacity-70 transition-all duration-500 z-10">💻</div>
-            <img src="img/logoSAEW.png"
-                 alt="Site Web e-commerce"
-                 class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
-
-            <div class="project-badge badge-perso">
-              SAÉ
-  </div>
-          </div>
-          <div class="p-6 sm:p-8">
-            <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">SAÉ / Projet encadré</p>
-            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-emerald-900 transition-all duration-300">EcoCoin - Site e-commerce</h3>
-            <p class="text-gray-600 text-sm leading-relaxed mb-6">Conception d'un site E-commerce dynamique : Architecture MVC, PHP et gestion de données phpMyAdmin</p>
-            <a href="projet-ecocoin.html" class="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-all duration-200 hover:translate-x-1">
-              Voir le projet →
-            </a>
-          </div>
-        </article>
-
-
-        <!-- PROJET 3 -->
-        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-
-          <!-- Image avec cadre -->
-          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-purple-400/20 to-pink-500/20 p-3 flex items-center justify-center">
-            <div class="absolute inset-3 rounded-xl border-2 border-purple-200 group-hover:border-purple-400 group-hover:shadow-lg group-hover:shadow-purple-400/30 transition-all duration-300 pointer-events-none"></div>
-            <!-- Emoji placeholder -->
-            <div class="relative text-6xl opacity-30 group-hover:opacity-50 transition-opacity duration-500">⚡</div>
-            <img src="img/imageGardeResistance.PNG"
-                 alt="Capture d'écran du jeu Résistance"
-                 class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
-
-            <!-- Badge Hackathon en haut à gauche -->
-            <div class="project-badge badge-hack">
-    Hackathon
-  </div>
-          </div>
-
-          <!-- Contenu -->
-          <div class="p-6 sm:p-7">
-            <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-2">
-              Nuit de l'info
-            </p>
-
-            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-900 transition-colors">
-              Projet Résistance
-            </h3>
-
-            <p class="text-gray-600 text-sm leading-relaxed mb-5">
-              Projet réalisé lors de la Nuit de l'info 2025...
-            </p>
-
-            <a href="resistance.html"
-              class="group/link inline-flex items-center gap-2 text-sm font-bold text-purple-600 hover:text-purple-700 transition-all duration-200 hover:gap-3">
-              Voir le projet
-              <svg class="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            <!-- SVG ECG Animé -->
+            <div class="w-full h-24 relative overflow-hidden bg-slate-900/50 rounded-lg border border-slate-700 mb-4">
+              <svg viewBox="0 0 500 100" class="w-full h-full" preserveAspectRatio="none">
+                <polyline class="ecg-line" points="0,50 100,50 120,20 140,80 160,50 200,50 220,50 240,20 260,80 280,50 350,50 370,20 390,80 410,50 500,50" />
               </svg>
-            </a>
-          </div>
-        </article>
-
-        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up">
-          <div class="relative h-56 sm:h-64 overflow-hidden bg-slate-900 p-4">
-
-            <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#00f2ff 1px, transparent 1px); background-size: 15px 15px;"></div>
-
-            <div class="absolute inset-0 rounded-xl border-4 border-transparent border-ctf transition-all duration-500 z-20"></div>
-            <img src="img/CTF.jpg"
-                 alt="Capture d'écran du jeu Résistance"
-                 class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
-
-            <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-900 to-cyan-900">
-              <div class="text-6xl group-hover:scale-125 transition-transform duration-500">🛡️</div>
             </div>
 
-            <div class="project-badge badge-ctf">
-              Cybersecurité / UX
+            <div class="text-center">
+              <div class="text-3xl font-bold text-green-400 font-mono">100%</div>
+              <div class="text-xs text-slate-500 uppercase">Motivation Function</div>
             </div>
           </div>
 
-          <div class="p-6 sm:p-8">
-            <div class="flex justify-between items-start mb-3">
-              <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Projet Personnel & Infra</p>
-              <span class="text-[10px] bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded font-bold">CTFd + Docker</span>
-            </div>
-            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-cyan-600 transition-all duration-300">YGGAMES CTF</h3>
-            <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
-              Création d'une plateforme CTF : Design UI/UX complet, système multilingue (20+ langues) et modes d'accessibilité daltoniens innovants.
-            </p>
-
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Reverse Proxy</span>
-              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Accessibility</span>
-              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Agile</span>
-            </div>
-
-            <a href="projet-ctf.html" class="inline-flex items-center gap-2 text-sm font-bold text-cyan-600 hover:text-cyan-700 transition-all duration-200 hover:translate-x-1">
-              Voir le projet →
-            </a>
-          </div>
-        </article>
-
-        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-600/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up" data-aos-delay="300">
-
-          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-purple-900 to-indigo-900 p-4">
-
-            <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-purple-500 group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-500 z-20"></div>
-
-            <img src="img/CliqueClaqueApp.png"
-                 alt="Jeu CliqueClaque"
-                 class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10 opacity-90 group-hover:opacity-100">
-
-            <div class="project-badge bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded shadow-lg absolute top-4 left-4 z-30 uppercase tracking-widest">
-              Game Jam
-            </div>
-          </div>
-
-          <div class="p-6 sm:p-8">
-            <div class="flex justify-between items-start mb-3">
-              <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Code Game Jam 2026</p>
-              <span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">30H Challenge</span>
+          <!-- COLONNE DROITE : STATS UTILES -->
+          <div class="md:col-span-2 relative z-10 pl-0 md:pl-4">
+            <div class="flex justify-between items-end mb-6">
+              <div>
+                <h4 class="text-xl font-bold text-white flex items-center gap-2">
+                  <span class="text-blue-400">⚡</span> Analyse Bio-Numérique
+                </h4>
+                <p class="text-sm text-slate-400">Dernier scan : <span class="text-green-400">Aujourd'hui</span></p>
+              </div>
+              <div class="text-right hidden sm:block">
+                <div class="text-xs font-mono text-blue-400 border border-blue-400/30 px-2 py-1 rounded">
+                  STATUS: READY TO CODE
+                </div>
+              </div>
             </div>
 
-            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-purple-700 transition-all duration-300">CliqueClaque</h3>
-
-            <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-4">
-              "Prends tes cliques et tes claques" : Un runner survitaminé réalisé en moins de 48h. Incarnez un étudiant fuyant ses amis après une nuit blanche de code.
-            </p>
-
-            <div class="flex items-center justify-between mt-auto">
-              <div class="flex -space-x-2">
-                <div class="w-7 h-7 rounded-full border-2 border-white bg-blue-500 flex items-center justify-center text-[9px] text-white font-bold" title="Mohamed">MS</div>
-                <div class="w-7 h-7 rounded-full border-2 border-white bg-purple-500 flex items-center justify-center text-[9px] text-white font-bold" title="Corentin">CF</div>
-                <div class="w-7 h-7 rounded-full border-2 border-white bg-indigo-500 flex items-center justify-center text-[9px] text-white font-bold" title="Sophian">SA</div>
+            <!-- Barres de compétences -->
+            <div class="space-y-5">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="font-medium text-slate-300">Rigueur Scientifique & Code</span>
+                  <span class="font-mono text-blue-400">98%</span>
+                </div>
+                <div class="stat-bar-bg">
+                  <div class="stat-bar-fill bg-blue-500" style="width: 98%"></div>
+                </div>
               </div>
 
-              <a href="cliqueclaque.html" class="inline-flex items-center gap-2 text-sm font-bold text-purple-600 hover:text-purple-700 transition-all duration-200 hover:translate-x-1">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="font-medium text-slate-300">Résolution de Problèmes (Debugging)</span>
+                  <span class="font-mono text-purple-400">95%</span>
+                </div>
+                <div class="stat-bar-bg">
+                  <div class="stat-bar-fill bg-purple-500" style="width: 95%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="font-medium text-slate-300">Endurance (Hackathon/Projets)</span>
+                  <span class="font-mono text-green-400">Stable</span>
+                </div>
+                <div class="stat-bar-bg">
+                  <div class="stat-bar-fill bg-green-500" style="width: 92%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-700/50 flex flex-wrap gap-4 text-xs font-mono text-slate-400">
+              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Logic</span>
+              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Creativity</span>
+              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span> Bio-Data</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PARCOURS / TIMELINE -->
+    <section id="experience" class="bg-white py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="section-wrapper mb-10" data-aos="fade-up">
+          <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
+            Mon Parcours (경력)
+          </h3>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line hidden sm:block"></div>
+
+          <!-- Item 1 : Master Bio-Informatique (À venir) -->
+          <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-right" data-aos="fade-left">
+            <div class="hidden sm:block"></div>
+            <div class="relative">
+              <div class="timeline-dot hidden sm:block" style="top: 30px; border-color: #fbbf24;"></div>
+              <div class="timeline-connector hidden sm:block"></div>
+              <div class="timeline-card coming-soon">
+                <span class="coming-soon-badge">⏳ À venir</span>
+                <div class="flex gap-4 mb-4">
+                  <div class="timeline-icon">🚀</div>
+                  <div class="flex-1">
+                      <span class="timeline-badge"
+                            style="background: linear-gradient(135deg,#fef3c7 0%,#fde68a 100%); color:#92400e; border-color:#fbbf24;">
+                        2027 — ????
+                      </span>
+                    <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">
+                      Master Bio-Informatique
+                    </h4>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-1">Université • France</p>
+                  </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed italic">
+                  Projet en préparation : intégrer un Master spécialisé en Bio-Informatique pour fusionner développement et santé.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4 text-xs">
+                  <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Bioinformatique</span>
+                  <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Data Science</span>
+                  <span class="bg-amber-50 text-amber-700 px-3 py-1 rounded-full border border-amber-200">Santé</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 : Stage GCSMS-ISI à Grabels (ANIMÉ) -->
+          <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-left" data-aos="fade-right">
+            <div class="relative text-right sm:text-right">
+              <div class="timeline-dot hidden sm:block" style="top: 30px; border-color: #3b82f6;"></div>
+              <div class="timeline-connector hidden sm:block"></div>
+
+              <div class="timeline-card border-2 border-blue-400 bg-gradient-to-br from-blue-50/70 to-white overflow-visible transition-all duration-300 hover:shadow-2xl">
+                <!-- Indicateur animé "Validé" -->
+                <div class="absolute -top-3 -left-3 z-30">
+                  <span class="flex h-6 w-6 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-6 w-6 bg-blue-600 items-center justify-center text-[10px] text-white font-bold shadow-lg">✓</span>
+                  </span>
+                </div>
+
+                <span class="coming-soon-badge bg-blue-600 shadow-[0_0_15px_rgba(59,130,246,0.5)]">💼 Expérience Pro</span>
+
+                <div class="flex gap-4 mb-4">
+                  <!-- Remplacement de l'emoji par l'image -->
+                  <img src="img/GCSMS-LOGO.jpeg" alt="Logo GCSMS-ISI"
+                  class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover border-2 border-blue-200 shadow-md" />
+                  <div class="flex-1 text-left">
+                    <span class="timeline-badge bg-blue-100 text-blue-800 border-blue-200">
+                      2026 — Stage validé
+                    </span>
+                    <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">Développeur WEBDEV/WINDEV (Stagiaire)</h4>
+                    <p class="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider mt-1">GCSMS-ISI • Grabels</p>
+                  </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed text-left border-l-2 border-blue-300 pl-3 mb-4">
+                  Immersion professionnelle et développement intensif au pôle informatique du <strong>GCSMS-ISI à Grabels</strong>. Contributions majeures à l'évolution de la solution SaaS <strong>ISI-CARE</strong> (refactorisation d'architecture et nouveaux modules).
+                </p>
+
+                <div class="flex flex-wrap gap-2 mt-4 text-[10px] uppercase font-bold tracking-tighter text-left">
+                  <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded border border-blue-200">SaaS ISI-CARE</span>
+                  <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded border border-blue-200">Fullstack</span>
+                  <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded border border-blue-200">Health-Tech</span>
+                  <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded border border-blue-200">Grabels</span>
+                </div>
+              </div>
+            </div>
+            <div class="hidden sm:block"></div>
+          </div>
+
+          <!-- Item 3 : BUT Informatique -->
+          <div class="grid sm:grid-cols-2 gap-8 mb-16 items-center timeline-item-right" data-aos="fade-left">
+            <div class="hidden sm:block"></div>
+            <div class="relative">
+              <div class="timeline-dot hidden sm:block" style="top: 30px;"></div>
+              <div class="timeline-connector hidden sm:block"></div>
+              <div class="timeline-card">
+                <div class="flex gap-4 mb-4">
+                  <img src="img/iut.jpg" alt="Logo IUT"
+                      class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover border-2 border-blue-200 shadow-md" />
+                  <div class="flex-1">
+                    <span class="timeline-badge">Sep 2024 — Présent</span>
+                    <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">BUT Informatique</h4>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-1">IUT Montpellier-Sète</p>
+                  </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed">
+                  Actuellement en BUT2, Parcours IAMSI : Java OO, C bas niveau, BDD MySQL, outils interactifs, systèmes/réseaux, virtualisation, conteneurisation, automatisation, gestion de projet Agile.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4 text-xs">
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">JavaFX</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">SQL</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">PL/SQL</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Gestion de projet</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Java</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">HTML / CSS / JS</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">IA</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Langage C</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 : Baccalauréat -->
+          <div class="grid sm:grid-cols-2 gap-8 items-center timeline-item-left" data-aos="fade-right">
+            <div class="relative text-right sm:text-right">
+              <div class="timeline-dot hidden sm:block" style="top: 30px;"></div>
+              <div class="timeline-connector hidden sm:block"></div>
+              <div class="timeline-card">
+                <div class="flex gap-4 mb-4">
+                  <img src="img/lycee.jpeg" alt="Logo Lycée"
+                      class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover border-2 border-blue-200 shadow-md" />
+                  <div class="flex-1 text-left sm:text-left">
+                    <span class="timeline-badge">Sep 2021 — Juin 2024</span>
+                    <h4 class="font-bold text-lg sm:text-xl text-gray-900 mt-2">Baccalauréat Technologique</h4>
+                    <p class="text-xs sm:text-sm text-gray-600 mt-1">Lycée - STI2D - Martigues • France</p>
+                  </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                  Spécialités SIN (Systèmes d'Information et Numérique)
+                </p>
+                <div class="mb-4">
+                  <p class="text-xs font-semibold text-gray-600">
+                    Niveau : 13.9, Mention Assez Bien
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs">
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">SIN</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Mathématique</span>
+                  <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full">Physique</span>
+                </div>
+              </div>
+            </div>
+            <div class="hidden sm:block"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LES PROJETS -->
+    <section id="projects" class="bg-gradient-to-b from-gray-50 to-white py-20 sm:py-28 relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-transparent to-indigo-500/3"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <!-- Titre -->
+        <div class="section-wrapper mb-10" data-aos="fade-up">
+          <h3 class="section-title text-2xl sm:text-3xl font-semibold text-blue-800">
+            Mes Projets (프로젝트)
+          </h3>
+        </div>
+
+        <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto mb-12 text-center">
+          Voici un petit aperçu des projets que j'ai réalisés. Chaque carte mène à sa page.
+        </p>
+
+        <!-- Grille 3 colonnes -->
+        <div class="grid md:grid-cols-3 gap-8 sm:gap-10">
+
+          <!-- PROJET 1 : POKÉMON -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-yellow-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up">
+            <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 p-4">
+              <div class="poke-confetti absolute top-4 left-10 text-yellow-400" style="animation-delay: 0.1s;">⭐</div>
+              <div class="poke-confetti absolute top-8 left-20 text-red-500" style="animation-delay: 0.2s;">🔴</div>
+              <div class="poke-confetti absolute top-12 right-16 text-yellow-400" style="animation-delay: 0.3s;">✨</div>
+              <div class="poke-confetti absolute top-16 left-16 text-blue-400" style="animation-delay: 0.4s;">💎</div>
+              <div class="poke-confetti absolute top-20 right-20 text-purple-400" style="animation-delay: 0.5s;">💜</div>
+              <div class="poke-confetti absolute top-24 left-8 text-orange-400" style="animation-delay: 0.6s;">⚡</div>
+              <div class="poke-confetti absolute top-28 right-8 text-pink-400" style="animation-delay: 0.7s;">🌸</div>
+
+              <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-yellow-400 group-hover:shadow-2xl group-hover:shadow-yellow-400/50 transition-all duration-500"></div>
+
+              <img src="img/Pokémon_Trading_Card.png"
+                  alt="Application Pokémon TCG"
+                  class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
+
+              <div class="project-badge badge-sae">SAÉ</div>
+            </div>
+
+            <div class="p-6 sm:p-8">
+              <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">SAÉ / Projet encadré</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-yellow-900 transition-all duration-300">Application Pokémon TCG</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6">Jeu complet Pokémon TCG développé en Java (Moteur) et JavaFX (Interface Graphique). Gestion des règles officielles.</p>
+              <a href="projet-pokemon-tcg.html" class="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-all duration-200 hover:translate-x-1">
                 Voir le projet →
               </a>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- PROJET LifePulse -->
-        <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-teal-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up" data-aos-delay="400">
+          <!-- PROJET 2 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/20 hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-emerald-400/20 to-teal-500/20 p-4 flex items-center justify-center">
+              <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-emerald-400 group-hover:shadow-2xl group-hover:shadow-emerald-400/50 transition-all duration-500"></div>
+              <div class="relative text-6xl opacity-40 group-hover:opacity-70 transition-all duration-500 z-10">💻</div>
+              <img src="img/logoSAEW.png"
+                  alt="Site Web e-commerce"
+                  class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
 
-          <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-teal-400/20 to-blue-500/20 p-4">
+              <div class="project-badge badge-perso">SAÉ</div>
+            </div>
+            <div class="p-6 sm:p-8">
+              <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">SAÉ / Projet encadré</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-emerald-900 transition-all duration-300">EcoCoin - Site e-commerce</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6">Conception d'un site E-commerce dynamique : Architecture MVC, PHP et gestion de données phpMyAdmin</p>
+              <a href="projet-ecocoin.html" class="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-all duration-200 hover:translate-x-1">
+                Voir le projet →
+              </a>
+            </div>
+          </article>
 
-            <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-teal-400 group-hover:shadow-2xl group-hover:shadow-teal-400/50 transition-all duration-500 z-20"></div>
+          <!-- PROJET 3 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-3 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+            <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-purple-400/20 to-pink-500/20 p-3 flex items-center justify-center">
+              <div class="absolute inset-3 rounded-xl border-2 border-purple-200 group-hover:border-purple-400 group-hover:shadow-lg group-hover:shadow-purple-400/30 transition-all duration-300 pointer-events-none"></div>
+              <div class="relative text-6xl opacity-30 group-hover:opacity-50 transition-opacity duration-500">⚡</div>
+              <img src="img/imageGardeResistance.PNG"
+                  alt="Capture d'écran du jeu Résistance"
+                  class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
 
-            <img src="img/LifePulse.jpg"
-                 alt="LifePulse Health App"
-                 class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
-
-
-            <!-- Badge -->
-            <div class="project-badge bg-teal-600 text-white text-[10px] font-bold px-3 py-1 rounded shadow-lg absolute top-4 left-4 z-30 uppercase tracking-widest">
-              Projet Personnel
-
-              <span class="text-[10px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-bold">
-              In Development
-            </span>
+              <div class="project-badge badge-hack">Hackathon</div>
             </div>
 
+            <div class="p-6 sm:p-7">
+              <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-2">
+                Nuit de l'info
+              </p>
 
+              <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-900 transition-colors">
+                Projet Résistance
+              </h3>
 
-          </div>
+              <p class="text-gray-600 text-sm leading-relaxed mb-5">
+                Projet réalisé lors de la Nuit de l'info 2025...
+              </p>
 
-          <div class="p-6 sm:p-8">
+              <a href="resistance.html"
+                class="group/link inline-flex items-center gap-2 text-sm font-bold text-purple-600 hover:text-purple-700 transition-all duration-200 hover:gap-3">
+                Voir le projet
+                <svg class="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
 
-            <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">
-              Mon application de santé
-            </p>
+          <!-- PROJET 4 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up">
+            <div class="relative h-56 sm:h-64 overflow-hidden bg-slate-900 p-4">
+              <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#00f2ff 1px, transparent 1px); background-size: 15px 15px;"></div>
+              <div class="absolute inset-0 rounded-xl border-4 border-transparent border-ctf transition-all duration-500 z-20"></div>
+              <img src="img/CTF.jpg"
+                  alt="Capture d'écran du CTF"
+                  class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
 
-            <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-teal-700 transition-all duration-300">
-              LifePulse
-            </h3>
+              <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-900 to-cyan-900">
+                <div class="text-6xl group-hover:scale-125 transition-transform duration-500">🛡️</div>
+              </div>
 
-            <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-6">
-              Je développe actuellement LifePulse, ma propre application HealthTech permettant de suivre sa santé au quotidien.
-              Le projet est en phase de développement et vise à proposer un score de santé, un journal personnel,
-              une analyse de symptômes et la centralisation de documents médicaux.
-            </p>
-
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Vue.js</span>
-              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">FastAPI</span>
-              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">PostgreSQL</span>
-              <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">AI</span>
+              <div class="project-badge badge-ctf">Cybersecurité / UX</div>
             </div>
 
-            <a href="lifepulse.html" class="inline-flex items-center gap-2 text-sm font-bold text-teal-600 hover:text-teal-700 transition-all duration-200 hover:translate-x-1">
-              Voir le projet →
-            </a>
+            <div class="p-6 sm:p-8">
+              <div class="flex justify-between items-start mb-3">
+                <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Projet Personnel & Infra</p>
+                <span class="text-[10px] bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded font-bold">CTFd + Docker</span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-cyan-600 transition-all duration-300">YGGAMES CTF</h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-3">
+                Création d'une plateforme CTF : Design UI/UX complet, système multilingue (20+ langues) et modes d'accessibilité daltoniens innovants.
+              </p>
 
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Reverse Proxy</span>
+                <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Accessibility</span>
+                <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Agile</span>
+              </div>
+
+              <a href="projet-ctf.html" class="inline-flex items-center gap-2 text-sm font-bold text-cyan-600 hover:text-cyan-700 transition-all duration-200 hover:translate-x-1">
+                Voir le projet →
+              </a>
+            </div>
+          </article>
+
+          <!-- PROJET 5 -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-purple-600/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up" data-aos-delay="300">
+            <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-purple-900 to-indigo-900 p-4">
+              <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-purple-500 group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-500 z-20"></div>
+
+              <img src="img/CliqueClaqueApp.png"
+                  alt="Jeu CliqueClaque"
+                  class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10 opacity-90 group-hover:opacity-100">
+
+              <div class="project-badge bg-purple-600 text-white text-[10px] font-bold px-3 py-1 rounded shadow-lg absolute top-4 left-4 z-30 uppercase tracking-widest">
+                Game Jam
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-8">
+              <div class="flex justify-between items-start mb-3">
+                <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold">Code Game Jam 2026</p>
+                <span class="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded font-bold">30H Challenge</span>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-purple-700 transition-all duration-300">CliqueClaque</h3>
+
+              <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-4">
+                "Prends tes cliques et tes claques" : Un runner survitaminé réalisé en moins de 48h. Incarnez un étudiant fuyant ses amis après une nuit blanche de code.
+              </p>
+
+              <div class="flex items-center justify-between mt-auto">
+                <div class="flex -space-x-2">
+                  <div class="w-7 h-7 rounded-full border-2 border-white bg-blue-500 flex items-center justify-center text-[9px] text-white font-bold" title="Mohamed">MS</div>
+                  <div class="w-7 h-7 rounded-full border-2 border-white bg-purple-500 flex items-center justify-center text-[9px] text-white font-bold" title="Corentin">CF</div>
+                  <div class="w-7 h-7 rounded-full border-2 border-white bg-indigo-500 flex items-center justify-center text-[9px] text-white font-bold" title="Sophian">SA</div>
+                </div>
+
+                <a href="cliqueclaque.html" class="inline-flex items-center gap-2 text-sm font-bold text-purple-600 hover:text-purple-700 transition-all duration-200 hover:translate-x-1">
+                  Voir le projet →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJET LifePulse -->
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-teal-500/30 hover:-translate-y-3 transition-all duration-500 relative" data-aos="fade-up" data-aos-delay="400">
+            <div class="relative h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-teal-400/20 to-blue-500/20 p-4">
+              <div class="absolute inset-0 rounded-xl border-4 border-transparent group-hover:border-teal-400 group-hover:shadow-2xl group-hover:shadow-teal-400/50 transition-all duration-500 z-20"></div>
+
+              <img src="img/LifePulse.jpg"
+                  alt="LifePulse Health App"
+                  class="absolute inset-0 w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-700 z-10">
+
+              <div class="project-badge bg-teal-600 text-white text-[10px] font-bold px-3 py-1 rounded shadow-lg absolute top-4 left-4 z-30 uppercase tracking-widest flex items-center gap-2">
+                Projet Personnel
+                <span class="text-[9px] bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded font-bold">In Development</span>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-8">
+              <p class="text-xs uppercase tracking-wide text-gray-400 font-semibold mb-3">
+                Mon application de santé
+              </p>
+
+              <h3 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-teal-700 transition-all duration-300">
+                LifePulse
+              </h3>
+
+              <p class="text-gray-600 text-sm leading-relaxed mb-6 line-clamp-6">
+                Je développe actuellement LifePulse, ma propre application HealthTech permettant de suivre sa santé au quotidien.
+                Le projet est en phase de développement et vise à proposer un score de santé, un journal personnel,
+                une analyse de symptômes et la centralisation de documents médicaux.
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">Vue.js</span>
+                <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">FastAPI</span>
+                <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">PostgreSQL</span>
+                <span class="text-[10px] bg-gray-100 px-2 py-1 rounded text-gray-600">AI</span>
+              </div>
+
+              <a href="lifepulse.html" class="inline-flex items-center gap-2 text-sm font-bold text-teal-600 hover:text-teal-700 transition-all duration-200 hover:translate-x-1">
+                Voir le projet →
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Divider décoratif -->
+        <div class="flex justify-center mt-20" data-aos="fade-up" data-aos-delay="300">
+          <div class="w-32 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bouton scroll to top -->
+    <div id="scrollToTop">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-blue-50 text-gray-700 py-6">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6">
+        <div class="text-left mb-4 md:mb-0">
+          <div class="font-medium text-gray-800 text-base sm:text-lg">
+            Mohamed Sendouk <span class="text-blue-600">(모하메드)</span>
           </div>
-        </article>
-
-
-
-      </div>
-
-      <!-- Divider décoratif -->
-      <div class="flex justify-center mt-20" data-aos="fade-up" data-aos-delay="300">
-        <div class="w-32 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
-      </div>
-
-    </div>
-  </section>
-
-
-
-  <!-- Bouton scroll to top -->
-  <div id="scrollToTop">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
-    </svg>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="bg-blue-50 text-gray-700 py-6">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 sm:px-6">
-      <div class="text-left mb-4 md:mb-0">
-        <div class="font-medium text-gray-800 text-base sm:text-lg">
-          Mohamed Sendouk <span class="text-blue-600">(모하메드)</span>
+          <div class="text-xs sm:text-sm text-gray-600 mt-1">
+            © 2025 · Tous droits réservés
+          </div>
         </div>
-        <div class="text-xs sm:text-sm text-gray-600 mt-1">
-          © 2025 · Tous droits réservés
+
+        <div class="flex space-x-3">
+          <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank"
+            class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+            <img src="img/linkedin.png" alt="LinkedIn" class="w-4 h-4"/>
+          </a>
+          <a href="mailto:sendoukmohamed45@gmail.com"
+            class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+            <img src="img/gmail.png" alt="Gmail" class="w-4 h-4"/>
+          </a>
+          <a href="https://github.com/SendoukM" target="_blank"
+            class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+            <img src="img/github.png" alt="GitHub" class="w-4 h-4"/>
+          </a>
         </div>
       </div>
+    </footer>
 
-      <div class="flex space-x-3">
-        <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank"
-          class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
-          <img src="img/linkedin.png" alt="LinkedIn" class="w-4 h-4"/>
-        </a>
-        <a href="mailto:sendoukmohamed45@gmail.com"
-          class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
-          <img src="img/gmail.png" alt="Gmail" class="w-4 h-4"/>
-        </a>
-        <a href="https://github.com/SendoukM" target="_blank"
-          class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
-          <img src="img/github.png" alt="GitHub" class="w-4 h-4"/>
-        </a>
-      </div>
-    </div>
-  </footer>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 1000, once: true });
 
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 1000, once: true });
+      const scrollToTopBtn = document.getElementById('scrollToTop');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) scrollToTopBtn.classList.add('show');
+        else scrollToTopBtn.classList.remove('show');
+      });
+      scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
-    const scrollToTopBtn = document.getElementById('scrollToTop');
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) scrollToTopBtn.classList.add('show');
-      else scrollToTopBtn.classList.remove('show');
-    });
-    scrollToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Menu mobile
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    navToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
-  <script>
-    window.addEventListener("load", () => {
-      const MIN_DURATION = 900; // durée minimale en ms
-      const start = performance.now();
-      const preloader = document.getElementById("preloader");
-      const bar = document.getElementById("preloader-bar");
-      const label = document.getElementById("preloader-label");
-
-      let progress = 0;
-      const tick = () => {
-        progress = Math.min(progress + Math.random() * 20, 95);
-        bar.style.width = progress + "%";
-        label.textContent = Math.round(progress) + "%";
-        if (progress < 95) {
-          requestAnimationFrame(tick);
-        }
-      };
-      requestAnimationFrame(tick);
-
-      const finish = () => {
-        const elapsed = performance.now() - start;
-        const remaining = Math.max(MIN_DURATION - elapsed, 0);
-
-        setTimeout(() => {
-          bar.style.width = "100%";
-          label.textContent = "100%";
-
-          preloader.classList.add("opacity-0", "pointer-events-none");
-          preloader.style.transition = "opacity 250ms ease-out";
-
-          setTimeout(() => {
-            preloader.remove();
-          }, 260);
-        }, remaining);
-      };
-
-      // Quand la page est prête
-      finish();
-    });
-
-    const steps = [
-      "Connexion au serveur…",
-      "Analyse des modules…",
-      "Chargement des données…",
-      "Optimisation de l’interface…",
-      "Finalisation…"
-    ];
-
-    let step = 0;
-
-    setInterval(() => {
-      if(step < steps.length){
-        document.getElementById("scanText").textContent = steps[step];
-        step++;
-      }
-    }, 700);
-  </script>
-
-
+      // Menu mobile
+      const navToggle = document.getElementById('navToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      navToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    </script>
 
   </body>
   </html>
