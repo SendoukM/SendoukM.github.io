@@ -14,375 +14,7 @@
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle at top, #e0f2fe 0, #f8fafc 40%, #f9fafb 100%);
-            scroll-behavior: smooth;
-        }
-        h1, h2, h3, h4 {
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* NAV LATERALE */
-        .side-nav {
-            position: fixed;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 40;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .nav-dot {
-            width: 11px;
-            height: 11px;
-            background: #e2e8f0;
-            border-radius: 999px;
-            transition: all 0.3s ease;
-            position: relative;
-            box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.4);
-        }
-        .nav-dot:hover,
-        .nav-dot.active {
-            background: linear-gradient(135deg, #1d4ed8, #38bdf8);
-            transform: scale(1.5);
-            box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
-        }
-        .nav-dot::after {
-            content: attr(data-title);
-            position: absolute;
-            left: 26px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #0f172a;
-            color: #f9fafb;
-            padding: 4px 10px;
-            border-radius: 999px;
-            font-size: 10px;
-            opacity: 0;
-            pointer-events: none;
-            transition: 0.25s;
-            white-space: nowrap;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.35);
-        }
-        .nav-dot:hover::after {
-            opacity: 1;
-            left: 22px;
-        }
-
-        /* CARTES COMPETENCES */
-        .competence-card {
-            border-radius: 1.8rem;
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            background: radial-gradient(circle at top left, rgba(191, 219, 254, 0.35), #ffffff 55%);
-            box-shadow:
-                    0 18px 45px rgba(15, 23, 42, 0.08),
-                    0 0 0 1px rgba(148, 163, 184, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        .competence-card::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 50%);
-            opacity: 0.8;
-            pointer-events: none;
-        }
-        .competence-card > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-mineure {
-            border: 1px solid rgba(59, 130, 246, 0.7);
-            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), #ffffff 60%);
-            box-shadow:
-                    0 18px 40px rgba(37, 99, 235, 0.16),
-                    0 0 0 1px rgba(191, 219, 254, 0.7);
-        }
-
-        .mineure-tag {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            background: linear-gradient(135deg, #1d4ed8, #38bdf8);
-            color: #ffffff;
-            padding: 4px 14px;
-            border-radius: 999px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.55);
-        }
-        .majeure-tag {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            /* Dégradé Indigo vers Violet pour bien différencier du bleu standard */
-            background: linear-gradient(135deg, #4338ca 0%, #6366f1 50%, #a855f7 100%);
-            color: #ffffff;
-            padding: 5px 16px;
-            border-radius: 999px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            /* Ombre portée violette plus profonde */
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            z-index: 10;
-        }
-
-        /* Le petit point brillant en version "pulsante" pour le côté majeur */
-        .majeure-tag::before {
-            content: "";
-            width: 6px;
-            height: 6px;
-            background: #fff;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px #fff;
-            animation: pulse-dot 2s infinite;
-        }
-
-        @keyframes pulse-dot {
-            0% { opacity: 0.6; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0.6; transform: scale(0.9); }
-        }
-
-        /* NIVEAUX / AC */
-        .level-title {
-            font-size: 0.82rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            color: #64748b;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .level-title::before {
-            content: "";
-            width: 26px;
-            height: 2px;
-            border-radius: 999px;
-            background: linear-gradient(to right, #1d4ed8, #38bdf8);
-            opacity: 0.7;
-        }
-
-        .ac-group {
-            border-left: 2px dashed rgba(148, 163, 184, 0.6);
-            padding-left: 18px;
-            margin-top: 14px;
-        }
-        .ac-item {
-            margin-bottom: 18px;
-            padding: 10px 12px;
-            border-radius: 0.9rem;
-            background: rgba(248, 250, 252, 0.9);
-            border: 1px solid rgba(226, 232, 240, 0.9);
-            transition: 0.25s;
-        }
-        .ac-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-            border-color: rgba(129, 140, 248, 0.5);
-            background: #ffffff;
-        }
-
-        .ac-header-line {
-            display: flex;
-            justify-content: space-between;
-            gap: 8px;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 4px;
-        }
-
-        .status-badge {
-            font-size: 9px;
-            font-weight: 800;
-            padding: 2px 8px;
-            border-radius: 999px;
-            text-transform: uppercase;
-            margin-right: 6px;
-            letter-spacing: 0.08em;
-            border: 1px solid transparent;
-        }
-        .status-acquis {
-            background: #dcfce7;
-            color: #166534;
-            border-color: rgba(22, 101, 52, 0.15);
-        }
-        .status-en-cours {
-            background: #fef9c3;
-            color: #92400e;
-            border-color: rgba(217, 119, 6, 0.25);
-        }
-
-        /* PASTILLES & METADATA */
-        .project-pill {
-            font-size: 10px;
-            padding: 3px 9px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.7);
-            background: rgba(248, 250, 252, 0.9);
-            color: #1d4ed8;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .project-pill::before {
-            content: "";
-            width: 6px;
-            height: 6px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #1d4ed8, #38bdf8);
-            box-shadow: 0 0 6px rgba(59, 130, 246, 0.8);
-        }
-
-        /* CARTES DE PROJETS (Traces) */
-        .project-evidence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 10px;
-            margin-top: 8px;
-        }
-        .project-evidence-card {
-            position: relative;
-            border-radius: 0.9rem;
-            padding: 9px 11px;
-            background: radial-gradient(circle at top left, rgba(191, 219, 254, 0.5), #ffffff 55%);
-            border: 1px solid rgba(191, 219, 254, 0.9);
-            box-shadow: 0 10px 18px rgba(148, 163, 184, 0.35);
-            overflow: hidden;
-            cursor: pointer;
-            transition: 0.25s;
-        }
-        .project-evidence-card::before {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.12), transparent 55%);
-            opacity: 0.6;
-            transform: translate3d(-20px, -10px, 0);
-        }
-        .project-evidence-card:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 16px 26px rgba(37, 99, 235, 0.4);
-            border-color: #1d4ed8;
-        }
-        .project-evidence-card h5 {
-            position: relative;
-            z-index: 1;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 2px;
-        }
-        .project-evidence-card p {
-            position: relative;
-            z-index: 1;
-            font-size: 11px;
-            color: #475569;
-            line-height: 1.4;
-        }
-        .project-evidence-card span.badge {
-            position: relative;
-            z-index: 1;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 4px;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #1d4ed8;
-        }
-        .project-evidence-card span.badge::before {
-            content: "";
-            width: 7px;
-            height: 7px;
-            border-radius: 999px;
-            background: #22c55e;
-            box-shadow: 0 0 6px rgba(34, 197, 94, 0.9);
-        }
-        .project-link-full {
-            text-decoration: none;
-            display: block;
-        }
-
-        /* LIENS INLINE (si besoin) */
-        .project-link {
-            font-size: 11px;
-            font-weight: 700;
-            color: #1d4ed8;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .project-link svg {
-            width: 11px;
-            height: 11px;
-            stroke-width: 2.2;
-            transition: transform 0.2s ease;
-        }
-        .project-link:hover svg {
-            transform: translateX(2px);
-        }
-
-        /* FILTRE NIVEAUX */
-        .filter-select {
-            appearance: none;
-            background: #ffffff;
-            border: 2px solid rgba(203, 213, 225, 0.9);
-            padding: 10px 38px 10px 14px;
-            border-radius: 999px;
-            font-weight: 600;
-            color: #1e40af;
-            cursor: pointer;
-            outline: none;
-            transition: 0.22s;
-            font-size: 0.86rem;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.07);
-        }
-        .filter-select:hover {
-            border-color: #1d4ed8;
-            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.35);
-            transform: translateY(-1px);
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        /* Style des boutons de filtre */
-        .type-btn {
-            color: #64748b; /* Gris-bleu ardoise */
-        }
-
-        .type-btn.active {
-            background-color: #ffffff;
-            color: #2563eb; /* Ton bleu C5/C6 */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .type-btn:hover:not(.active) {
-            color: #2563eb;
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/portfolioApp.css">
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -412,14 +44,14 @@
 
         <!-- Menu desktop -->
         <ul class="hidden md:flex items-center space-x-4 lg:space-x-6 text-sm font-medium">
-            <li><a href="index.html#home" class="hover:text-blue-600">Accueil</a></li>
-            <li><a href="index.html#about" class="hover:text-blue-600">À propos</a></li>
-            <li><a href="index.html#experience" class="hover:text-blue-600">Parcours</a></li>
-            <li><a href="index.html#projects" class="hover:text-blue-600">Projets</a></li>
+            <li><a href="../index.html#home" class="hover:text-blue-600">Accueil</a></li>
+            <li><a href="../index.html#about" class="hover:text-blue-600">À propos</a></li>
+            <li><a href="../index.html#experience" class="hover:text-blue-600">Parcours</a></li>
+            <li><a href="../index.html#projects" class="hover:text-blue-600">Projets</a></li>
             <li><a href="#portfolio" class="text-blue-700 hover:text-blue-800">Portfolio d'apprentissage</a></li>
             <li><a href="contact.html" class="hover:text-blue-600">Contact</a></li>
             <li>
-                <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
+                <a href="../assets/docs/cv/CV-SENDOUK-MOHAMED-2.pdf" download
                    class="px-3 py-2 lg:px-4 lg:py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-xs lg:text-sm whitespace-nowrap">
                     Télécharger CV
                 </a>
@@ -430,14 +62,14 @@
     <!-- Menu mobile -->
     <div id="mobileMenu" class="md:hidden hidden border-t border-gray-200 bg-white">
         <ul class="px-4 py-3 space-y-2 text-sm font-medium">
-            <li><a href="index.html#home" class="block py-1 hover:text-blue-600">Accueil</a></li>
-            <li><a href="index.html#about" class="block py-1 hover:text-blue-600">À propos</a></li>
-            <li><a href="index.html#experience" class="block py-1 hover:text-blue-600">Parcours</a></li>
-            <li><a href="index.html#projects" class="block py-1 hover:text-blue-600">Projets</a></li>
+            <li><a href="../index.html#home" class="block py-1 hover:text-blue-600">Accueil</a></li>
+            <li><a href="../index.html#about" class="block py-1 hover:text-blue-600">À propos</a></li>
+            <li><a href="../index.html#experience" class="block py-1 hover:text-blue-600">Parcours</a></li>
+            <li><a href="../index.html#projects" class="block py-1 hover:text-blue-600">Projets</a></li>
             <li><a href="#portfolio" class="block py-1 text-blue-700 hover:text-blue-800">Portfolio</a></li>
             <li><a href="contact.html" class="block py-1 hover:text-blue-600">Contact</a></li>
             <li>
-                <a href="docs/CV-SENDOUK-MOHAMED-2.pdf" download
+                <a href="../assets/docs/cv/CV-SENDOUK-MOHAMED-2.pdf" download
                    class="mt-2 inline-block px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-sm">
                     Télécharger CV
                 </a>
@@ -537,14 +169,14 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-pokemon-tcg.html" class="project-link-full">
+                        <a href="projets/projet-pokemon-tcg.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>Pokémon TCG – Java</h5>
                                 <p>Moteur de jeu complet, gestion des cartes, règles officielles et interface JavaFX.</p>
                                 <span class="badge">SAE • Java</span>
                             </article>
                         </a>
-                        <a href="projet-ecocoin.html" class="project-link-full">
+                        <a href="projets/projet-ecocoin.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>EcoCoin – E‑commerce</h5>
                                 <p>Site MVC PHP avec gestion des produits, panier et commandes.</p>
@@ -576,7 +208,7 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ecocoin.html" class="project-link-full">
+                        <a href="projets/projet-ecocoin.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>EcoCoin – Conception</h5>
                                 <p>Modélisation UML de la base de données et des cas d’utilisation.</p>
@@ -608,14 +240,14 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-pokemon-tcg.html" class="project-link-full">
+                        <a href="projets/projet-pokemon-tcg.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>Pokémon TCG – UI</h5>
                                 <p>Interface de jeu JavaFX avec gestion des états et feedback visuel.</p>
                                 <span class="badge">Desktop</span>
                             </article>
                         </a>
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Interface</h5>
                                 <p>Interface web moderne avec badges, confettis et modes d’accessibilité.</p>
@@ -654,14 +286,14 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ecocoin.html" class="project-link-full">
+                        <a href="projets/projet-ecocoin.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>EcoCoin – Spécifications</h5>
                                 <p>Cahier des charges fonctionnel, architecture MVC et implémentation complète.</p>
                                 <span class="badge">SAE • Web</span>
                             </article>
                         </a>
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF</h5>
                                 <p>Plateforme complète à partir d’un besoin réel (événements CTF, joueurs, scores).</p>
@@ -693,14 +325,14 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Accessibilité</h5>
                                 <p>Modes daltoniens, contrastes renforcés et multi‑langues sur l’interface.</p>
                                 <span class="badge">CTF • Accessibilité</span>
                             </article>
                         </a>
-                        <a href="index.html" class="project-link-full">
+                        <a href="../index.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>Portfolio – UI</h5>
                                 <p>Design responsive, animations AOS et cohérence visuelle globale.</p>
@@ -750,7 +382,7 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-pokemon-tcg.html" class="project-link-full">
+                        <a href="projets/projet-pokemon-tcg.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>Pokémon TCG</h5>
                                 <p>Choix d’algorithmes pour gérer les cartes, les effets et les tours de jeu.</p>
@@ -786,7 +418,7 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF</h5>
                                 <p>Organisation des défis, scores et joueurs pour des performances correctes.</p>
@@ -815,7 +447,7 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Sécurité</h5>
                                 <p>Mise en place de règles de sécurité, gestion des comptes et des scores.</p>
@@ -901,7 +533,7 @@
                         Trace principale
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Infra</h5>
                                 <p>Plateforme CTFd conteneurisée avec reverse proxy et isolation réseau.</p>
@@ -950,7 +582,7 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ecocoin.html" class="project-link-full">
+                        <a href="projets/projet-ecocoin.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>EcoCoin – BDD</h5>
                                 <p>Conception et exploitation d’une base de données pour un site e‑commerce.</p>
@@ -985,7 +617,7 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ecocoin.html" class="project-link-full">
+                        <a href="projets/projet-ecocoin.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>EcoCoin – Optimisation</h5>
                                 <p>Amélioration des requêtes et du modèle de données pour de meilleures performances.</p>
@@ -1014,14 +646,14 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ecocoin.html" class="project-link-full">
+                        <a href="projets/projet-ecocoin.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>EcoCoin – Sécurité BDD</h5>
                                 <p>Gestion des comptes, vérification des entrées et protection des informations clients.</p>
                                 <span class="badge">Web • Sécurité</span>
                             </article>
                         </a>
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Données</h5>
                                 <p>Protection des comptes joueurs et des scores dans la plateforme.</p>
@@ -1105,7 +737,7 @@
                         Trace principale
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Pilotage</h5>
                                 <p>Gestion complète du projet : planification des releases, suivi des correctifs et déploiement.</p>
@@ -1189,14 +821,14 @@
                         Traces principales
                     </div>
                     <div class="project-evidence-grid">
-                        <a href="projet-ctf.html" class="project-link-full">
+                        <a href="projets/projet-ctf.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>YGGAME CTF – Travail d’équipe</h5>
                                 <p>Organisation des tâches, discussions techniques et partage de ressources sécurité.</p>
                                 <span class="badge">CTF • Team</span>
                             </article>
                         </a>
-                        <a href="resistance.html" class="project-link-full">
+                        <a href="projets/resistance.html" class="project-link-full">
                             <article class="project-evidence-card">
                                 <h5>Projet Résistance – Nuit de l’Info</h5>
                                 <p>Travail en équipe sur un jeu, avec partage d’idées et coordination rapide.</p>
@@ -1223,13 +855,13 @@
         </p>
         <div class="flex gap-3 mb-6">
             <a href="https://www.linkedin.com" class="bg-white rounded-full p-2 shadow hover:scale-110 transition-transform">
-                <img src="img/linkedin.png" class="w-4 h-4" alt="LinkedIn">
+                <img src="../assets/img/icones/linkedin.png" class="w-4 h-4" alt="LinkedIn">
             </a>
             <a href="mailto:sendoukmohamed45@gmail.com" class="bg-white rounded-full p-2 shadow hover:scale-110 transition-transform">
-                <img src="img/gmail.png" class="w-4 h-4" alt="Gmail">
+                <img src="../assets/img/icones/gmail.png" class="w-4 h-4" alt="Gmail">
             </a>
             <a href="https://github.com/SendoukM" class="bg-white rounded-full p-2 shadow hover:scale-110 transition-transform">
-                <img src="img/github.png" class="w-4 h-4" alt="GitHub">
+                <img src="../assets/img/icones/github.png" class="w-4 h-4" alt="GitHub">
             </a>
         </div>
         <p class="text-[11px] text-gray-400">
@@ -1239,98 +871,7 @@
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({ duration: 1000, once: true });
-
-    // Filtre niveaux
-    const levelFilter = document.getElementById('levelFilter');
-    if (levelFilter) {
-        levelFilter.addEventListener('change', function() {
-            const val = this.value;
-            const n1s = document.querySelectorAll('.n1-content');
-            const n2s = document.querySelectorAll('.n2-content');
-
-            if (val === 'all') {
-                n1s.forEach(el => el.style.display = 'block');
-                n2s.forEach(el => el.style.display = 'block');
-            } else if (val === 'n1') {
-                n1s.forEach(el => el.style.display = 'block');
-                n2s.forEach(el => el.style.display = 'none');
-            } else if (val === 'n2') {
-                n1s.forEach(el => el.style.display = 'none');
-                n2s.forEach(el => el.style.display = 'block');
-            }
-        });
-    }
-
-    // Scroll spy
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section[id]');
-        const dots = document.querySelectorAll('.nav-dot');
-        let current = "";
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (pageYOffset >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        dots.forEach(dot => {
-            dot.classList.remove('active');
-            if (dot.getAttribute('href') === `#${current}`) {
-                dot.classList.add('active');
-            }
-        });
-    });
-
-    // Burger
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (navToggle && mobileMenu) {
-        navToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-
-    function filterById(type) {
-        const cards = document.querySelectorAll('.competence-card');
-        const buttons = document.querySelectorAll('.type-btn');
-
-        // Groupes basés sur tes IDs
-        const majeures = ['c1', 'c5', 'c6'];
-        const mineures = ['c2', 'c3', 'c4'];
-
-        // Gestion de l'état actif des boutons
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-
-        // Animation et affichage des cartes
-        cards.forEach(card => {
-            const cardId = card.id.toLowerCase();
-
-            let shouldShow = false;
-            if (type === 'all') shouldShow = true;
-            else if (type === 'majeure') shouldShow = majeures.includes(cardId);
-            else if (type === 'mineure') shouldShow = mineures.includes(cardId);
-
-            if (shouldShow) {
-                card.style.display = 'block';
-                // Petit délai pour l'animation de fondu
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 10);
-            } else {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 400); // Correspond à la durée de la transition CSS
-            }
-        });
-    }
-</script>
+<script src="../assets/js/portfolioApp.js"></script>
 
 
 </body>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Sendouk Mohamed</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Noto+Sans+KR:wght@400;600&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../assets/css/contact.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+<!-- BACKGROUND PARTICLES -->
+<div class="tech-bg" id="tech-bg"></div>
+
+<!-- Navbar (Fixée en haut) -->
+<header class="fixed w-full top-0 left-0 bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+        <h1 class="text-xl md:text-2xl font-semibold text-blue-800 flex items-center gap-2" style="font-family: 'Montserrat', sans-serif;">
+            Mohamed Sendouk
+            <span class="text-blue-600 text-sm md:text-lg font-normal hidden sm:inline" style="font-family: 'Noto Sans KR', sans-serif;">(모하메드)</span>
+        </h1>
+
+        <!-- Menu Desktop -->
+        <ul class="hidden md:flex space-x-6 text-sm font-medium items-center">
+            <li><a href="../index.html#home" class="hover:text-blue-600 transition">Accueil</a></li>
+            <li><a href="../index.html#about" class="hover:text-blue-600 transition">À propos</a></li>
+            <li><a href="../index.html#experience" class="hover:text-blue-600 transition">Parcours</a></li>
+            <li><a href="../index.html#projects" class="hover:text-blue-600 transition">Projets</a></li>
+            <li><a href="portfolioApp.html" class="hover:text-blue-600 transition">Portfolio</a></li>
+            <li><a href="contact.html" class="text-blue-700 font-bold">Contact</a></li>
+            <li>
+                <a href="../assets/docs/cv/CV-SENDOUK-MOHAMED-2.pdf" download class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition text-sm shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                    CV
+                </a>
+            </li>
+        </ul>
+
+        <!-- Menu Mobile Button (Icone Burger simple) -->
+        <button class="md:hidden text-gray-600 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<!-- CORRECTION ICI : mt-20 pour pousser sous la navbar, pt-12 pour l'espacement interne -->
+<div class="contact-hero mt-20 pt-16 pb-20 md:pt-24 md:pb-28">
+    <div class="max-w-4xl mx-auto text-center relative z-10 px-4">
+        <div data-aos="fade-down">
+                <span class="availability-badge">
+                    <span class="availability-dot"></span>
+                    Disponible pour des opportunités
+                </span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mt-6 mb-4 leading-tight" data-aos="fade-up">
+            Entrons en contact ! <br class="md:hidden"> <span style="font-family: 'Noto Sans KR', sans-serif;">(연락하세요)</span>
+        </h1>
+        <p id="typing-text" class="text-blue-700 font-semibold mt-4"></p>
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+            Je suis toujours ouvert à discuter de nouveaux projets, d'opportunités de stage ou simplement échanger sur la technologie et la médecine.
+        </p>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<section class="py-16 -mt-10 relative z-20">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8 mb-12">
+            <!-- Email -->
+            <div class="info-card" data-aos="zoom-in">
+                <div class="info-icon mb-4">📧</div>
+                <h3 class="font-semibold text-lg text-gray-900 mb-2">Email</h3>
+                <a href="mailto:sendoukmohamed45@gmail.com" class="text-blue-600 hover:underline text-sm break-all">
+                    sendoukmohamed45@gmail.com
+                </a>
+            </div>
+            <!-- Téléphone -->
+            <div class="info-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="info-icon mb-4">📱</div>
+                <h3 class="font-semibold text-lg text-gray-900 mb-2">Téléphone</h3>
+                <a href="tel:+33619978556" class="text-blue-600 hover:underline text-sm">
+                    +33 6 19 97 85 56
+                </a>
+            </div>
+            <!-- Localisation -->
+            <div class="info-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="info-icon mb-4">📍</div>
+                <h3 class="font-semibold text-lg text-gray-900 mb-2">Localisation</h3>
+                <p class="text-gray-600 text-sm">Montpellier, France</p>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+            <!-- Formulaire -->
+            <div class="contact-card" data-aos="fade-right">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Envoyez-moi un message</h2>
+                <form class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Votre nom *</label>
+                        <input type="text" placeholder="Jean Dupont" class="form-input" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Votre email *</label>
+                        <input type="email" placeholder="jean.dupont@example.com" class="form-input" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Sujet</label>
+                        <input type="text" placeholder="Opportunité de stage" class="form-input">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Votre message *</label>
+                        <textarea placeholder="Bonjour Mohamed, je souhaiterais..." rows="5" class="form-input" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Envoyer le message 🚀</button>
+                </form>
+            </div>
+
+            <!-- Réseaux sociaux + Info -->
+            <div data-aos="fade-left">
+                <div class="contact-card mb-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Mes réseaux sociaux</h3>
+                    <p class="text-gray-600 text-sm mb-6">
+                        Retrouvez-moi sur mes différents réseaux pour suivre mes projets et rester en contact !
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank" class="social-link" title="LinkedIn">
+                            <img src="../assets/img/icones/linkedin.png" alt="LinkedIn" />
+                        </a>
+                        <a href="https://github.com/SendoukM" target="_blank" class="social-link" title="GitHub">
+                            <img src="../assets/img/icones/github.png" alt="GitHub" />
+                        </a>
+                        <a href="mailto:sendoukmohamed45@gmail.com" class="social-link" title="Email">
+                            <img src="../assets/img/icones/gmail.png" alt="Gmail" />
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Temps de réponse</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl">⚡</span>
+                            <div>
+                                <p class="font-medium text-gray-900">Réponse rapide</p>
+                                <p class="text-sm text-gray-600">Je réponds généralement sous 24-48h</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl">💼</span>
+                            <div>
+                                <p class="font-medium text-gray-900">Disponibilité</p>
+                                <p class="text-sm text-gray-600">Ouvert aux stages et projets collaboratifs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-2xl">🌍</span>
+                            <div>
+                                <p class="font-medium text-gray-900">Langue</p>
+                                <p class="text-sm text-gray-600">Français, Anglais, Coréen (apprentissage)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-blue-50 text-gray-700 py-6 mt-16 border-t border-gray-200">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+        <div class="text-left mb-4 md:mb-0 text-center md:text-left">
+            <div class="font-medium text-gray-800 text-lg">
+                Mohamed Sendouk <span class="text-blue-600">(모하메드)</span>
+            </div>
+            <div class="text-sm text-gray-600 mt-1">© 2025 · Tous droits réservés</div>
+        </div>
+        <div class="flex space-x-3">
+            <a href="https://www.linkedin.com/in/mohamed-sendouk-912948337/" target="_blank" class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+                <img src="../assets/img/icones/linkedin.png" alt="LinkedIn" class="w-4 h-4"/>
+            </a>
+            <a href="mailto:sendoukmohamed45@gmail.com" class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+                <img src="../assets/img/icones/gmail.png" alt="Gmail" class="w-4 h-4"/>
+            </a>
+            <a href="https://github.com/SendoukM" target="_blank" class="bg-white rounded-full p-2 flex items-center justify-center shadow hover:shadow-md transition-transform transform hover:scale-110">
+                <img src="../assets/img/icones/github.png" alt="GitHub" class="w-4 h-4"/>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<script src="../assets/js/contact.js"></script>
+</body>
+</html>

@@ -7,81 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        :root {
-            --main-brown: #5D4D42;
-            --pastel-beige: #FDF8F2;
-            --accent-yellow: #FFD966;
-            --border-color: #E6D5C3;
-        }
-
-        body {
-            background-color: var(--pastel-beige);
-            color: var(--main-brown);
-            font-family: 'Quicksand', sans-serif;
-            background-image: url("https://www.transparenttextures.com/patterns/felt.png"); /* Texture papier discrète */
-        }
-
-        .title-cartoon {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 0.9;
-            filter: drop-shadow(4px 4px 0px #E6D5C3);
-        }
-
-        /* Card Style "Storyboard" */
-        .card-story {
-            background: white;
-            border: 3px solid var(--main-brown);
-            border-radius: 24px;
-            box-shadow: 8px 8px 0px var(--border-color);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .card-story:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 12px 12px 0px var(--accent-yellow);
-        }
-
-        /* Bouton qui s'enfonce */
-        .btn-play {
-            background: var(--accent-yellow);
-            border: 3px solid var(--main-brown);
-            border-radius: 20px;
-            box-shadow: 0px 8px 0px #D9B64E;
-            transition: all 0.1s;
-        }
-
-        .btn-play:active {
-            transform: translateY(6px);
-            box-shadow: 0px 2px 0px #D9B64E;
-        }
-
-        /* Badge Style BD */
-        .badge-bd {
-            background: #FFADAD;
-            color: white;
-            padding: 4px 15px;
-            border: 2px solid var(--main-brown);
-            border-radius: 50px;
-            font-weight: 800;
-            transform: rotate(-5deg);
-            display: inline-block;
-        }
-
-        .video-container {
-            border: 3px solid var(--main-brown);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(93, 77, 66, 0.1);
-        }
-    </style>
+    <link rel="stylesheet" href="../../assets/css/cliqueclaque.css">
 </head>
 <body class="p-4 md:p-10">
 
 <nav class="max-w-6xl mx-auto flex justify-between items-center mb-16">
-    <a href="index.html#projects" class="group flex items-center gap-2 font-bold text-sm hover:text-yellow-600 transition">
+    <a href="../../index.html#projects" class="group flex items-center gap-2 font-bold text-sm hover:text-yellow-600 transition">
         <span class="transition-transform group-hover:-translate-x-1">←</span>
         [ RETOUR AU PORTFOLIO ]
     </a>
@@ -112,7 +43,7 @@
         <div class="relative" data-aos="zoom-in">
             <div class="absolute -top-6 -right-6 w-24 h-24 bg-yellow-200 rounded-full mix-blend-multiply opacity-70 animate-pulse"></div>
             <div class="card-story overflow-hidden">
-                <img src="img/CliqueClaqueJaquette.png" alt="CliqueClaque Jaquette" class="w-full h-full object-cover">
+                <img src="../../assets/img/projets/cliqueclaque/CliqueClaqueJaquette.png" alt="CliqueClaque Jaquette" class="w-full h-full object-cover">
             </div>
         </div>
     </div>
@@ -126,7 +57,7 @@
         <div class="max-w-4xl mx-auto" data-aos="fade-up">
             <a href="https://www.youtube.com/watch?v=qnEdw8xGDeQ" target="_blank" class="block card-story p-2 group relative overflow-hidden">
                 <div class="relative rounded-xl overflow-hidden aspect-video">
-                    <img src="img/Menu.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="CliqueClaque Trailer">
+                    <img src="../../assets/img/projets/cliqueclaque/Menu.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="CliqueClaque Trailer">
 
                     <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                         <div class="w-20 h-20 bg-yellow-500 border-4 border-[--main-brown] rounded-full flex items-center justify-center shadow-[0_8px_0px_#D9B64E] group-hover:scale-110 transition-transform">
@@ -152,10 +83,10 @@
                 J'ai conçu l'intégralité de l'identité visuelle du projet. Mon travail a porté sur la création des ambiances colorées (passant du chaleureux au stressant), ainsi que sur le design du menu principal et des interfaces, pour garantir une expérience fluide et immersive. J'ai misé sur une narration visuelle forte en conservant les mêmes éléments de décor, tout en faisant évoluer les expressions des personnages et la mise en scène pour traduire la progression de l'histoire.
             </p>
             <div class="grid grid-cols-2 gap-4">
-                <img src="img/Image1.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="Salon 1">
-                <img src="img/Image5.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="Salon 2">
-                <img src="img/Epreuve%20n°1.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="épreuve n°1">
-                <img src="img/Epreuve%20n°3.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="épreuve n°3 ">
+                <img src="../../assets/img/projets/cliqueclaque/Image1.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="Salon 1">
+                <img src="../../assets/img/projets/cliqueclaque/Image5.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="Salon 2">
+                <img src="../../assets/img/projets/cliqueclaque/Epreuve%20n%C2%B01.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="épreuve n°1">
+                <img src="../../assets/img/projets/cliqueclaque/Epreuve%20n%C2%B03.png" class="rounded-xl border-2 border-gray-100 shadow-sm" alt="épreuve n°3 ">
             </div>
         </div>
 
@@ -183,7 +114,7 @@
             <span class="absolute -top-12 md:left-1/4 text-2xl animate-bounce">✨</span>
             <span class="absolute -bottom-12 md:right-1/4 text-2xl animate-bounce" style="animation-delay: 0.2s">⭐</span>
 
-            <a href="docs/CliqueClaque.zip" download class="btn-play inline-flex items-center gap-4 px-8 py-5 text-lg font-black uppercase tracking-tighter">
+            <a href="../../assets/docs/projets/CliqueClaque.zip" download class="btn-play inline-flex items-center gap-4 px-8 py-5 text-lg font-black uppercase tracking-tighter">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1l8 8 8-8v-1M12 12V3" />
                 </svg>
@@ -202,8 +133,6 @@
 </main>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({ duration: 800, once: true });
-</script>
+<script src="../../assets/js/cliqueclaque.js"></script>
 </body>
 </html>

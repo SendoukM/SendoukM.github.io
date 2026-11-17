@@ -14,145 +14,7 @@
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <style>
-        /* --- CONFIGURATION GLOBALE --- */
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #f0fdf4; /* Fond vert très pâle */
-            color: #1e293b;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, .brand-font {
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        /* --- FOND ANIMÉ (MESH GRADIENT + BLOBS) --- */
-        .ambient-light {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8), transparent);
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: float 10s infinite ease-in-out;
-        }
-
-        .blob-1 {
-            top: -10%; left: -10%; width: 500px; height: 500px;
-            background: rgba(16, 185, 129, 0.2);
-            animation-delay: 0s;
-        }
-        .blob-2 {
-            bottom: 20%; right: -10%; width: 400px; height: 400px;
-            background: rgba(59, 130, 246, 0.2);
-            animation-delay: -5s;
-        }
-        .blob-3 {
-            top: 40%; left: 30%; width: 300px; height: 300px;
-            background: rgba(236, 72, 153, 0.15); /* Une touche de rose subtile */
-            animation-delay: -2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-
-        /* --- CARTES GLASSMORPHISM PREMIUM --- */
-        .eco-card {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 24px;
-            box-shadow:
-                    0 4px 6px -1px rgba(0, 0, 0, 0.02),
-                    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .eco-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.9);
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow:
-                    0 20px 40px -5px rgba(16, 185, 129, 0.15),
-                    0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* --- EFFET 3D TILT CONTAINER --- */
-        .tilt-container {
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-        .tilt-element {
-            transition: transform 0.1s ease-out; /* Très fluide */
-        }
-
-        /* --- BOUTONS GLOW --- */
-        .btn-eco {
-            position: relative;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            overflow: hidden;
-        }
-        .btn-eco::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s;
-        }
-        .btn-eco:hover::before { left: 100%; }
-        .btn-eco:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5); }
-
-        .btn-git {
-            background: #0f172a; color: white; border: 1px solid #1e293b;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2); transition: all 0.3s ease;
-        }
-        .btn-git:hover { background: #1e293b; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(15, 23, 42, 0.4); }
-
-        /* --- TECH BLOCKS --- */
-        .tech-block {
-            background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(226, 232, 240, 0.8);
-            border-radius: 16px; transition: all 0.3s ease;
-        }
-        .tech-block:hover {
-            background: white; transform: translateY(-4px) scale(1.02);
-            border-color: #10b981; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.1);
-        }
-
-        /* --- IMAGE HERO GLOW --- */
-        .hero-image-container::before {
-            content: ''; position: absolute; inset: -20px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.3));
-            border-radius: 40px; filter: blur(30px); z-index: -1; opacity: 0.6;
-            animation: pulse-glow 4s infinite alternate;
-        }
-        @keyframes pulse-glow { 0% { opacity: 0.4; } 100% { opacity: 0.7; } }
-
-        /* Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-        /* Syntax Color */
-        .code-kw { color: #c084fc; font-weight: 600; }
-        .code-fn { color: #60a5fa; }
-        .code-str { color: #4ade80; }
-        .code-cls { color: #fbbf24; }
-        .code-var { color: #93c5fd; }
-    </style>
+    <link rel="stylesheet" href="../../assets/css/projet-ecocoin.css">
 </head>
 <body class="selection:bg-emerald-200 selection:text-emerald-900">
 
@@ -166,7 +28,7 @@
 <!-- NAVBAR -->
 <nav class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/60 backdrop-blur-xl border-b border-white/20 shadow-sm">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="index.html" class="text-lg font-bold text-slate-800 flex items-center gap-2 hover:text-emerald-600 transition group">
+        <a href="../../index.html" class="text-lg font-bold text-slate-800 flex items-center gap-2 hover:text-emerald-600 transition group">
             <span class="group-hover:-translate-x-1 transition-transform">←</span>
             <span>Retour Portfolio</span>
         </a>
@@ -267,7 +129,7 @@
             <!-- Colonne Droite : Visuel AVEC 3D TILT -->
             <!-- J'ai ajouté l'ID 'tiltHero' et la classe 'tilt-container' -->
             <div id="tiltHero" class="tilt-container hero-image-container relative" data-aos="zoom-out" data-aos-duration="1200" data-aos-delay="200">
-                <img src="img/InterfaceEcoCoin.PNG" alt="Interface EcoCoin" class="tilt-element relative rounded-2xl shadow-2xl border-4 border-white/50 cursor-pointer w-full object-cover" onclick="openModal(this.src)">
+                <img src="../../assets/img/projets/ecocoin/InterfaceEcoCoin.PNG" alt="Interface EcoCoin" class="tilt-element relative rounded-2xl shadow-2xl border-4 border-white/50 cursor-pointer w-full object-cover" onclick="openModal(this.src)">
 
                 <!-- Badge Flottant -->
                 <div class="tilt-element absolute -bottom-6 -left-6 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/50 animate-bounce" style="animation-duration: 3s; transform: translateZ(20px);">
@@ -487,7 +349,7 @@
     <div class="max-w-6xl mx-auto px-4 text-center relative z-10">
         <h3 class="text-2xl font-bold text-white mb-8">Vous voulez voir d'autres de mes réalisations ?</h3>
         <div class="flex justify-center gap-6 mb-12">
-            <a href="index.html" class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition backdrop-blur-sm">Retour Portfolio</a>
+            <a href="../../index.html" class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition backdrop-blur-sm">Retour Portfolio</a>
             <a href="mailto:sendoukmohamed45@gmail.com" class="px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition shadow-lg shadow-emerald-900/50">Me contacter</a>
         </div>
         <div class="w-full h-px bg-slate-800 mb-8 max-w-xs mx-auto"></div>
@@ -504,76 +366,7 @@
 
 <!-- SCRIPTS -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-    AOS.init({ duration: 1000, once: true, offset: 50 });
-
-    /* --- SCRIPT 3D TILT EFFECT --- */
-    const heroContainer = document.getElementById('tiltHero');
-    const heroImg = heroContainer.querySelector('img');
-    const badge = heroContainer.querySelector('.absolute');
-
-    // On s'assure que les éléments existent
-    if(heroContainer && heroImg) {
-        heroContainer.addEventListener('mousemove', (e) => {
-            const rect = heroContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Calcul du centre
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            // Rotation (plus on s'éloigne du centre, plus ça tourne)
-            // On divise par 20 ou 25 pour adoucir l'effet
-            const rotateX = ((y - centerY) / 20) * -1; // Inverser pour effet naturel
-            const rotateY = (x - centerX) / 20;
-
-            // Appliquer la transformation
-            heroImg.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-
-            // Le badge bouge un peu plus pour effet de parallaxe
-            if(badge) {
-                badge.style.transform = `perspective(1000px) translateZ(40px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            }
-        });
-
-        // Remettre à zéro quand la souris sort
-        heroContainer.addEventListener('mouseleave', () => {
-            heroImg.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
-            if(badge) {
-                badge.style.transform = `perspective(1000px) translateZ(20px) rotateX(0) rotateY(0)`;
-            }
-        });
-    }
-
-    /* --- SCRIPT MODAL --- */
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-
-    function openModal(src) {
-        modal.classList.remove('hidden');
-        void modal.offsetWidth; // Force reflow
-        modal.classList.remove('opacity-0');
-
-        setTimeout(() => {
-            modalImg.classList.remove('scale-95');
-            modalImg.classList.add('scale-100');
-        }, 50);
-        modalImg.src = src;
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        modalImg.classList.remove('scale-100');
-        modalImg.classList.add('scale-95');
-        modal.classList.add('opacity-0');
-
-        setTimeout(() => {
-            modal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }, 300);
-    }
-</script>
+<script src="../../assets/js/projet-ecocoin.js"></script>
 
 </body>
 </html>
